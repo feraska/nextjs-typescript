@@ -1,0 +1,31 @@
+.slider {
+   position: relative;
+   display: flex;
+   gap: 15px;
+   .icon {
+    font-size: 36px;
+    color: #fff;
+    position: absolute;
+    z-index: 333;
+    cursor: pointer;
+    margin-top: 100px;
+}
+.left {
+    left: 0;
+}
+.right {
+    right: 0;
+}
+ul {
+    display: flex;
+    gap: 15px;
+    list-style-type: none;
+    transform: translateX(0px);
+}
+.visible {
+    visibility: visible;
+}
+.none {
+    visibility: hidden;
+}
+}

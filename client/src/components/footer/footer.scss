@@ -1,0 +1,30 @@
+footer {
+    
+    margin-top: 100px;
+    margin-bottom: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+    .social-media {
+        display: flex;
+        
+        gap: 20px;
+        color: #fff;
+        svg {
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+    ul {
+        margin-top: 10px;
+        color: #fff;
+        list-style-type: none;
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr ;
+        row-gap: 10px;
+        column-gap: 15px;
+        place-items: center;
+    }
+}

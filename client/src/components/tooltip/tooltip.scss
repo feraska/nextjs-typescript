@@ -1,0 +1,28 @@
+.tooltip {
+    position: relative;
+   
+  }
+  
+   .tooltiptext {
+    background-color: rgb(238, 151, 21);
+    color: #fff;
+    text-align: center;
+    display: none;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    top: -30px;
+    width: 120px;
+    left: 0;
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+   
+  }
+  
+  .tooltip:hover .tooltiptext {
+   display: block;
+    opacity: 1;
+    z-index: 999999999999;
+    
+  }

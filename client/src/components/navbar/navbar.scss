@@ -1,0 +1,216 @@
+@media screen and (max-width:768px) {
+    nav {
+      .left {
+        .logo {
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+      }
+        ul {
+            display: none;
+        }
+        .right {
+         
+          .search {
+           
+          }
+            
+        }
+    }
+}
+@media screen and (min-width:768px) {
+    nav {
+        .left {
+            .logo {
+                img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+        }
+        .h {
+            display: none;
+        }
+        ul {
+       display: flex;
+        }
+        .right {
+         
+            .search {
+              display: flex;
+            }
+              
+          }
+       
+    }
+}
+.h {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.scrolled {
+    background-color: black;
+}
+nav {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    .left {
+        
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        justify-content: center;
+        .logout {
+            font-size: 26px;
+            cursor: pointer;
+        }
+        .logo {
+            margin-left: 25px;
+            img {
+                // width: 100px;
+                // height: 100px;
+            }
+        }
+        ul {
+            list-style: none;
+          //  display: flex;
+            gap: 20px;
+            a {
+                font-size: 16px;
+                &:hover{
+                    background-color: red;
+                  }
+            }
+            li {
+                font-size: 18px;
+                color: #fff;
+            }
+        }
+    }
+    .right {
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .notification {
+            position: relative;
+            &:hover > .message{
+                display: block;
+            }
+           .info {
+            position: relative;
+            color: #fff;
+            cursor: pointer;
+            margin-right: 15px;
+          
+            .icon {
+               
+                font-size: 26px;
+                }
+            span {
+                position: absolute;
+                top: -10px;
+                right: 10px;
+                background-color: red;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 16px;
+            }
+          
+           }
+           .message {
+            position: absolute;
+            display: none;
+            background-color: rgba(0,0,0,1);
+            top: 30px;
+            right: 15px;
+            width: 300px;
+            height: 300px;
+            z-index: 99999;
+            overflow: auto;
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            li {
+                font-size: 20px;
+                border-bottom: 1px #fff solid;
+                display: flex;
+                gap: 15px;
+                cursor: pointer;
+                padding-left: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            
+            &:hover {
+                opacity: 0.5;
+            }
+            .msg {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+           }
+        }
+        .search {
+         //   display: flex;
+            gap: 5px;
+            margin-right: 50px;
+            background-color: transparent;
+           
+            .icon {
+                color: #fff;
+                margin-left: 5px;
+                font-size: 26px;
+                cursor: pointer;
+            }
+            input {
+              border: none;
+              outline: none;
+              background-color: transparent;
+              color: #fff;
+              font-size: 16px;
+              padding: 5px 0 5px 0;
+              transition: 0.3s ease-in-out;
+              background-color: transparent;
+             &::placeholder {
+                color: #fff;
+                font-size: 20px;
+             }
+              
+            }
+            .none {
+                opacity: 0;
+                width: 0;
+                
+            }
+            .visible {
+                width: 100%;
+                opacity: 1;
+                border: 1px solid #fff;
+            }
+        }
+    
+}
+
+
+
+}

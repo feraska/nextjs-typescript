@@ -1,0 +1,64 @@
+
+.details {
+    color: black;
+   
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+    .clicks {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: black;
+      color: white;
+      .more {
+        font-size: 26px;
+        margin-right: 20px;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+          border: none;
+          transition: 0.2s ease-in-out;
+        }
+      }
+    .buttons {
+        display: flex;
+        gap: 10px;
+       
+        .icon-buttons {
+            font-size: 26px;
+            gap: 10px;
+           cursor: pointer;
+           border: none;
+           transition: 0.2s ease-in-out;
+           
+           &:hover {
+            opacity: 0.8;
+           
+          }
+         
+        }
+    }
+  }
+    .info {
+      display: flex;
+      color: white;
+      
+      font-size: 12px;
+
+     
+    }
+    .genre {
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      flex-wrap: wrap;
+      color: white;
+      
+    }
+  
+    
+  
+}
