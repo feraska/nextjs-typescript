@@ -13,14 +13,16 @@ import { format } from "timeago.js";
 
 import {  mobileWidth } from "@/utils/getUser";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 const Navbar = () => {
     const [showSearch,setShowSearch] = useState(false)
     const [scrolled,setScolled] = useState(false)
     const {state,dispatch} = useContext(AuthContext)
     const {deletE} = useDelete(api.logoutMainServer)
     const router = useRouter()
+    const pathname = usePathname()
     // const nav = navigator.userAgent
     // const isMobile = nav.match(/Mobile/i)?true:false;
     // const  mobileWidth = window.matchMedia("(max-width: 768px)").matches; 
@@ -72,7 +74,7 @@ const Navbar = () => {
         <nav className={scrolled?"scrolled":""}>
             <div className="left">
             <div className="logo">
-                <img src={Logo.src}/>
+                <Image alt="" width={100} height={100} src={Logo.src}/>
             </div>
             <RxHamburgerMenu className="h" onClick={run}/>
             {state?.user&&<PiSignOutLight className="logout" onClick={logout}/>}
@@ -82,7 +84,7 @@ const Navbar = () => {
             <ul>
             {data.map((value,i)=>(
                 
-                    <Link key={i} href={value.path}>
+                    <Link key={i} href={value.path} className={value.path === pathname?"active":""} replace>
                     <li key={i}>{value.text}</li>
                     </Link>
              
@@ -108,7 +110,7 @@ const Navbar = () => {
                     <ul>
                         {state?.notification?.map((item)=>(
                              <li key={item._id}>
-                                <img src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/>
+                                <Image alt="" width={100} height={100} src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/>
                                 <div className="msg">
                              <span>{item?.msg}</span>
                              <span>{format(item.createdAt)}</span>

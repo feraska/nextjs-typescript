@@ -6,6 +6,7 @@ const SelectGenre:React.FC<{setGenre:unknown}> = ({setGenre}) => {
     return(
         <div className="genre">
             <select name="" id="" onChange={(event: ChangeEvent<HTMLSelectElement>)=>setGenre(event.target.value)}>
+                <option value={"type"} disabled hidden selected> type</option>
                 {state.genre.map((genre,i)=>(
                     <option key={i} value={genre.id}>{genre.name}</option>
                 ))}

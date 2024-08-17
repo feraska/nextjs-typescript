@@ -63,6 +63,10 @@ nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    // display: grid;
+    // grid-template-columns: 50% 50%;
+    // justify-content: space-between;
+    // grid-template-columns: 1fr 1fr;
     
     align-items: center;
     .left {
@@ -86,14 +90,21 @@ nav {
             list-style: none;
           //  display: flex;
             gap: 20px;
+            .active {
+                background-color: red;
+                
+            }
             a {
-                font-size: 16px;
+                
+                padding: 5px;
+                border-radius: 5px;
+               
                 &:hover{
                     background-color: red;
                   }
             }
             li {
-                font-size: 18px;
+                font-size: 20px;
                 color: #fff;
             }
         }
@@ -183,9 +194,9 @@ nav {
                 cursor: pointer;
             }
             input {
-              border: none;
-              outline: none;
-              background-color: transparent;
+              border: none !important;
+              outline: none !important;
+              border-bottom: 1px solid #fff !important;
               color: #fff;
               font-size: 16px;
               padding: 5px 0 5px 0;
@@ -195,6 +206,7 @@ nav {
                 color: #fff;
                 font-size: 20px;
              }
+            
               
             }
             .none {

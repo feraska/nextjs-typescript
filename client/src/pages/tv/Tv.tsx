@@ -13,6 +13,7 @@ const SelectGenre = dynamic(()=>import( "../../components/selectGenre/SelectGenr
 import Movie from "../movie/Movie"
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
+import Head from "next/head"
 const Tv = ()=> {
     const {state} = useContext(AuthContext)
     const [genre,setGenre] = useState("")
@@ -29,6 +30,10 @@ const Tv = ()=> {
     } 
     return(
         <>
+         <Head>
+        <title>My page title</title>
+        
+      </Head>
         {id&&<Movie/>}
         <Navbar/>
         {<Vheader/>}

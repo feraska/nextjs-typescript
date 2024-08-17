@@ -3,6 +3,7 @@ import useInfo from "../../hooks/useInfo"
 import { AiFillCloseCircle } from "react-icons/ai"
 import {  useRouter, useSearchParams } from "next/navigation"
 import { usePathname } from "next/dist/client/components/navigation"
+import Image from "next/image"
 const Movie = () => {
 const router = useRouter()
 const path = usePathname()
@@ -28,8 +29,8 @@ const id = search?.get("t")
                 ))}
             </div>
             <div className="images">
-            <img src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}/>
-            <img src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}/>
+            <Image alt="" width={100} height={100} src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}/>
+            <Image alt="" width={100} height={100} src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}/>
             </div>
         </div>
         </div>

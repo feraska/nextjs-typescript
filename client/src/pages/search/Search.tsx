@@ -17,7 +17,7 @@ const Search = () => {
     const id = search?.get("t")
     const {state} = useContext(AuthContext)
     useGlobal()
-    const {data} = useFilter(`https://api.themoviedb.org/3/movie/now_playing?page=${search?.get("q")}`)
+    const {data,loading} = useFilter(`https://api.themoviedb.org/3/movie/now_playing?page=${search?.get("q")}`)
     const router = useRouter()
     if(state.login === 2) {
        
@@ -25,13 +25,17 @@ const Search = () => {
     }
     if(state.login === 0) {
         router.push("/login")
-    } 
+    }
+    // if(loading) {
+    //     return<p>Loading...</p>
+    // } 
     return(
         <>
          {id&&<Movie/>}
         <Navbar/>
         {<Vheader/>}
         <div className="filter">
+            {loading&&<p>Loading...</p>}
             <h1>Search</h1>
             <ul>
                 {data?.results?.map((item,i)=>(

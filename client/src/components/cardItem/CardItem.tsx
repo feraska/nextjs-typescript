@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { card } from "../../hooks/useApi"
 import "./cardItem.scss"
 import dynamic from "next/dynamic"
+import Image from "next/image"
 // import Video from "../video/Video"
 const Video = dynamic(()=>import("@/components/video/Video"),{ssr:false})
 
@@ -12,7 +13,7 @@ const CardItem:React.FC<{item:card}> = ({item}) => {
    
     return (
         <li className="card-item" onMouseOver={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)}>
-            <img src={`https://image.tmdb.org/t/p/w500/${item.poster_path ? item.poster_path : item.backdrop_path}`} alt={""} />
+            <Image width={100} height={100} src={`https://image.tmdb.org/t/p/w500/${item.poster_path ? item.poster_path : item.backdrop_path}`} alt={""} />
             {isHovered&&<Video item={item}/>}
         </li>
     )

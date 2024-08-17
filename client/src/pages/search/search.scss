@@ -3,14 +3,18 @@
     
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    // justify-content: center;
     gap: 20px;
     ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
+        // // display: flex;
+        // // justify-content: center;
+        // // align-items: center;
+        // flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+        // display: flex;
+        // flex-wrap: wrap;
         gap:  20px;
         list-style: none;
     }
