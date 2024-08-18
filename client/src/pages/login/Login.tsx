@@ -30,6 +30,7 @@ const  Login = () => {
              await post(user)
              dispatch({type:actions.login})
              router.push("/")
+             
             
          } catch(err) {
             console.log((err as Error).message)
@@ -42,6 +43,7 @@ const  Login = () => {
     }
     if(state.login === 1) {
         router.push("/")
+        return
     } 
     return(
         <div className="login">

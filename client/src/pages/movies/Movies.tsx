@@ -26,6 +26,7 @@ const Movies = () => {
     }
     if(state.login === 0) {
         router.push("/")
+        return
     } 
     
    

@@ -3,9 +3,21 @@ import { IoArrowBack } from "react-icons/io5"
 
 import "./watch.scss"
 import { useRouter } from "next/navigation"
+import useGlobal from "@/hooks/useGloabal"
+import { useContext } from "react"
+import { AuthContext } from "@/context/AuthContext"
+import Loading from "@/components/loading/Loading"
 const Watch = () => {
+    const {state} = useContext(AuthContext)
     const router = useRouter()
-    
+    useGlobal()
+    if(state.login === 2) {
+        return<Loading/>
+    }
+    if(state.login === 0) {
+        router.push("/login")
+        return
+    }
     return (
     <div className="player">
           <div className="back">

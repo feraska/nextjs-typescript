@@ -11,7 +11,16 @@ interface o  {
 const useGet =  (url:string):o => {
     const [error,setError] = useState(false)
     const [loading,setLoading] = useState(false)
-    const [data,setData] = useState<User>()
+    const [data,setData] = useState<User>(
+        {
+        _id:"",
+        email:"",
+        firstName:"",
+        lastName:"",
+        likes:[],
+        list:[]
+    }
+)
 
     const get = async()=> {
             try {

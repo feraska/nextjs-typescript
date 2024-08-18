@@ -25,6 +25,7 @@ const Search = () => {
     }
     if(state.login === 0) {
         router.push("/login")
+        return
     }
     // if(loading) {
     //     return<p>Loading...</p>

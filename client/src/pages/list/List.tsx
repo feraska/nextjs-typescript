@@ -23,6 +23,7 @@ const List = ()=> {
 }
 if(state.login === 0) {
     router.push("/login")
+    return
 }
     return(
         <>

@@ -36,6 +36,7 @@ const Register = () => {
     }
     if(state.login === 1) {
        router.push("/")
+       return
     } 
     return(
         <div className="register">

@@ -1,8 +1,8 @@
 import "./movie.scss"
 import useInfo from "../../hooks/useInfo"
 import { AiFillCloseCircle } from "react-icons/ai"
-import {  useRouter, useSearchParams } from "next/navigation"
-import { usePathname } from "next/dist/client/components/navigation"
+import {  usePathname, useRouter, useSearchParams } from "next/navigation"
+
 import Image from "next/image"
 const Movie = () => {
 const router = useRouter()
