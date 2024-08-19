@@ -1,15 +1,17 @@
 
+import { Socket } from "socket.io-client";
 import { AppState, action,  actions } from "./AuthContext";
-
+import User from "@/interfaces/user";
 const AuthReducer = (state:AppState, action:action):AppState => {
     switch(action.type) {
         case actions.socket:
+            //if(action.payload instanceof Socket)
             return {
                 ...state,
                 socket: action.payload
             }
         case actions.login:
-          
+            //if(typeof action.payload === "number")
             return {
                 ...state,
                 login:action.payload
@@ -21,12 +23,14 @@ const AuthReducer = (state:AppState, action:action):AppState => {
                 login:2,
             }    
         case actions.user:
+            //if("_id" in action.payload)
             return {
                 ...state,
                 user:action.payload
             }
 
         case actions.get_genre:
+            
             return {
                 ...state,
                genre:action.payload
@@ -81,7 +85,7 @@ const AuthReducer = (state:AppState, action:action):AppState => {
                 case actions.remove_list:
                     return {
                         ...state,
-                        list:[...state.list.filter((value)=>value!==action.payload)]
+                        list:[...state.list.filter((value)=>value!==action?.payload)]
                     }
                     default:
                         return state

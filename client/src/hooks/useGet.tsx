@@ -33,10 +33,11 @@ const useGet =  (url:string):o => {
                 setError(false)
                 setLoading(false)
             } catch(err) {
-                setData(undefined)
+                if(err instanceof AxiosError) {
                 setError(true)
                 setLoading(false)
-                throw new Error((err as AxiosError).response?.data.message)
+                throw new Error(err.response?.data)
+                }
                 
             }
        

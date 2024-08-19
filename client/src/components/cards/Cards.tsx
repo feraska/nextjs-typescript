@@ -6,7 +6,7 @@ const CardItem = dynamic(()=> import("../cardItem/CardItem"),{ssr:false})
 import "./cards.scss"
 import useApi from "../../hooks/useApi"
 
-const Cards:React.FC<{url:string,genre?:boolean}> = ({url,genre}) => {
+const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
     const {data,getData} = useApi(url)
     const list = React.createRef<HTMLUListElement>()
     const [numberSlider,setNumberSlider] = useState(0)

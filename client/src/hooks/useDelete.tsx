@@ -13,10 +13,12 @@ const useDelete = (url:string) => {
             setError(false)
             setLoading(false)
         } catch(err) {
-            setMessage((err as AxiosError).response?.data.message)
+            if(err instanceof AxiosError) {
+            setMessage(err.response?.data)
             setError(true)
             setLoading(false)
-            throw new Error((err as AxiosError).response?.data.message)
+            throw new Error(err.response?.data)
+            }
         }
     }
     return {

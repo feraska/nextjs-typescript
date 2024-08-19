@@ -13,7 +13,12 @@ export interface AppState   {
     login:number;
     loading:boolean;
     notification:Array<notification>,
-    socket:Socket
+    socket?:Socket
+}
+ export type u = User
+interface iPayload extends AppState {
+    msg:notification,
+    id:number,
 }
 export interface notification {
     msg?:string,
@@ -39,19 +44,20 @@ export enum actions  {
 }
 export interface action  {
     type:actions,
-    payload:Array<number> | string | number | User
+    payload?:any
     
 }
   
  const INITIAL_STATE:AppState = {
-    genre:[],
-    list:[],
-    likes:[],
-    user:undefined ,
-    login:2,
-    loading:false,
-    notification:[]
-}
+     genre: [],
+     list: [],
+     likes: [],
+     user: undefined,
+     login: 2,
+     loading: false,
+     notification: [],
+    
+ }
 interface Props {
     children: React.ReactNode;
   }

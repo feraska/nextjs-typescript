@@ -11,6 +11,7 @@ const Watch = () => {
     const {state} = useContext(AuthContext)
     const router = useRouter()
     useGlobal()
+    
     if(state.login === 2) {
         return<Loading/>
     }

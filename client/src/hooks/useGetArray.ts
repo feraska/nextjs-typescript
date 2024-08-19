@@ -12,9 +12,12 @@ const useGetArray = (url:string) => {
                 setloading(false)
                 setData(res.data)
             } catch (err) {
+
+                if(err instanceof AxiosError) {
+                setError(err.response?.data)
                 setloading(false)
-                setError((err as Error).message)
-                throw new Error((err as AxiosError).response?.data.message)
+                throw new Error(err.response?.data)
+                }
             }
         }
     

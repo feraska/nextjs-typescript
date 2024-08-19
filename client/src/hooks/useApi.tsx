@@ -5,7 +5,8 @@ export interface play {
         maximum:Date,
         minimum:Date,
     },
-    results:Array<card>
+    results:Array<card>,
+    genres:[]
     
 }
 export interface card {
@@ -15,7 +16,15 @@ export interface card {
     adult?:boolean,
     genre_ids?:Array<number>,
     id:number,
-    original_name?:string
+    original_name?:string,
+    genres:Array<genere>,
+    spoken_languages:Array<lang>
+}
+export interface lang {
+    english_name:string
+}
+export interface genre {
+    name:string
 }
 export interface genere {
     id:number,
@@ -36,9 +45,11 @@ const useApi = (url:string) => {
                 setloading(false)
                 setData(res.data)
             } catch (err) {
+                if(err instanceof AxiosError) {
                 setloading(false)
-                setError((err as Error).message)
-                throw new Error((err as AxiosError).response?.data.message)
+                setError(err.response?.data)
+                throw new Error(err.response?.data) 
+                }
             }
         }
        

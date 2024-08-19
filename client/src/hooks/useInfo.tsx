@@ -21,9 +21,11 @@ const useInfo = (url:string) => {
                 setloading(false)
                 setData(res.data)
             } catch (err) {
-                setloading(false)
-                setError((err as Error).message)
-                throw new Error((err as AxiosError).response?.data.message)
+                if(err instanceof AxiosError) {
+                    setError(err.response?.data)
+                    setloading(false)
+                    throw new Error(err.response?.data)
+                    }
             }
         }
         if(first === 0) {

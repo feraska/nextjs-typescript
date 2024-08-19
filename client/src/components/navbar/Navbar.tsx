@@ -23,33 +23,13 @@ const Navbar = () => {
     const {deletE} = useDelete(api.logoutMainServer)
     const router = useRouter()
     const pathname = usePathname()
-    //const ref = useRef()
-    //const iconSearch = useRef()
-    // const nav = navigator.userAgent
-    // const isMobile = nav.match(/Mobile/i)?true:false;
-    // const  mobileWidth = window.matchMedia("(max-width: 768px)").matches;
-    // const handleClickOutside = (e) => {
-    //    // console.log(showSearch)
-    //     if(iconSearch.current && iconSearch.current.contains(e.target)) {
-    //         //console.log("OK")
-    //        setShowSearch((prev)=>!prev)
-    //     }
-    //     else if(ref.current && !ref.current.contains(e.target)) {
-    //         setShowSearch(false)
-    //     }
-    // } 
-    // useEffect(()=> {
-    //     if(ref.current) {
-    //         console.log("AA")
-    //         ref.current.focus()
-    //     }
-    // },[])
+
     const handleChange = (e:FormEvent<HTMLInputElement>) => {
         router.push(`/search?q=${e.currentTarget.value}`)
     }
     const logout = async() => {
         await deletE()
-        dispatch({type:actions.logout})
+        dispatch({type:actions.logout,payload:undefined})
         router.push("/login")
     }
     useEffect(()=> {
@@ -69,10 +49,11 @@ const Navbar = () => {
     },[])
     const run = () => {
         
-        const vNav = document.getElementsByClassName("v-nav")[0]
+        const vNav = (document.getElementsByClassName("v-nav")[0] as HTMLElement) 
+       
         //vNav.style.display = "flex"
         
-        if(vNav.style.display === "") {
+        if(vNav?.style.display === "") {
             vNav.style.display = "flex"
             console.log(vNav)
          //   setIsClick(true)

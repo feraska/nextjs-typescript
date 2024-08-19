@@ -58,8 +58,8 @@ const useGlobal = () => {
             return
         }
         if(msg) {
-        dispatch({type:actions.addNotification,payload:{...msg,to:state.user?._id}})
-        post({...msg,to:state.user?._id})
+        dispatch({type:actions.addNotification,payload:{msg,to:state.user?._id}})
+        post({msg,to:state.user?._id})
         }
         }
 

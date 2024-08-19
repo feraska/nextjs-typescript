@@ -1,9 +1,10 @@
-import React from "react"
+import React, { ReactNode, ReactPortal } from "react"
 import "./tooltip.scss"
-interface Props {
-    children: React.ReactNode;
+type Props = {
+    children: ReactNode,
+    text:string
   }
-const Tooltip:React.FC<{children:Props,text:string}> = ({children,text}) => {
+const Tooltip:React.FC<Props> = ({children,text}) => {
     return(
         <div className="tooltip">
             {children}

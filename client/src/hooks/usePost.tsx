@@ -4,7 +4,7 @@ const usePost = (url:string) => {
     const [error,setError] = useState(false)
     const [loading,setLoading] = useState(false)
     const [message,setMessage] = useState("")
-    const post = async(body)=> {
+    const post = async(body:any)=> {
         try {
             setLoading(true)
             
@@ -26,10 +26,11 @@ const usePost = (url:string) => {
             setError(false)
             setLoading(false)
         } catch(err) {
-            setMessage((err as AxiosError).response?.data.message)
-            setError(true)
-            setLoading(false)
-            throw new Error((err as AxiosError).response?.data.message)
+            if(err instanceof AxiosError) {
+                setError(true)
+                setLoading(false)
+                throw new Error(err.response?.data)
+                }
             
         }
         

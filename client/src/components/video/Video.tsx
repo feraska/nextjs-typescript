@@ -1,21 +1,22 @@
-import React, {  useRef, useState } from "react"
+import React, {  EventHandler, MouseEvent, MouseEventHandler, useRef, useState } from "react"
 import Details from "../details/Details"
 import "./video.scss"
 import { card } from "../../hooks/useApi"
 import { IoVolumeHighOutline, IoVolumeMuteOutline } from "react-icons/io5"
 import { useRouter } from "next/navigation"
 
-const Video:React.FC<{item:card,id?:number,isList?:boolean}> = ({item,id,isList}) => {
+const Video:React.FC<{item?:card,isList?:boolean}> = ({item,isList=false}) => {
     const router = useRouter()
-    const newRef = useRef(null);
+    const newRef = useRef<HTMLDivElement>(null);
     const [isMuted,setIsMuted] = useState(true)
-    const getMovie = (e) => {
+    const getMovie = (e:MouseEvent<HTMLDivElement>) => {
         if(handleOutsideClick(e)) {
-        router.push(`/watch/${item.id}`)
+        router.push(`/watch/${item?.id}`)
         }
     }
-    const handleOutsideClick = (e):boolean => {
-        if (newRef.current && !newRef.current.contains(e.target)) {
+    const handleOutsideClick = (e:MouseEvent<HTMLDivElement>):boolean => {
+     
+        if (newRef.current && !newRef.current.contains(e.target as Node)) {
           return true
         } else {
             setIsMuted((prev)=>!prev)
@@ -25,7 +26,7 @@ const Video:React.FC<{item:card,id?:number,isList?:boolean}> = ({item,id,isList}
    
     return(
         <div className="video">
-            <div className="show" onClick={(e)=>getMovie(e)}>
+            <div className="show" onClick={getMovie}>
                         {/* <iframe autoCapitalize=""
             src="https://www.youtube.com/embed/TYljxL4WeRo">
             </iframe> */}
@@ -34,7 +35,7 @@ const Video:React.FC<{item:card,id?:number,isList?:boolean}> = ({item,id,isList}
             {isMuted?<IoVolumeMuteOutline/>:<IoVolumeHighOutline />}
             </div>
             </div>
-            <Details item={item} id={id} isList={isList}/>
+            <Details item={item}  isList={isList}/>
         </div>
     )
 }

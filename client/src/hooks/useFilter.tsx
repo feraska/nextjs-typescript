@@ -1,11 +1,11 @@
 "use client"
 import {  useEffect, useState } from "react"
-import { card } from "./useApi"
+import { card, play } from "./useApi"
 import axios, { AxiosError } from "axios"
 
 
 const useFilter = (url:string) => {
-    const [data,setData] = useState<card[]>()
+    const [data,setData] = useState<play>()
     const [error,setError] = useState("")
     const [loading,setloading] = useState(false)
     const [first,setFirst] = useState(0)
@@ -21,9 +21,11 @@ const useFilter = (url:string) => {
                 setloading(false)
                 setData(res.data)
             } catch (err) {
+                if(err instanceof AxiosError) {
                 setloading(false)
-                setError((err as Error).message)
-                throw new Error((err as AxiosError).response?.data.message)
+                setError(err.response?.data)
+                throw new Error(err.response?.data)
+                }
             }
         }
         if(first === 0) {

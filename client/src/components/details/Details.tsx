@@ -11,26 +11,27 @@ import { MdOutlineExpandMore } from "react-icons/md"
 
 import Tooltip from "../tooltip/Tooltip"
 import { useRouter } from "next/navigation"
-const Details:React.FC<{item:card,id:number,isList:boolean}> = ({item,id,isList}) => {
+const Details:React.FC<{item?:card,isList:boolean}> = ({item,isList}) => {
     const {state,dispatch} = useContext(AuthContext)
     const {put} = usePut(api.addToList)
     const {put:addToLikes} = usePut(api.like)
     const {put:removeFromLikes} = usePut(`${api.dislike}`)
     const {put:remove} = usePut(`${api.removeFromList}`)
     const router = useRouter()
+    
     const removeMovie = async()=> {
         try {
-            await remove({image:id})
-        dispatch({type:actions.remove_list,payload:id})
+            await remove({image:item?.id})
+        dispatch({type:actions.remove_list,payload:item?.id})
         } catch(err) {
             console.log(err)
         }
     }
     const addHandler = async() => {
         try {
-        await put({image:item.id})
+        await put({image:item?.id})
         
-        dispatch({type:actions.add_list,payload:item.id})
+        dispatch({type:actions.add_list,payload:item?.id})
         
         } catch(err) {
             console.log(err)
@@ -39,27 +40,28 @@ const Details:React.FC<{item:card,id:number,isList:boolean}> = ({item,id,isList}
     const likeHandler = async(action:string) => {
         try {
             if(action === actions.like) {
-                await addToLikes({image:item.id})
-                dispatch({type:actions.like,payload:item.id})
+                await addToLikes({image:item?.id})
+                dispatch({type:actions.like,payload:item?.id})
             } else {
-                await removeFromLikes({image:item.id})
-                dispatch({type:actions.dislike,payload:item.id})
+                await removeFromLikes({image:item?.id})
+                dispatch({type:actions.dislike,payload:item?.id})
             }
         } catch(err) {
             console.log(err)
         }
     }
     const showDetails = () => {
-        router.push(`?t=${item.id}`)
+        router.push(`?t=${item?.id}`)
     }
-   
-  
+   if(!item) {
+    return
+   }
     return (
     
         <div className="details">
             <div className="clicks">
             <div className="buttons">
-            <FaPlay className="icon-buttons" onClick={()=>router.push(`/watch/${item.id}`)}/>
+            <FaPlay className="icon-buttons" onClick={()=>router.push(`/watch/${item?.id}`)}/>
             <Tooltip text={!isList?"add":"remove"}>
             {!isList?<IoMdAdd className="icon-buttons" onClick={addHandler}/>:<IoIosRemoveCircle className="icon-buttons" onClick={removeMovie} />}
             </Tooltip>
