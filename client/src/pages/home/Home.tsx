@@ -9,7 +9,7 @@ const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false}
 import useGlobal from "../../hooks/useGloabal";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/loading/Loading";
-import Movie from "../movie/Movie";
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 
 const Vheader = dynamic( ()=>import( "../../components/vheader/Vheader"),{ssr:false});
 import { useRouter } from "next/navigation";

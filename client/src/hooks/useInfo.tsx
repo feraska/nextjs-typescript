@@ -8,7 +8,8 @@ const useInfo = (url:string) => {
     const [data,setData] = useState<card>()
     const [error,setError] = useState("")
     const [loading,setloading] = useState(false)
-    useEffect(()=> {
+    const [first,setFirst] = useState(0)
+    useEffect(()=> { 
         const getData = async() => {
             try {
                 setloading(true)
@@ -25,9 +26,13 @@ const useInfo = (url:string) => {
                 throw new Error((err as AxiosError).response?.data.message)
             }
         }
+        if(first === 0) {
+            setFirst(1)
+            return
+        }
         getData()
-       
-},[url])
+    
+},[url,first])
 return {
     data,loading,error
 }

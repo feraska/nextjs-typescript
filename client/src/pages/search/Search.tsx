@@ -8,7 +8,7 @@ const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:
 import Loading from "../../components/loading/Loading"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import Movie from "../movie/Movie"
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
 import useGlobal from "@/hooks/useGloabal"

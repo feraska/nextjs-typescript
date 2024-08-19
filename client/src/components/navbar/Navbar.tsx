@@ -70,8 +70,8 @@ const Navbar = () => {
        
     }
     return(
-        // <header className={scrolled?"scrolled":""}>
-        <nav className={scrolled?"scrolled":""}>
+        <header className={scrolled?"scrolled":""}>
+        <nav>
             <div className="left">
             <div className="logo">
                 <Image alt="" width={100} height={100} src={Logo.src}/>
@@ -127,7 +127,7 @@ const Navbar = () => {
                 
             </div>
         </nav>
-        // </header>
+        </header>
     )
 }
 export default Navbar

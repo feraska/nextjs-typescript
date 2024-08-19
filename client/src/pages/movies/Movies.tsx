@@ -7,7 +7,7 @@ import useGlobal from "../../hooks/useGloabal"
 import Loading from "../../components/loading/Loading"
 import { AuthContext } from "../../context/AuthContext"
 const SelectGenre = dynamic(()=>import( "../../components/selectGenre/SelectGenre"),{ssr:false})
-import Movie from "../movie/Movie"
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader =  dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import {useRouter,  useSearchParams } from "next/navigation"
 

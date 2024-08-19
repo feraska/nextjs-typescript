@@ -10,7 +10,7 @@ const Cards = dynamic(()=> import("../../components/cards/Cards"),{ssr:false})
 const Playing = dynamic(()=> import("../../components/playing/Playing"),{ssr:false}) 
 import  "./tv.scss"
 const SelectGenre = dynamic(()=>import( "../../components/selectGenre/SelectGenre"),{ssr:false})
-import Movie from "../movie/Movie"
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
 
