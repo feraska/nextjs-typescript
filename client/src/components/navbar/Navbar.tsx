@@ -3,7 +3,7 @@ import "./navbar.scss"
 import Logo from "../../assets/logo.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
-import {  FormEvent, useContext, useEffect, useState } from "react";
+import {  FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { AuthContext, actions } from "../../context/AuthContext";
 import { PiSignOutLight } from "react-icons/pi";
 import useDelete from "../../hooks/useDelete";
@@ -23,9 +23,27 @@ const Navbar = () => {
     const {deletE} = useDelete(api.logoutMainServer)
     const router = useRouter()
     const pathname = usePathname()
+    //const ref = useRef()
+    //const iconSearch = useRef()
     // const nav = navigator.userAgent
     // const isMobile = nav.match(/Mobile/i)?true:false;
-    // const  mobileWidth = window.matchMedia("(max-width: 768px)").matches; 
+    // const  mobileWidth = window.matchMedia("(max-width: 768px)").matches;
+    // const handleClickOutside = (e) => {
+    //    // console.log(showSearch)
+    //     if(iconSearch.current && iconSearch.current.contains(e.target)) {
+    //         //console.log("OK")
+    //        setShowSearch((prev)=>!prev)
+    //     }
+    //     else if(ref.current && !ref.current.contains(e.target)) {
+    //         setShowSearch(false)
+    //     }
+    // } 
+    // useEffect(()=> {
+    //     if(ref.current) {
+    //         console.log("AA")
+    //         ref.current.focus()
+    //     }
+    // },[])
     const handleChange = (e:FormEvent<HTMLInputElement>) => {
         router.push(`/search?q=${e.currentTarget.value}`)
     }
@@ -95,11 +113,14 @@ const Navbar = () => {
 
             <div className="right">
                 <div className="search">
-                    
-                <CiSearch className="icon" onClick={()=>setShowSearch((prev)=>!prev)} />
                 
-                    <input className={showSearch?"visible":"none"} type="text" placeholder="type " onBlur={()=>setShowSearch(false)} onChange={(e)=>handleChange(e)}/>
+                <CiSearch className="icon"  onClick={()=>setShowSearch((prev)=>!prev)}/>
+                    {showSearch&&
+                <input autoFocus  type="text" placeholder="type " onBlur={()=>setShowSearch(false)} onChange={(e)=>handleChange(e)}/>
+                    }
                 </div>
+                  
+                
                 {!mobileWidth&&(
                 <div className="notification">
                 <div className="info"> 

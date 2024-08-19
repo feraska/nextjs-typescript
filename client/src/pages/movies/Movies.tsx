@@ -36,7 +36,7 @@ const Movies = () => {
         <Navbar/>
         {<Vheader/>}
         <SelectGenre setGenre={setGenre}/>
-            <Playing url="https://api.themoviedb.org/3/movie/now_playing"/>
+            <Playing url="/9SSEUrSqhljBMzRe4aBTh17rUaC.jpg"/>
             <Cards url="https://api.themoviedb.org/3/movie/now_playing" genre={genre}/>
         <Footer/>
         </>

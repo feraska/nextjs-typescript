@@ -43,8 +43,8 @@ const Home = () => {
       
         <div>
 
-            <Playing url="https://api.themoviedb.org/3/discover/movie"/>
-            <Cards url="https://api.themoviedb.org/3/discover/movie" />
+             <Playing url="/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg"/>
+            <Cards url="https://api.themoviedb.org/3/discover/movie" /> 
           
           
         </div>

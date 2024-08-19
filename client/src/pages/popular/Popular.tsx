@@ -31,7 +31,7 @@ const Popular = () => {
          {id&&<Movie/>}
         <Navbar/>
         {<Vheader/>}
-            <Playing url="https://api.themoviedb.org/3/movie/popular"/>
+            <Playing url= "/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg"/>
             <Cards url="https://api.themoviedb.org/3/movie/popular"/>
         
         <Footer/>
