@@ -12,6 +12,7 @@ const Home = dynamic(()=> import('../pages/home/Home'),{
   loading:()=><p>Loading..</p>,
   ssr:false
 }
+
 ) 
 
 
