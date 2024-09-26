@@ -45,6 +45,6 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
       message,
     });
   });
-app.listen(Number(process.env.PORT),()=> {
+app.listen(Number(process.env.PORT),"0.0.0.0",()=> {
     console.log(`the server run in port ${process.env.PORT}`)
 })

@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const auth_1 = __importDefault(require("./routes/auth"));
 const user_1 = __importDefault(require("./routes/user"));
@@ -31,7 +30,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };
-app.use((0, cors_1.default)(corsOptions));
+// app.use(cors(corsOptions))
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
@@ -48,6 +47,6 @@ app.use((err, req, res, next) => {
         message,
     });
 });
-app.listen(Number(process.env.PORT), () => {
+app.listen(Number(process.env.PORT), "0.0.0.0", () => {
     console.log(`the server run in port ${process.env.PORT}`);
 });

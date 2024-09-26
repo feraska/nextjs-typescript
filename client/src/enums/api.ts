@@ -1,5 +1,5 @@
 export enum api {
-    url = "https://0tb1mjxb-5000.euw.devtunnels.ms",
+    url = "https://nextjs-typescript.onrender.com/",
     mainServer = `${url}/api`,
     loginMainServer = `${mainServer}/auth/login`,
     registerMainServer = `${mainServer}/auth/register`,
