@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
 import "@/app/App.scss"
-const Search = dynamic( ()=>import( "@/pages/search/Search") ,{
+const Search = dynamic( ()=>import( "@/page/search/Search") ,{
     loading:()=><p>Loading..</p>,
     ssr:false
   })

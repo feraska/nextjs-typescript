@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
 import "@/app/App.scss"
-const Tv =  dynamic( ()=>import("@/pages/tv/Tv" ) ,{
+const Tv =  dynamic( ()=>import("@/page/tv/Tv" ) ,{
     loading:()=><p>Loading..</p>,
     ssr:false
   })

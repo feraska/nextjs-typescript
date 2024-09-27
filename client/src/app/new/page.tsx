@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
 import "@/app/App.scss"
-const Popular =  dynamic( ()=>import("@/pages/popular/Popular") ,{
+const Popular =  dynamic( ()=>import("@/page/popular/Popular") ,{
     loading:()=><p>Loading..</p>,
     ssr:false
   })

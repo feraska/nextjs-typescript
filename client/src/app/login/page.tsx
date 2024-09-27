@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
 import "@/app/App.scss"
-const Login = dynamic(()=>import("@/pages/login/Login") ,{
+const Login = dynamic(()=>import("@/page/login/Login") ,{
     loading:()=><p>Loading..</p>,
     ssr:false
   })

@@ -1,7 +1,7 @@
 "use client"
 import dynamic from "next/dynamic"
 import "@/app/App.scss"
-const Watch =  dynamic(()=>import ("@/pages/watch/Watch") ,{
+const Watch =  dynamic(()=>import ("@/page/watch/Watch") ,{
     loading:()=><p>Loading..</p>,
     ssr:false
   })

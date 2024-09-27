@@ -1,4 +1,4 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import dynamic from "next/dynamic";
 const Cards = dynamic(()=>import ( "../../components/cards/Cards"),{ssr:false})  
 const Playing = dynamic(()=>import("../../components/playing/Playing"),{ssr:false}) ;
@@ -7,7 +7,7 @@ import "./home.scss"
 const Navbar = dynamic( ()=>import( "../../components/navbar/Navbar"),{ssr:false});
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false});
 import useGlobal from "../../hooks/useGloabal";
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/loading/Loading";
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 
@@ -20,8 +20,8 @@ import { useAppSelector } from "@/redux/hooks";
 
 
 const Home = () => {
-    const {state,dispatch} = useContext(AuthContext)
-    const user = useAppSelector((state)=>state.user.user)
+    // const {state,dispatch} = useContext(AuthContext)
+    // const user = useAppSelector((state)=>state.user.user)
     const login = useAppSelector((state)=>state.user.login)
     const router = useRouter()
     const search = useSearchParams()
