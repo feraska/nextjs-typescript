@@ -2,8 +2,10 @@
 import React, { createContext, useReducer } from "react";
 import AuthReducer from "./AuthReducer";
 import User from "../interfaces/user";
-import { genere } from "../hooks/useApi";
+
 import { Socket } from "socket.io-client";
+import { genere } from "@/interfaces/card";
+import { notification } from "@/interfaces/notification";
 
 export interface AppState   {
     genre:Array<genere>;
@@ -16,16 +18,8 @@ export interface AppState   {
     socket?:Socket
 }
  export type u = User
-interface iPayload extends AppState {
-    msg:notification,
-    id:number,
-}
-export interface notification {
-    msg?:string,
-    sender?:string,
-    _id:string,
-    createdAt:string
-}
+
+
 
 export enum actions  {
    get_genre = "get_genre",

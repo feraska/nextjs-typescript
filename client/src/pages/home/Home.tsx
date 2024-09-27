@@ -1,4 +1,4 @@
-import { lazy, useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import dynamic from "next/dynamic";
 const Cards = dynamic(()=>import ( "../../components/cards/Cards"),{ssr:false})  
 const Playing = dynamic(()=>import("../../components/playing/Playing"),{ssr:false}) ;
@@ -14,21 +14,25 @@ const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loa
 const Vheader = dynamic( ()=>import( "../../components/vheader/Vheader"),{ssr:false});
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import useScroll from "@/hooks/useScroll";
+import { useAppSelector } from "@/redux/hooks";
 
 
 
 const Home = () => {
     const {state,dispatch} = useContext(AuthContext)
+    const user = useAppSelector((state)=>state.user.user)
+    const login = useAppSelector((state)=>state.user.login)
     const router = useRouter()
     const search = useSearchParams()
     const id = search?.get("t")
-   useGlobal()
-  
-    if(state.login === 2) {
+    useScroll(id??"")
+    useGlobal()
+    if(login === 2) {
         
         return<Loading/>
     }
-    if(state.login === 0) {
+    if(login === 0) {
         router.push("/login")
         return
     }
@@ -37,7 +41,7 @@ const Home = () => {
         <>
       
      
-       {id&&<Movie/>}
+       {id&&<Movie />}
         <Navbar/>
         {<Vheader/>}
       

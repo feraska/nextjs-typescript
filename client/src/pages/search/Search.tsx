@@ -12,24 +12,28 @@ const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loa
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
 import useGlobal from "@/hooks/useGloabal"
+import useScroll from "@/hooks/useScroll"
+import { useAppSelector } from "@/redux/hooks"
 const Search = () => {
     const search = useSearchParams()
     const id = search?.get("t")
     const {state} = useContext(AuthContext)
+    const login = useAppSelector((state)=>state.user.login)
+    useScroll(id??"")
     useGlobal()
     const {data,loading} = useFilter(`https://api.themoviedb.org/3/movie/now_playing?page=${search?.get("q")}`)
     const router = useRouter()
-    if(state.login === 2) {
+    if(login === 2) {
        
         return<Loading/>
     }
-    if(state.login === 0) {
+    if(login === 0) {
         router.push("/login")
         return
     }
-    // if(loading) {
-    //     return<p>Loading...</p>
-    // } 
+    if(loading) {
+        return<p>Loading...</p>
+    } 
     return(
         <>
          {id&&<Movie/>}

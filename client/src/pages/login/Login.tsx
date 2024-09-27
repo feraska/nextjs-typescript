@@ -10,11 +10,13 @@ import Loading from "../../components/loading/Loading"
 import useGlobal from "../../hooks/useGloabal"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useAppSelector } from "@/redux/hooks"
 
 const  Login = () => {
     useGlobal()
     const router = useRouter()
     const {state,dispatch} = useContext(AuthContext)
+    const login = useAppSelector((state)=>state.user.login)
     const [user,setUser] = useState({
         "email":"",
         "password":""
@@ -38,10 +40,10 @@ const  Login = () => {
          }
          
     }
-    if(state.login === 2 || loading) {
+    if(login === 2 || loading) {
         return<Loading/>
     }
-    if(state.login === 1) {
+    if(login === 1) {
         router.push("/")
         return
     } 

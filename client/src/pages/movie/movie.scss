@@ -8,13 +8,14 @@
     top: 0;
     left: 0;
     z-index: 99999999999;
-    overflow: auto; /* Enable scroll if needed */
+  
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
     background-color: rgba(109, 109, 110, 0.7);/* Black w/ opacity */
+    overflow: auto;
     .data {
         box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
         background-color: #181818;
@@ -23,6 +24,7 @@
         height: 80%;
         animation-name: animatetop;
         animation-duration: 0.4s;
+        // overflow: auto; /* Enable scroll if needed */
     .close {
         font-size: 26px;
         top: 20px;
@@ -30,7 +32,7 @@
         right: 20px;
         cursor: pointer;
     }
-}
+
 .movie {
     
     display: flex;
@@ -70,4 +72,5 @@
         }
     }
 }
+    }
 }

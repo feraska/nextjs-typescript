@@ -16,7 +16,10 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { useAppSelector } from "@/redux/hooks";
 const Navbar = () => {
+    const notification = useAppSelector((state)=>state.notification.notification)
+    const user = useAppSelector((state)=>state.user.user)
     const [showSearch,setShowSearch] = useState(false)
     const [scrolled,setScolled] = useState(false)
     const {state,dispatch} = useContext(AuthContext)
@@ -37,7 +40,7 @@ const Navbar = () => {
         const scroll = window.onscroll = ()=> {
             
             if(window.scrollY > 0) {
-               
+             
                 setScolled(true)
             } else {
                 setScolled(false)
@@ -76,9 +79,9 @@ const Navbar = () => {
                 <Image alt="" width={100} height={100} src={Logo.src}/>
             </div>
             <RxHamburgerMenu className="h" onClick={run}/>
-            {state?.user&&<PiSignOutLight className="logout" onClick={logout}/>}
+            {user&&<PiSignOutLight className="logout" onClick={logout}/>}
             
-            <h3>{state?.user?.firstName}</h3>
+            <h3>{user?.firstName}</h3>
             
             <ul>
             {data.map((value,i)=>(
@@ -106,11 +109,11 @@ const Navbar = () => {
                 <div className="notification">
                 <div className="info"> 
                 <IoIosNotificationsOutline className="icon"/>
-                <span>{state?.notification?.length}</span>
+                <span>{notification?.length}</span>
                 </div>
                 <div className="message">
                     <ul>
-                        {state?.notification?.map((item)=>(
+                        {notification?.map((item)=>(
                              <li key={item._id}>
                                 <Image alt="" width={100} height={100} src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/>
                                 <div className="msg">

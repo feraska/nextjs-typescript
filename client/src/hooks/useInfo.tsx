@@ -1,7 +1,8 @@
 "use client"
 import {  useEffect, useState } from "react"
-import { card } from "./useApi"
+
 import axios, { AxiosError } from "axios"
+import { card } from "@/interfaces/card"
 
 
 const useInfo = (url:string) => {

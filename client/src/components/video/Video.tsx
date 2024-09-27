@@ -1,9 +1,10 @@
 import React, {  EventHandler, MouseEvent, MouseEventHandler, useRef, useState } from "react"
 import Details from "../details/Details"
 import "./video.scss"
-import { card } from "../../hooks/useApi"
+
 import { IoVolumeHighOutline, IoVolumeMuteOutline } from "react-icons/io5"
 import { useRouter } from "next/navigation"
+import { card } from "@/interfaces/card"
 
 const Video:React.FC<{item?:card,isList?:boolean}> = ({item,isList=false}) => {
     const router = useRouter()

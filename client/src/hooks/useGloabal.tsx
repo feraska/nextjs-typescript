@@ -7,8 +7,18 @@ import { api } from "../enums/api"
 import useGetArray from "./useGetArray"
 import usePost from "./usePost"
 import { io } from "socket.io-client"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { setGenre } from "@/redux/slices/genre"
+import { addNotification, getNotification } from "@/redux/slices/notification"
+import { getUser, login } from "@/redux/slices/user"
 
 const useGlobal = () => {
+    const genre = useAppSelector((state)=>state.genre.genre)
+    const notification = useAppSelector((state)=>state.notification.notification)
+    const User = useAppSelector((state)=>state.user.user)
+    const sigin = useAppSelector((state)=>state.user.login)
+    const socketIo = useAppSelector((state)=>state.user.socket)
+    const dispatc = useAppDispatch()
     const {state,dispatch} = useContext(AuthContext)
     const {data,getData} = useApi("https://api.themoviedb.org/3/genre/movie/list")
     const {data:user,get} = useGet(api.findUser)
@@ -25,11 +35,11 @@ const useGlobal = () => {
         //     setFirstSocket(1)
         //     return
         // }
-        if(!state.user?._id) {
+        if(!User?._id) {
             
             return
         }
-        if(state.socket?.id) {
+        if(socketIo?.id) {
             
             return
         }
@@ -50,7 +60,7 @@ const useGlobal = () => {
         })
       
    // }
-    },[state.user?._id])
+    },[User?._id])
 
     useEffect(()=> {
         return()=>{
@@ -58,18 +68,20 @@ const useGlobal = () => {
             return
         }
         if(msg) {
-        dispatch({type:actions.addNotification,payload:{msg,to:state.user?._id}})
-        post({msg,to:state.user?._id})
+        // dispatch({type:actions.addNotification,payload:{msg,to:state.user?._id}})
+        dispatc(addNotification({msg,to:User?._id}))
+        post({msg,to:User?._id})
         }
         }
 
-    },[state.user?.email,msg])
+    },[User?.email,msg])
     useEffect(()=> {
         const getAll = async()=> {
             try {
              await get()
             } catch (err) {
-             dispatch({type:actions.login,payload:0})
+            //  dispatch({type:actions.login,payload:0})
+            dispatc(login(0))
             }
              
          }
@@ -92,10 +104,11 @@ const useGlobal = () => {
         
       
     if(user?._id) {
-        dispatch({type:actions.get_likes,payload:user.likes})
-        dispatch({type:actions.get_list,payload:user.list})
-        dispatch({type:actions.user,payload:user})
-        dispatch({type:actions.login,payload:1})
+        // dispatch({type:actions.get_likes,payload:user.likes})
+        // dispatch({type:actions.get_list,payload:user.list})
+        // dispatch({type:actions.user,payload:user})
+        dispatc(login(1))
+        dispatc(getUser(user))
         
       }
 //}
@@ -111,7 +124,7 @@ const useGlobal = () => {
             await getData()
         }
   //  return()=>{
-        if(!state.genre?.length) {
+        if(!genre?.length) {
             getAll()
         }
     },[firstSelect])
@@ -120,7 +133,7 @@ const useGlobal = () => {
        
        
     if(data){
-    dispatch({type:actions.get_genre,payload:data?.genres})
+        dispatc(setGenre(data.genres))
     }
 //}
 }
@@ -137,17 +150,17 @@ useEffect(()=> {
             return
         }
       //  return()=> {
-            if(state.notification.length == 0 && state.user?.email) {
+            if(notification.length == 0 && User?.email) {
                 getAll()
             }
             if(messages) {
-                dispatch({type:actions.getNotification,payload:messages})
+                dispatc(getNotification(messages))
                 
                 }
    // }
   
     
-},[messages,state.user?.email,firstnot])
+},[messages,User?.email,firstnot])
 }
 
 

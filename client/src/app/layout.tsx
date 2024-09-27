@@ -2,6 +2,7 @@
 import { AuthContextProvider } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import StoreProvider from "./StoreProvider";
 
 // import Head from "next/head";
 // import "./globals.css";
@@ -26,9 +27,9 @@ export default function RootLayout({
       <title >vg</title>
       </Head> */}
       <body className={inter.className}>
-      <AuthContextProvider>
+      <StoreProvider>
       {children}
-      </AuthContextProvider>
+      </StoreProvider>
       </body>
       
     </html>

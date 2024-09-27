@@ -1,7 +1,8 @@
 "use client"
 import {  useEffect, useState } from "react"
-import { card, play } from "./useApi"
+
 import axios, { AxiosError } from "axios"
+import { play } from "@/interfaces/play"
 
 
 const useFilter = (url:string) => {

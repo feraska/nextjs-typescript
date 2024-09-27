@@ -7,15 +7,17 @@ import useGlobal from "@/hooks/useGloabal"
 import { useContext } from "react"
 import { AuthContext } from "@/context/AuthContext"
 import Loading from "@/components/loading/Loading"
+import { useAppSelector } from "@/redux/hooks"
 const Watch = () => {
     const {state} = useContext(AuthContext)
     const router = useRouter()
+    const login = useAppSelector((state)=>state.user.login)
     useGlobal()
     
-    if(state.login === 2) {
+    if(login === 2) {
         return<Loading/>
     }
-    if(state.login === 0) {
+    if(login === 0) {
         router.push("/login")
         return
     }

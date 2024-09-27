@@ -11,17 +11,22 @@ const  ListItem = dynamic(()=>import( "../../components/listItem/ListItem"),{ssr
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import {useRouter , useSearchParams } from "next/navigation"
+import useScroll from "@/hooks/useScroll"
+import { useAppSelector } from "@/redux/hooks"
 
 const List = ()=> {
     const {state} = useContext(AuthContext)
     const router = useRouter()
    const search = useSearchParams()
     const id = search?.get("t")
+    const user = useAppSelector((state)=>state.user.user)
+    const login = useAppSelector((state)=>state.user.login)
+    useScroll(id??"")
    useGlobal()
-   if(state.login === 2) {
+   if(login === 2) {
     return<Loading/>
 }
-if(state.login === 0) {
+if(login === 0) {
     router.push("/login")
     return
 }
@@ -33,7 +38,7 @@ if(state.login === 0) {
         <div className="list" >
             <h1>My List</h1>
             <ul>
-            {state.list?.map((id,i)=>(
+            {user?.list?.map((id,i)=>(
                <ListItem id={id} key={i}/>
             ))}
             </ul>

@@ -10,6 +10,8 @@ const SelectGenre = dynamic(()=>import( "../../components/selectGenre/SelectGenr
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader =  dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import {useRouter,  useSearchParams } from "next/navigation"
+import useScroll from "@/hooks/useScroll"
+import { useAppSelector } from "@/redux/hooks"
 
 const Cards = dynamic(()=> import("../../components/cards/Cards"),{ssr:false}) 
 const Playing = dynamic(()=> import("../../components/playing/Playing"),{ssr:false}) 
@@ -19,12 +21,14 @@ const Movies = () => {
     const search = useSearchParams()
     const id = search?.get("t")
     const router = useRouter()
+    useScroll(id??"")
     useGlobal()
     const {state} = useContext(AuthContext)
-    if(state.login === 2) {
+    const login = useAppSelector((state)=>state.user.login)
+    if(login === 2) {
         return<Loading/>
     }
-    if(state.login === 0) {
+    if(login === 0) {
         router.push("/")
         return
     } 

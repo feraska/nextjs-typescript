@@ -10,6 +10,7 @@ import Loading from "../../components/loading/Loading"
 import useGlobal from "../../hooks/useGloabal"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useAppSelector } from "@/redux/hooks"
 
 const Register = () => {
     useGlobal()
@@ -22,6 +23,7 @@ const Register = () => {
     })
     const {post,message,loading} = usePost(api.registerMainServer)
     const router = useRouter()
+    const login = useAppSelector((state)=>state.user.login)
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setUser({...user,[e.target.name]:e.target.value})
     }
@@ -30,11 +32,11 @@ const Register = () => {
         await post(user)
         
     }
-    if(state.login === 2) {
+    if(login === 2) {
        
         return<Loading/>
     }
-    if(state.login === 1) {
+    if(login === 1) {
        router.push("/")
        return
     } 
