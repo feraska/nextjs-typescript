@@ -28,6 +28,13 @@ const Home = () => {
     const id = search?.get("t")
     useScroll(id??"")
     useGlobal()
+    // setTimeout(()=> {
+    //     if(login === 2) {
+        
+    //         router.push("/login")
+    //         return
+    //     }
+    // },10000)
     if(login === 2) {
         
         return<Loading/>

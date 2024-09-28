@@ -14,6 +14,9 @@ const ListItem:React.FC<{id:number}> = ({id}) => {
     const {data:item} = useInfo(`https://api.themoviedb.org/3/movie/${id}`)
     const [hover,setHover] = useState(false)
     const router = useRouter()
+    if(!item) {
+        return
+    }
     // const getInfo = () => {
     //     navigate(`/movie?t=${id}`)
     // }

@@ -118,7 +118,7 @@ const Navbar = () => {
                                 <Image alt="" width={100} height={100} src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/>
                                 <div className="msg">
                              <span>{item?.msg}</span>
-                             <span>{format(item.createdAt)}</span>
+                             <span>{format(item?.createdAt??"")}</span>
                              </div>
                            </li>
                         ))}

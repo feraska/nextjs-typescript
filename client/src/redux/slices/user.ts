@@ -1,6 +1,6 @@
 
 import User from '@/interfaces/user'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Socket } from 'socket.io-client'
 
 
@@ -21,22 +21,26 @@ export const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    getSocket: (state,action) => {
+    getSocket: (state,action:PayloadAction<Socket>) => {
+        
+        if(!state.socket) {
+            return
+        }
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.socket = action.payload
+      state.socket.id = action.payload.id
     },
-    login: (state,action) => {
+    login: (state,action:PayloadAction<number>) => {
         state.login = action.payload
     },
-    logout: (state,action) => {
+    logout: (state) => {
         state.login = 2
         state.user = undefined
         state.socket = undefined
     },
-    getUser: (state,action) => {
+    getUser: (state,action:PayloadAction<User>) => {
         state.user = action.payload
     },
     // getLikes: (state,action) => {
@@ -48,7 +52,7 @@ export const notificationSlice = createSlice({
     //    state.user.likes = [...action.payload]
     // //    state.user = {...prev}
     // },
-    like: (state,action) => {
+    like: (state,action:PayloadAction<number>) => {
         if(!state.user) {
             return
         }
@@ -58,7 +62,7 @@ export const notificationSlice = createSlice({
     //    state.user = {...prev}
     },
     
-    dislike: (state,action) => {
+    dislike: (state,action:PayloadAction<number>) => {
         if(!state.user) {
             return
         }
@@ -78,7 +82,7 @@ export const notificationSlice = createSlice({
     // },
     
   //},
-  addList: (state,action) => {
+  addList: (state,action:PayloadAction<number>) => {
     if(!state.user) {
         return
     }
@@ -87,7 +91,7 @@ export const notificationSlice = createSlice({
    state.user.list = [...state.user.list,action.payload]
 //    state.user = {...prev}
 },
-removeList: (state,action) => {
+removeList: (state,action:PayloadAction<number>) => {
     if(!state.user) {
         return
     }

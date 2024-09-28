@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation"
 import { card } from "@/interfaces/card"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addList, dislike, like, removeList } from "@/redux/slices/user"
-const Details:React.FC<{item?:card,isList:boolean}> = ({item,isList}) => {
+const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
     const {state,dispatch} = useContext(AuthContext)
     const dispatc = useAppDispatch()
     const {put} = usePut(api.addToList)
@@ -47,7 +47,7 @@ const Details:React.FC<{item?:card,isList:boolean}> = ({item,isList}) => {
             if(action === actions.like) {
                 await addToLikes({image:item?.id})
                 // dispatch({type:actions.like,payload:item?.id})
-                dispatc(like(item?.id))
+                dispatc(like(item.id))
             } else {
                 await removeFromLikes({image:item?.id})
                 // dispatch({type:actions.dislike,payload:item?.id})

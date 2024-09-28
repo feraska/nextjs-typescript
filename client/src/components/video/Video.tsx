@@ -6,7 +6,7 @@ import { IoVolumeHighOutline, IoVolumeMuteOutline } from "react-icons/io5"
 import { useRouter } from "next/navigation"
 import { card } from "@/interfaces/card"
 
-const Video:React.FC<{item?:card,isList?:boolean}> = ({item,isList=false}) => {
+const Video:React.FC<{item:card,isList?:boolean}> = ({item,isList=false}) => {
     const router = useRouter()
     const newRef = useRef<HTMLDivElement>(null);
     const [isMuted,setIsMuted] = useState(true)

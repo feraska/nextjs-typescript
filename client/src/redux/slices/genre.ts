@@ -1,5 +1,5 @@
 import { genere } from '@/interfaces/card'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface CounterState {
@@ -14,7 +14,7 @@ export const genreSlice = createSlice({
   name: 'genre',
   initialState,
   reducers: {
-    setGenre: (state,action) => {
+    setGenre: (state,action:PayloadAction<Array<genere>>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
