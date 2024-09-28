@@ -9,7 +9,7 @@ import { api } from "../../enums/api"
 import { MdOutlineExpandMore } from "react-icons/md"
 
 import Tooltip from "../tooltip/Tooltip"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { card } from "@/interfaces/card"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addList, dislike, like, removeList } from "@/redux/slices/user"
@@ -22,6 +22,8 @@ const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
     const {put:remove} = usePut(`${api.removeFromList}`)
     const router = useRouter()
     const user = useAppSelector((state)=>state.user.user)
+    const search = useSearchParams()
+    const id = search?.get("q")
     const removeMovie = async()=> {
         try {
             await remove({image:item?.id})
@@ -58,7 +60,10 @@ const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
         }
     }
     const showDetails = () => {
+        if(!id)
         router.push(`?t=${item?.id}`)
+        else 
+        router.push(`?t=${item?.id}&q=${id}`)
     }
    if(!item) {
     return

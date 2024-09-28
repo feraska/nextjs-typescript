@@ -9,11 +9,13 @@ const router = useRouter()
 const path = usePathname()
 const search = useSearchParams()
 const id = search?.get("t")
+const q = search?.get("q")
+
     const {data:item} = useInfo(`https://api.themoviedb.org/3/movie/${id}`)
     return(
         <div className="window">
             <div className="data">
-            <AiFillCloseCircle className="close" onClick={()=>router.push(path??"/")}/>
+            <AiFillCloseCircle className="close" onClick={()=>router.push(q?`${path}?q=${q}`:path??"/")}/>
         <div className="movie">
             <div className="item">
             <h1>{item?.original_title}</h1>
