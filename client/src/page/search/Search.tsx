@@ -6,8 +6,9 @@ import "./search.scss"
 import useFilter from "../../hooks/useFilter"
 const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:false})
 import Loading from "../../components/loading/Loading"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
+import React from "react"
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
@@ -17,7 +18,9 @@ import { useAppSelector } from "@/redux/hooks"
 const Search = () => {
     const search = useSearchParams()
     const id = search?.get("t")
-    const {state} = useContext(AuthContext)
+    
+   
+    //const {state} = useContext(AuthContext)
     const login = useAppSelector((state)=>state.user.login)
     useScroll(id??"")
     useGlobal()
@@ -39,6 +42,7 @@ const Search = () => {
          {id&&<Movie/>}
         <Navbar/>
         {<Vheader/>}
+        
         <div className="filter">
             {loading&&<p>Loading...</p>}
             <h1>Search</h1>
@@ -52,4 +56,4 @@ const Search = () => {
         </>
     )
 }
-export default Search
+export default React.memo(Search)

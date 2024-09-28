@@ -3,33 +3,43 @@ import "./navbar.scss"
 import Logo from "../../assets/logo.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
-import {  FormEvent, useContext, useEffect, useRef, useState } from "react";
+import {  ChangeEvent, FormEvent, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { AuthContext, actions } from "../../context/AuthContext";
 import { PiSignOutLight } from "react-icons/pi";
 import useDelete from "../../hooks/useDelete";
 import { api } from "../../enums/api";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoIosClose, IoIosNotificationsOutline } from "react-icons/io";
 import { format } from "timeago.js";
-
+import React from "react"
 import {  mobileWidth } from "@/utils/getUser";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppSelector } from "@/redux/hooks";
 const Navbar = () => {
     const notification = useAppSelector((state)=>state.notification.notification)
     const user = useAppSelector((state)=>state.user.user)
-    const [showSearch,setShowSearch] = useState(false)
+    
     const [scrolled,setScolled] = useState(false)
     const {state,dispatch} = useContext(AuthContext)
     const {deletE} = useDelete(api.logoutMainServer)
     const router = useRouter()
     const pathname = usePathname()
-
-    const handleChange = (e:FormEvent<HTMLInputElement>) => {
-        router.push(`/search?q=${e.currentTarget.value}`)
+    const search = useSearchParams()
+    const id = search?.get("q")
+    const [text,setText] = useState(id??"")
+    const [showSearch,setShowSearch] = useState(search?.get("q")?true:false)
+    const handleChange =  (e:ChangeEvent<HTMLInputElement>) => {
+        setText(e.target.value)
+        setTimeout(()=> {
+            
+        router.push(`/search?q=${e.target.value}`)
+        },1000)
+        
     }
+    
+    
     const logout = async() => {
         await deletE()
         dispatch({type:actions.logout,payload:undefined})
@@ -71,6 +81,16 @@ const Navbar = () => {
        
        
     }
+    const clear = () => {
+        console.log("clear")
+       // setTimeout(()=> {
+            setText("")
+            setShowSearch(true)
+            router.push("/")
+       // },1000)
+       
+        
+    }
     return(
         <header className={scrolled?"scrolled":""}>
         <nav>
@@ -97,10 +117,11 @@ const Navbar = () => {
 
             <div className="right">
                 <div className="search">
-                
-                <CiSearch className="icon"  onClick={()=>setShowSearch((prev)=>!prev)}/>
-                    {showSearch&&
-                <input autoFocus  type="text" placeholder="type " onBlur={()=>setShowSearch(false)} onChange={(e)=>handleChange(e)}/>
+                {showSearch&&<IoIosClose className="close" onClick={clear} />}
+                <CiSearch className="icon" onClick={()=>setShowSearch(true)} />
+                    {
+                        showSearch&&
+                <input autoFocus value={text}  type="text" placeholder="type " onChange={handleChange}/>
                     }
                 </div>
                   
@@ -135,4 +156,4 @@ const Navbar = () => {
         </header>
     )
 }
-export default Navbar
+export default memo(Navbar)

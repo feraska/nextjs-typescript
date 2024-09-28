@@ -1,4 +1,4 @@
-@media screen and (max-width:768px) {
+@media screen and (max-width:992px) {
     nav {
        
       .left {
@@ -22,7 +22,7 @@
     }
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:992px) {
     nav {
         .left {
             .logo {
@@ -196,7 +196,14 @@ nav {
             gap: 5px;
             margin-right: 50px;
             background-color: transparent;
-           
+            position: relative;
+            .close {
+                position: absolute;
+                right: 0;
+                cursor: pointer;
+                width: 25px;
+                height: 25px;
+            }
             .icon {
                 color: #fff;
                 margin-left: 5px;
