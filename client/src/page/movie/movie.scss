@@ -20,11 +20,11 @@
         box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
         background-color: #181818;
         position: relative;
-        width: 100%;
+        width: 80%;
         height: 80%;
         animation-name: animatetop;
         animation-duration: 0.4s;
-        // overflow: auto; /* Enable scroll if needed */
+        overflow: auto; /* Enable scroll if needed */
     .close {
         font-size: 26px;
         top: 20px;
