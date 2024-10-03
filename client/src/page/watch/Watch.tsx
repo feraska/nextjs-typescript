@@ -31,7 +31,7 @@ const Watch = () => {
             <IoArrowBack  onClick={() => router.back()} className="back-icon"/>
           </div>
           <iframe autoCapitalize=""
-            src={`https://www.youtube.com/embed/${data?.results[0].key}?autoplay=1&mute=1`}
+            src={`https://www.youtube.com/embed/${data?.results[0]?.key}?autoplay=1&mute=1`}
             
             frameBorder="0" 
             >
