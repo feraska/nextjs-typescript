@@ -17,6 +17,7 @@ const  Login = () => {
     const router = useRouter()
     // const {state,dispatch} = useContext(AuthContext)
     const sigIn = useAppSelector((state)=>state.user.login)
+    
     const dispatch = useAppDispatch()
     const [user,setUser] = useState({
         "email":"",
@@ -42,7 +43,7 @@ const  Login = () => {
          }
          
     }
-    if(sigIn === 2 ) {
+    if(sigIn === 2 || loading) {
         return<Loading/>
     }
     if(sigIn === 1) {
