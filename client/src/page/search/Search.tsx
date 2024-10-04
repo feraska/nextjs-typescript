@@ -6,8 +6,8 @@ import "./search.scss"
 import useFilter from "../../hooks/useFilter"
 const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:false})
 import Loading from "../../components/loading/Loading"
-import { useContext, useEffect, useState } from "react"
-import { AuthContext } from "../../context/AuthContext"
+// import { useContext, useEffect, useState } from "react"
+// import { AuthContext } from "../../context/AuthContext"
 import React from "react"
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
@@ -24,7 +24,7 @@ const Search = () => {
     const login = useAppSelector((state)=>state.user.login)
     useScroll(id??"")
     useGlobal()
-    const {data,loading} = useFilter(`https://api.themoviedb.org/3/movie/now_playing?page=${search?.get("q")}`)
+    const {data,loading} = useFilter(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}`)
     const router = useRouter()
     if(login === 2) {
        

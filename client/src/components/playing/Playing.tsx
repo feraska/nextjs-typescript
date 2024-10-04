@@ -1,6 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
-import useApi from "../../hooks/useApi"
+import React from "react"
 import "./playing.scss"
 import Image from "next/image"
 

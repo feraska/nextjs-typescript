@@ -1,6 +1,6 @@
 import { play } from "@/interfaces/play"
 import axios, { AxiosError } from "axios"
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 
 
 
@@ -8,6 +8,7 @@ const useApi = (url:string) => {
     const [data,setData] = useState<play>()
     const [error,setError] = useState("")
     const [loading,setloading] = useState(false)
+    useEffect(()=> {
         const getData = async() => {
             try {
                 setloading(true)
@@ -26,10 +27,13 @@ const useApi = (url:string) => {
                 }
             }
         }
+        getData()
+    },[])
+        
        
 
     
     
-    return {getData,data,error,loading}
+    return {data,error,loading}
 }
 export default useApi

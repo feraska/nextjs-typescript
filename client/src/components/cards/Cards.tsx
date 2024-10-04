@@ -1,5 +1,5 @@
 "use client"
-import React, {  lazy, useEffect, useState } from "react"
+import React, {   useState } from "react"
 import dynamic from "next/dynamic"
 import { IoIosArrowForward,IoIosArrowBack } from "react-icons/io"
 const CardItem = dynamic(()=> import("../cardItem/CardItem"),{ssr:false}) 
@@ -7,16 +7,16 @@ import "./cards.scss"
 import useApi from "../../hooks/useApi"
 
 const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
-    const {data,getData} = useApi(url)
+    const {data} = useApi(url)
     const list = React.createRef<HTMLUListElement>()
     const [numberSlider,setNumberSlider] = useState(0)
-    useEffect(()=> {
-        const get = async()=> {
-            getData()
-        }
-        get()
+    // useEffect(()=> {
+    //     const get = async()=> {
+    //         getData()
+    //     }
+    //     get()
 
-    },[])
+    // },[])
     const handleSlider = async(type:string) => {
         if(!list.current) {
             return

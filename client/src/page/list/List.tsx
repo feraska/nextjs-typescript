@@ -1,6 +1,6 @@
 "use client"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
+// import { useContext } from "react"
+// import { AuthContext } from "../../context/AuthContext"
 import "./list.scss"
 import dynamic from "next/dynamic"
 const Navbar = dynamic(()=>import("../../components/navbar/Navbar"),{ssr:false}) 
@@ -15,7 +15,7 @@ import useScroll from "@/hooks/useScroll"
 import { useAppSelector } from "@/redux/hooks"
 
 const List = ()=> {
-    const {state} = useContext(AuthContext)
+    //const {state} = useContext(AuthContext)
     const router = useRouter()
    const search = useSearchParams()
     const id = search?.get("t")

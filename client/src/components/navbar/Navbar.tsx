@@ -16,13 +16,14 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout } from "@/redux/slices/user";
 const Navbar = () => {
     const notification = useAppSelector((state)=>state.notification.notification)
     const user = useAppSelector((state)=>state.user.user)
-    
+    const dispatch = useAppDispatch()
     const [scrolled,setScolled] = useState(false)
-    const {state,dispatch} = useContext(AuthContext)
+    // const {state,dispatch} = useContext(AuthContext)
     const {deletE} = useDelete(api.logoutMainServer)
     const router = useRouter()
     const pathname = usePathname()
@@ -40,9 +41,10 @@ const Navbar = () => {
     }
     
     
-    const logout = async() => {
+    const logOut = async() => {
         await deletE()
-        dispatch({type:actions.logout,payload:undefined})
+        // dispatch({type:actions.logout,payload:undefined})
+        dispatch(logout())
         router.push("/login")
     }
     useEffect(()=> {
@@ -99,7 +101,7 @@ const Navbar = () => {
                 <Image alt="" width={100} height={100} src={Logo.src}/>
             </div>
             <RxHamburgerMenu className="h" onClick={run}/>
-            {user&&<PiSignOutLight className="logout" onClick={logout}/>}
+            {user&&<PiSignOutLight className="logout" onClick={logOut}/>}
             
             <h3>{user?.firstName}</h3>
             

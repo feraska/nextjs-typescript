@@ -1,6 +1,6 @@
 "use client"
 import { useContext, useEffect, useState } from "react"
-import useApi from "./useApi"
+// import useApi from "./useApi"
 import { AuthContext, actions } from "../context/AuthContext"
 import useGet from "./useGet"
 import { api } from "../enums/api"
@@ -8,25 +8,25 @@ import useGetArray from "./useGetArray"
 import usePost from "./usePost"
 import { io } from "socket.io-client"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { setGenre } from "@/redux/slices/genre"
+// import { setGenre } from "@/redux/slices/genre"
 import { addNotification, getNotification } from "@/redux/slices/notification"
 import { getUser, login } from "@/redux/slices/user"
 
 const useGlobal = () => {
-    const genre = useAppSelector((state)=>state.genre.genre)
+    // const genre = useAppSelector((state)=>state.genre.genre)
     const notification = useAppSelector((state)=>state.notification.notification)
     const User = useAppSelector((state)=>state.user.user)
-    const sigin = useAppSelector((state)=>state.user.login)
+    // const sigin = useAppSelector((state)=>state.user.login)
     const socketIo = useAppSelector((state)=>state.user.socket)
     const dispatc = useAppDispatch()
     const {state,dispatch} = useContext(AuthContext)
-    const {data,getData} = useApi("https://api.themoviedb.org/3/genre/movie/list")
+    // const {data} = useApi("https://api.themoviedb.org/3/genre/movie/list")
     const {data:user,get} = useGet(api.findUser)
     const {data:messages,getData:getMessages} = useGetArray(api.getNotification)
     const {post} = usePost(api.addNotification)
     const [msg,setMsg] = useState(undefined)
     const [first,setFirst] = useState(0)
-    const [firstSelect,setF] = useState(0)
+    // const [firstSelect,setF] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
     useEffect(()=> {
         
@@ -114,31 +114,31 @@ const useGlobal = () => {
 //}
     },[user?._id])
 
-    useEffect(()=> {
-        if(firstSelect === 0) {
-            setF(1)
-            return
-        }
-        const getAll = async()=> {
+//     useEffect(()=> {
+//         if(firstSelect === 0) {
+//             setF(1)
+//             return
+//         }
+//         // const getAll = async()=> {
            
-            await getData()
-        }
-  //  return()=>{
-        if(!genre?.length) {
-            getAll()
-        }
-    },[firstSelect])
+//         //     await getData()
+//         // }
+//   //  return()=>{
+//         // if(!genre?.length) {
+//         //     getAll()
+//         // }
+//     },[firstSelect])
 
-    useEffect(()=> {
+//     useEffect(()=> {
        
        
-    if(data){
-        dispatc(setGenre(data.genres))
-    }
-//}
-}
+//     if(data){
+//         dispatc(setGenre(data.genres))
+//     }
+// //}
+// }
 
-,[data])
+// ,[data])
 
 useEffect(()=> {
     const getAll = async()=> {

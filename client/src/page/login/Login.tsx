@@ -1,22 +1,23 @@
 "use client"
-import { ChangeEvent, FormEvent, lazy, useContext, useState } from "react"
+import { ChangeEvent, FormEvent,  useState } from "react"
 import dynamic from "next/dynamic"
 const BackgroundImage = dynamic(()=>import("../../components/backgroundImage/BackgroundImage"),{ssr:false}) 
 import "./login.scss"
 import usePost from "../../hooks/usePost"
 import { api } from "../../enums/api"
-import { AuthContext, actions } from "../../context/AuthContext"
 import Loading from "../../components/loading/Loading"
 import useGlobal from "../../hooks/useGloabal"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { login } from "@/redux/slices/user"
 
 const  Login = () => {
     useGlobal()
     const router = useRouter()
-    const {state,dispatch} = useContext(AuthContext)
-    const login = useAppSelector((state)=>state.user.login)
+    // const {state,dispatch} = useContext(AuthContext)
+    const sigIn = useAppSelector((state)=>state.user.login)
+    const dispatch = useAppDispatch()
     const [user,setUser] = useState({
         "email":"",
         "password":""
@@ -30,7 +31,8 @@ const  Login = () => {
         e.preventDefault()
          try {
              await post(user)
-             dispatch({type:actions.login})
+             dispatch(login(1))
+             //dispatch({type:actions.login})
              router.push("/")
              
             
@@ -40,10 +42,10 @@ const  Login = () => {
          }
          
     }
-    if(login === 2 || loading) {
+    if(sigIn === 2 ) {
         return<Loading/>
     }
-    if(login === 1) {
+    if(sigIn === 1) {
         router.push("/")
         return
     } 

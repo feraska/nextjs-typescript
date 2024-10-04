@@ -36,7 +36,7 @@ export const notificationSlice = createSlice({
         state.login = action.payload
     },
     logout: (state) => {
-        state.login = 2
+        state.login = 0
         state.user = undefined
         state.socket = undefined
     },

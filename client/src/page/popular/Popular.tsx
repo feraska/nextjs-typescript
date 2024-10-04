@@ -1,10 +1,10 @@
 "use client"
-import { lazy, useContext } from "react"
+
 import dynamic from "next/dynamic"
 const Navbar = dynamic( ()=>import("../../components/navbar/Navbar"),{ssr:false})
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false})
 import useGlobal from "../../hooks/useGloabal"
-import { AuthContext } from "../../context/AuthContext"
+
 import Loading from "../../components/loading/Loading"
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
@@ -20,7 +20,7 @@ const Popular = () => {
     const id = search?.get("t")
     useScroll(id??"")
     useGlobal()
-    const {state} = useContext(AuthContext)
+    // const {state} = useContext(AuthContext)
     const router = useRouter()
     const login = useAppSelector((state)=>state.user.login)
     if(login === 2) {

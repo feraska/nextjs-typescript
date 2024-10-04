@@ -1,11 +1,11 @@
 "use client"
-import { ChangeEvent, FormEvent, lazy,  useContext,  useState } from "react"
+import { ChangeEvent, FormEvent,   useState } from "react"
 import dynamic from "next/dynamic"
 const BackgroundImage = dynamic(()=> import( "../../components/backgroundImage/BackgroundImage"),{ssr:false})
 import "./register.scss"
 import usePost from "../../hooks/usePost"
 import { api } from "../../enums/api"
-import { AuthContext } from "../../context/AuthContext"
+// import { AuthContext } from "../../context/AuthContext"
 import Loading from "../../components/loading/Loading"
 import useGlobal from "../../hooks/useGloabal"
 import Link from "next/link"
@@ -14,7 +14,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 const Register = () => {
     useGlobal()
-    const {state} = useContext(AuthContext)
+    // const {state} = useContext(AuthContext)
     const [user,setUser] = useState({
         "email":"",
         "password":"",

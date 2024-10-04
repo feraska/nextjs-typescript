@@ -4,13 +4,13 @@ import { IoArrowBack } from "react-icons/io5"
 import "./watch.scss"
 import { useParams, useRouter } from "next/navigation"
 import useGlobal from "@/hooks/useGloabal"
-import { useContext } from "react"
-import { AuthContext } from "@/context/AuthContext"
+// import { useContext } from "react"
+// import { AuthContext } from "@/context/AuthContext"
 import Loading from "@/components/loading/Loading"
 import { useAppSelector } from "@/redux/hooks"
 import useVideo from "@/hooks/useVideo"
 const Watch = () => {
-    const {state} = useContext(AuthContext)
+    // const {state} = useContext(AuthContext)
     const router = useRouter()
     const login = useAppSelector((state)=>state.user.login)
     const params = useParams()

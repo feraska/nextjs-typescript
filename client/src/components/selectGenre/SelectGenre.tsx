@@ -1,8 +1,7 @@
-import React, { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
+import React from "react"
 import "./selectGenre.scss"
 import { useAppSelector } from "@/redux/hooks"
-// import {useRouter} from "next/navigation"
+
 const SelectGenre:React.FC<{setGenre:(name:string)=>void}> = ({setGenre}) => {
     //const {state} = useContext(AuthContext)
     const genre = useAppSelector((state)=>state.genre.genre)

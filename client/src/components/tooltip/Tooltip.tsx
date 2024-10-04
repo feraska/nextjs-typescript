@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactPortal } from "react"
+import React, { ReactNode } from "react"
 import "./tooltip.scss"
 type Props = {
     children: ReactNode,

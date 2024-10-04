@@ -1,8 +1,8 @@
-import React, {  EventHandler, MouseEvent, MouseEventHandler, useRef, useState } from "react"
+import React, {  MouseEvent, useRef, useState } from "react"
 import Details from "../details/Details"
 import "./video.scss"
 
-import { IoVolumeHighOutline, IoVolumeMuteOutline } from "react-icons/io5"
+// import { IoVolumeHighOutline, IoVolumeMuteOutline } from "react-icons/io5"
 import { useRouter } from "next/navigation"
 import { card } from "@/interfaces/card"
 import useVideo from "@/hooks/useVideo"

@@ -2,8 +2,8 @@ import { FaPlay } from "react-icons/fa"
 import "./details.scss"
 import { IoIosRemoveCircle, IoMdAdd } from "react-icons/io"
 import { SlDislike, SlLike } from "react-icons/sl"
-import React, {  useContext } from "react"
-import { AuthContext, actions } from "../../context/AuthContext"
+import React from "react"
+import { actions } from "../../context/AuthContext"
 import usePut from "../../hooks/usePut"
 import { api } from "../../enums/api"
 import { MdOutlineExpandMore } from "react-icons/md"
@@ -14,21 +14,22 @@ import { card } from "@/interfaces/card"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addList, dislike, like, removeList } from "@/redux/slices/user"
 const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
-    const {state,dispatch} = useContext(AuthContext)
-    const dispatc = useAppDispatch()
+    //const {state,dispatch} = useContext(AuthContext)
+    const dispatch = useAppDispatch()
     const {put} = usePut(api.addToList)
     const {put:addToLikes} = usePut(api.like)
     const {put:removeFromLikes} = usePut(`${api.dislike}`)
     const {put:remove} = usePut(`${api.removeFromList}`)
     const router = useRouter()
     const user = useAppSelector((state)=>state.user.user)
+    const genre = useAppSelector((state)=>state.genre.genre)
     const search = useSearchParams()
     const id = search?.get("q")
     const removeMovie = async()=> {
         try {
             await remove({image:item?.id})
         // dispatch({type:actions.remove_list,payload:item?.id})
-        dispatc(removeList(item?.id))
+        dispatch(removeList(item?.id))
         } catch(err) {
             console.log(err)
         }
@@ -38,7 +39,7 @@ const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
         await put({image:item?.id})
         
         // dispatch({type:actions.add_list,payload:item?.id})
-        dispatc(addList(item?.id))
+        dispatch(addList(item?.id))
         
         } catch(err) {
             console.log(err)
@@ -49,11 +50,11 @@ const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
             if(action === actions.like) {
                 await addToLikes({image:item?.id})
                 // dispatch({type:actions.like,payload:item?.id})
-                dispatc(like(item.id))
+                dispatch(like(item.id))
             } else {
                 await removeFromLikes({image:item?.id})
                 // dispatch({type:actions.dislike,payload:item?.id})
-                dispatc(dislike(item?.id))
+                dispatch(dislike(item?.id))
             }
         } catch(err) {
             console.log(err)
@@ -90,7 +91,7 @@ const Details:React.FC<{item:card,isList:boolean}> = ({item,isList}) => {
             </div>
             
             <div className="genre">
-            {state.genre?.filter((a)=>item?.genre_ids?.includes(a?.id))?.map((item)=>(
+            {genre?.filter((a)=>item?.genre_ids?.includes(a?.id))?.map((item)=>(
                 <span key={item.id} >{item?.name}</span>
             ))}
            </div>

@@ -1,5 +1,5 @@
 "use client"
-import { lazy, useContext, useState } from "react"
+import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 const Navbar = dynamic(()=>import( "../../components/navbar/Navbar"),{ssr:false})
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false})
@@ -14,11 +14,20 @@ const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loa
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
 import useScroll from "@/hooks/useScroll"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import useApi from "@/hooks/useApi"
+import { setGenre } from "@/redux/slices/genre"
 
 const Tv = ()=> {
-    const {state} = useContext(AuthContext)
-    const [genre,setGenre] = useState("")
+    // const {state} = useContext(AuthContext)
+    const {data} = useApi("https://api.themoviedb.org/3/genre/tv/list")
+    const dispatch = useAppDispatch()
+    useEffect(()=> {
+        if(data?.genres) {
+            dispatch(setGenre(data.genres))
+        }
+    },[data?.genres])
+    const [genre,setgenre] = useState("")
     const search = useSearchParams()
     const id = search?.get("t")
     const router = useRouter()
@@ -38,7 +47,7 @@ const Tv = ()=> {
         {id&&<Movie/>}
         <Navbar/>
         {<Vheader/>}
-        <SelectGenre setGenre={setGenre}/>
+        <SelectGenre setGenre={setgenre}/>
         <Playing url="/uCY1j1YqfDWRbbS7hJwd9szX1sJ.jpg"/>
         <Cards url="https://api.themoviedb.org/3/discover/tv" genre={genre}/>
     <Footer/>
