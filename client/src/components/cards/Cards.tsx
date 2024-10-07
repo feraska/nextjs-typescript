@@ -10,13 +10,6 @@ const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
     const {data} = useApi(url)
     const list = React.createRef<HTMLUListElement>()
     const [numberSlider,setNumberSlider] = useState(0)
-    // useEffect(()=> {
-    //     const get = async()=> {
-    //         getData()
-    //     }
-    //     get()
-
-    // },[])
     const handleSlider = async(type:string) => {
         if(!list.current) {
             return

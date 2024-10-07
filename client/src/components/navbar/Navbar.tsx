@@ -34,8 +34,11 @@ const Navbar = () => {
     const handleChange =  (e:ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
         setTimeout(()=> {
-            
+        if(!pathname.includes("search"))
         router.push(`/search?q=${e.target.value}`)
+        else {
+            router.push(`${pathname}?q=${e.target.value}`)
+        }
         },1000)
         
     }

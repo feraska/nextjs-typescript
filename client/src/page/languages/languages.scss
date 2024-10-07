@@ -1,0 +1,34 @@
+.languages {
+    margin-top: 100px;
+    .box {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .dropdown {
+            display: flex;
+            gap: 10px;
+            .drop {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                select {
+                    
+                    background-color: black;
+                    border: 1px solid white;
+                    color: white;
+                    outline: none;
+                    padding: 5px;
+                    cursor: pointer;
+                }
+            }
+        }
+        ul {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+         // display: flex;
+         // flex-wrap: wrap;
+             list-style: none;
+             gap: 20px;
+        }
+    }
+}

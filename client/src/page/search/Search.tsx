@@ -6,26 +6,33 @@ import "./search.scss"
 import useFilter from "../../hooks/useFilter"
 const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:false})
 import Loading from "../../components/loading/Loading"
-// import { useContext, useEffect, useState } from "react"
-// import { AuthContext } from "../../context/AuthContext"
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
 import useGlobal from "@/hooks/useGloabal"
 import useScroll from "@/hooks/useScroll"
 import { useAppSelector } from "@/redux/hooks"
+import useLoadMore from "@/hooks/useLoadMore"
+
+
 const Search = () => {
     const search = useSearchParams()
     const id = search?.get("t")
     
-   
-    //const {state} = useContext(AuthContext)
+
     const login = useAppSelector((state)=>state.user.login)
+    const [page,setPage] = useState(1)
     useScroll(id??"")
     useGlobal()
-    const {data,loading} = useFilter(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}`)
+   
+    //const {loading} = useFilter(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}`)
+   
+    const {data,error,loading} = useLoadMore(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}&page=${page}`,page,setPage)
     const router = useRouter()
+    
+   
+   
     if(login === 2) {
        
         return<Loading/>
@@ -34,9 +41,7 @@ const Search = () => {
         router.push("/login")
         return
     }
-    if(loading) {
-        return<p>Loading...</p>
-    } 
+    
     return(
         <>
          {id&&<Movie/>}
@@ -44,13 +49,14 @@ const Search = () => {
         {<Vheader/>}
         
         <div className="filter">
-            {loading&&<p>Loading...</p>}
+            
             <h1>Search</h1>
             <ul>
-                {data?.results?.map((item,i)=>(
+                {data?.map((item,i)=>(
                     <CardItem item={item} key={i}/>
                 ))}
             </ul>
+            {loading&&<Loading/>}
         </div>
         <Footer/>
         </>

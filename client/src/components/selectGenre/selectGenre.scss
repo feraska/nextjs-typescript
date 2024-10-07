@@ -1,8 +1,27 @@
 .genre {
     position: relative;
+    
+    
     select {
         position: absolute;
         top: 150px;
         left: 40px;
+        background-color: black;
+        border: 1px solid white;
+        color: white;
+        outline: none;
+        padding: 5px;
+        cursor: pointer;
+        option {
+           &:hover {
+            cursor: pointer;
+            background-color: red;
+           }
+           
+        }
+        &:hover {
+            opacity: 0.5;
+        }
+
     }
 }

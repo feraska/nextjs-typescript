@@ -5,6 +5,7 @@ export const data = [
         {text: "Movies",path:"/movies"},
         {text:  "New & Popular",path:"/new"},
         {text: "My List",path:"/list"},
+        {text:"Languages",path:"/languages"}
     
    
     
