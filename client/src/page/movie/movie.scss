@@ -70,6 +70,16 @@
             width: 200px;
             height: 200px;
         }
+        p {
+            width: 80%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            letter-spacing: 2px;
+            word-spacing: 2px;
+            border-spacing: 1px;
+            line-height: 30px;
+            
+        }
     }
 }
     }

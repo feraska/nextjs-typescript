@@ -7,7 +7,8 @@ export interface card {
     id:number,
     original_name?:string,
     genres:Array<genere>,
-    spoken_languages:Array<lang>
+    spoken_languages:Array<lang>,
+    overview:string
 }
 export interface lang {
     english_name:string

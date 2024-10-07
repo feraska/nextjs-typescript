@@ -34,6 +34,7 @@ const q = search?.get("q")
             <Image alt="" width={100} height={100} src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}/>
             <Image alt="" width={100} height={100} src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}/>
             </div>
+            <p>{item?.overview}</p>
         </div>
         </div>
         </div>

@@ -1,7 +1,7 @@
 
-import { Socket } from "socket.io-client";
+// import { Socket } from "socket.io-client";
 import { AppState, action,  actions } from "./AuthContext";
-import User from "@/interfaces/user";
+// import User from "@/interfaces/user";
 const AuthReducer = (state:AppState, action:action):AppState => {
     switch(action.type) {
         case actions.socket:

@@ -10,38 +10,13 @@ const useLoadMore = (url:string,page:number,setPage:React.Dispatch<React.SetStat
     const [loading,setloading] = useState(false)
     const [init,setInit] = useState(0)
     const search = useSearchParams()
+    const [first,setFirst] = useState(0)
     useEffect(()=> {
         setPage(1)
         setInit(0)
     },[search?.get("q"),search?.get("s")])
     useEffect(()=> {
-        // console.log(page)
-         const f = async()=> {
-                 await getData()
-         }
-         if(init === 0 && page === 1 || init !== 0) {
-         f()
-         setInit(1)
-         } else {
-             f()
-         }
-     },[page,init])
-     const loadMore = () => {
-         setPage((prev)=>prev+1)
-     }
-     const handleScroll = () => {
-         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) {
-           return;
-         }
-         
-         loadMore()
-       };
-       
-       useEffect(() => {
-         window.addEventListener('scroll', handleScroll);
-         return () => window.removeEventListener('scroll', handleScroll);
-       }, []);
-          const getData = async() => {
+        const getData = async() => {
             try {
                 setloading(true)
               const res =  await axios.get(`${url}`,{
@@ -62,6 +37,41 @@ const useLoadMore = (url:string,page:number,setPage:React.Dispatch<React.SetStat
                 }
             }
         }
+        // console.log(page)
+        //  const f = async()=> {
+        //          await getData()
+        //  }
+        if(first === 0) {
+            setFirst(1)
+            return
+        }
+         if(init === 0 && page === 1) {
+         //f()
+         getData()
+         setInit(1)
+         }
+         if(init === 1 && page !== 1)
+          {
+             //f()
+             getData()
+         }
+     },[page,init,first])
+     const loadMore = () => {
+         setPage((prev)=>prev+1)
+     }
+     const handleScroll = () => {
+         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) {
+           return;
+         }
+         
+         loadMore()
+       };
+       
+       useEffect(() => {
+         window.addEventListener('scroll', handleScroll);
+         return () => window.removeEventListener('scroll', handleScroll);
+       }, []);
+         
 return {
     data,loading,error
 }

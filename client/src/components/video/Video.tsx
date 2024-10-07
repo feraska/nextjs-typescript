@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import { card } from "@/interfaces/card"
 import useVideo from "@/hooks/useVideo"
 
-const Video:React.FC<{item:card,isList?:boolean}> = ({item,isList=false}) => {
+const Video:React.FC<{item:card,isList?:boolean}> = ({item}) => {
     const router = useRouter()
     const newRef = useRef<HTMLDivElement>(null);
     const [isMuted,setIsMuted] = useState(true)
@@ -44,7 +44,7 @@ const Video:React.FC<{item:card,isList?:boolean}> = ({item,isList=false}) => {
             {isMuted?<IoVolumeMuteOutline/>:<IoVolumeHighOutline />}
             </div> */}
             </div>
-            <Details item={item}  isList={isList}/>
+            <Details item={item} />
         </div>
     )
 }

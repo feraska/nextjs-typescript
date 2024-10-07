@@ -16,7 +16,7 @@ const useGetArray = (url:string) => {
                 if(err instanceof AxiosError) {
                 setError(err.response?.data)
                 setloading(false)
-                throw new Error(err.response?.data)
+                throw new Error(JSON.stringify(err.response?.data))
                 }
             }
         }

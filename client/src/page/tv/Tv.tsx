@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 const Navbar = dynamic(()=>import( "../../components/navbar/Navbar"),{ssr:false})
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false})
 import useGlobal from "../../hooks/useGloabal"
-import { AuthContext } from "../../context/AuthContext"
+//import { AuthContext } from "../../context/AuthContext"
 import Loading from "../../components/loading/Loading"
 const Cards = dynamic(()=> import("../../components/cards/Cards"),{ssr:false}) 
 const Playing = dynamic(()=> import("../../components/playing/Playing"),{ssr:false}) 

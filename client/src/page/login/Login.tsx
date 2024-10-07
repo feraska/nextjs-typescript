@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { login } from "@/redux/slices/user"
+import { errorMsg } from "@/interfaces/message"
 
 const  Login = () => {
     useGlobal()
@@ -23,7 +24,8 @@ const  Login = () => {
         "email":"",
         "password":""
     })
-    const {post,message,loading} = usePost(api.loginMainServer)
+    const {post,message,loading,error} = usePost(api.loginMainServer)
+    const [messageError,setMessageError] = useState<errorMsg>()
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setUser({...user,[e.target.name]:e.target.value})
     }
@@ -32,13 +34,21 @@ const  Login = () => {
         e.preventDefault()
          try {
              await post(user)
+             console.log(message)
              dispatch(login(1))
              //dispatch({type:actions.login})
              router.push("/")
              
             
          } catch(err) {
-            console.log((err as Error).message)
+            //console.log((err as Error).message)
+            
+            const m = (err as Error)
+            const s = JSON.parse(m.message)  
+            const t:errorMsg = (s  as errorMsg)
+            setMessageError(t)
+            
+            
             
          }
          
@@ -70,7 +80,7 @@ const  Login = () => {
                 </div>
                 
                 <button type="submit"  disabled={loading?true:false}>Login</button>
-                <p>{message}</p>
+                <p>{error&&messageError?.message}</p>
                 
             </form>
             

@@ -36,7 +36,7 @@ const useGet =  (url:string):o => {
                 if(err instanceof AxiosError) {
                 setError(true)
                 setLoading(false)
-                throw new Error(err.response?.data)
+                throw new Error(JSON.stringify(err.response?.data))
                 }
                 
             }

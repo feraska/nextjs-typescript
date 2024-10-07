@@ -27,9 +27,10 @@ const usePost = (url:string) => {
             setLoading(false)
         } catch(err) {
             if(err instanceof AxiosError) {
+                //console.log(err.response?.data)
                 setError(true)
                 setLoading(false)
-                throw new Error(err.response?.data)
+                throw new Error(JSON.stringify(err.response?.data))
                 }
             
         }

@@ -3,8 +3,8 @@ import "./navbar.scss"
 import Logo from "../../assets/logo.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
-import {  ChangeEvent, FormEvent, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { AuthContext, actions } from "../../context/AuthContext";
+import {  ChangeEvent,   useEffect, useState } from "react";
+//import { AuthContext, actions } from "../../context/AuthContext";
 import { PiSignOutLight } from "react-icons/pi";
 import useDelete from "../../hooks/useDelete";
 import { api } from "../../enums/api";
@@ -18,13 +18,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout } from "@/redux/slices/user";
+import Loader from "../loader/Loader";
 const Navbar = () => {
     const notification = useAppSelector((state)=>state.notification.notification)
     const user = useAppSelector((state)=>state.user.user)
     const dispatch = useAppDispatch()
     const [scrolled,setScolled] = useState(false)
     // const {state,dispatch} = useContext(AuthContext)
-    const {deletE} = useDelete(api.logoutMainServer)
+    const {deletE,loading} = useDelete(api.logoutMainServer)
     const router = useRouter()
     const pathname = usePathname()
     const search = useSearchParams()
@@ -45,10 +46,14 @@ const Navbar = () => {
     
     
     const logOut = async() => {
+        try {
         await deletE()
         // dispatch({type:actions.logout,payload:undefined})
         dispatch(logout())
         router.push("/login")
+        } catch(e) {
+
+        }
     }
     useEffect(()=> {
         
@@ -73,7 +78,6 @@ const Navbar = () => {
         
         if(vNav?.style.display === "") {
             vNav.style.display = "flex"
-            console.log(vNav)
          //   setIsClick(true)
         }
          else if(vNav.style.display === "none") {
@@ -87,7 +91,6 @@ const Navbar = () => {
        
     }
     const clear = () => {
-        console.log("clear")
        // setTimeout(()=> {
             setText("")
             setShowSearch(true)
@@ -104,7 +107,7 @@ const Navbar = () => {
                 <Image alt="" width={100} height={100} src={Logo.src}/>
             </div>
             <RxHamburgerMenu className="h" onClick={run}/>
-            {user&&<PiSignOutLight className="logout" onClick={logOut}/>}
+            {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
             
             <h3>{user?.firstName}</h3>
             
@@ -126,7 +129,7 @@ const Navbar = () => {
                 <CiSearch className="icon" onClick={()=>setShowSearch(true)} />
                     {
                         showSearch&&
-                <input autoFocus value={text}  type="text" placeholder="type " onChange={handleChange}/>
+                <input autoFocus value={text}  type="text" placeholder="type " onChange={handleChange} onBlur={()=>setShowSearch(false)}/>
                     }
                 </div>
                   
@@ -161,4 +164,4 @@ const Navbar = () => {
         </header>
     )
 }
-export default memo(Navbar)
+export default Navbar
