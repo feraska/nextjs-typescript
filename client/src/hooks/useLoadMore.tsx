@@ -60,7 +60,7 @@ const useLoadMore = (url:string,page:number,setPage:React.Dispatch<React.SetStat
          setPage((prev)=>prev+1)
      }
      const handleScroll = () => {
-         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) {
+         if (Math.abs(window.innerHeight + document.documentElement.scrollTop - document.documentElement.offsetHeight)>=1 || loading) {
            return;
          }
          
