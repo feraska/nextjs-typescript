@@ -10,16 +10,20 @@ const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
     const {data} = useApi(url)
     const list = React.createRef<HTMLUListElement>()
     const [numberSlider,setNumberSlider] = useState(0)
+    
     const handleSlider = async(type:string) => {
         if(!list.current) {
             return
         }
+       
+       
+        
         const distance = list.current.getBoundingClientRect().x
         if(type === "left") {
-            list.current.style.transform = `translateX(${315+distance}px)`
+            list.current.style.transform = `translateX(${300+15+distance}px)`
             setNumberSlider((prev)=>prev-1)
         } if(type === "right") {
-            list.current.style.transform = `translateX(${-315+distance}px)`
+            list.current.style.transform = `translateX(${-300-15+distance}px)`
             setNumberSlider((prev)=>prev+1)
         }
    }
@@ -45,6 +49,7 @@ const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
 }
     return(
         <div className="slider">
+           
             <IoIosArrowBack className={`icon left ${(numberSlider===0)?"none":"visible"}`}  onClick={()=>handleSlider("left")}/>
         <ul ref={list}>
             {data?.results.length&&
@@ -58,6 +63,7 @@ const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
         </ul>
         <IoIosArrowForward className={`icon right ${(numberSlider===data?.results.length)?"none":"visible"}`} onClick={()=>handleSlider("right")}/>
         </div>
+        
     )
 }
 export default Cards

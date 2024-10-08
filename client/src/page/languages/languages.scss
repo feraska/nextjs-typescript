@@ -1,12 +1,16 @@
 .languages {
     margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
     .box {
         display: flex;
         flex-direction: column;
         gap: 20px;
+       
         .dropdown {
             display: flex;
             gap: 10px;
+            
             .drop {
                 display: flex;
                 gap: 10px;
@@ -25,6 +29,7 @@
         ul {
             display: grid;
             grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+            place-items: center;
          // display: flex;
          // flex-wrap: wrap;
              list-style: none;

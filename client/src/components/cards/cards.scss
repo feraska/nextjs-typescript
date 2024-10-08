@@ -1,14 +1,20 @@
 .slider {
-   position: relative;
-   display: flex;
-   gap: 15px;
+
+   
+ 
+    
+    position: relative;
+    // display: flex;
+    // gap: 15px;
    .icon {
     font-size: 36px;
     color: #fff;
     position: absolute;
     z-index: 333;
     cursor: pointer;
-    margin-top: 100px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 .left {
     left: 0;
@@ -21,6 +27,9 @@ ul {
     gap: 15px;
     list-style-type: none;
     transform: translateX(0px);
+    width: max-content;
+    // margin-left: 20px;
+    transition: all 1s ease;
 }
 .visible {
     visibility: visible;
@@ -28,4 +37,5 @@ ul {
 .none {
     visibility: hidden;
 }
+
 }
