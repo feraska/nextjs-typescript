@@ -10,6 +10,7 @@ const io = new Server(Number(process.env.PORT),{
     
 
 })
+
 let users = Array<user>();
 const addUser = (userId:string, socketId:string) => {
   !users.some((user:user) => user.userId === userId) &&

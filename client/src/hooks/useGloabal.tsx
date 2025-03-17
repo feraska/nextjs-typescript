@@ -22,9 +22,9 @@ const useGlobal = () => {
     //const {state,dispatch} = useContext(AuthContext)
     // const {data} = useApi("https://api.themoviedb.org/3/genre/movie/list")
     const {data:user,get} = useGet(api.findUser)
-    const {data:messages,getData:getMessages} = useGetArray(api.getNotification)
+    const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)
     const {post} = usePost(api.addNotification)
-    const [msg,setMsg] = useState(undefined)
+    const [msg,setMsg] = useState([])
     const [first,setFirst] = useState(0)
     // const [firstSelect,setF] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
@@ -44,7 +44,7 @@ const useGlobal = () => {
             return
         }
         try {
-        const socket = io("https://0tb1mjxb-9000.euw.devtunnels.ms/")
+        const socket = io("https://nextjs-typescript-1.onrender.com")
         socket?.on("connect",()=> {
             console.log("connected")
             //dispatch({type:actions.socket,payload:socket})
@@ -71,8 +71,8 @@ const useGlobal = () => {
         }
         if(msg) {
         // dispatch({type:actions.addNotification,payload:{msg,to:state.user?._id}})
-        dispatch(addNotification({msg,to:User?._id}))
-        post({msg,to:User?._id})
+        dispatch(addNotification({msg}))
+        post({msg})
         }
         }
 
@@ -145,24 +145,23 @@ const useGlobal = () => {
 useEffect(()=> {
     const getAll = async()=> {
         await getMessages()
-       
+        
         }
         if(firstnot === 0) {
             setFirstNot(1)
             return
         }
       //  return()=> {
-            if(notification.length == 0 && User?.email) {
+            if( User?.email) {
                 getAll()
             }
             if(messages) {
                 dispatch(getNotification(messages))
-                
                 }
    // }
   
     
-},[messages,User?.email,firstnot])
+},[messages?.length,User?.email,firstnot])
 }
 
 

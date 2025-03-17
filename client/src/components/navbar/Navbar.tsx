@@ -1,6 +1,6 @@
 "use client"
 import "./navbar.scss"
-import Logo from "../../assets/logo.png"
+import Logo from "../../assets/feras.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
 import {  ChangeEvent,   useEffect, useState } from "react";
@@ -138,23 +138,23 @@ const Navbar = () => {
                 <div className="notification">
                 <div className="info"> 
                 <IoIosNotificationsOutline className="icon"/>
-                <span>{notification?.length}</span>
+                {notification?.length!==0&&<span>{notification?.length}</span>}
                 </div>
-                <div className="message">
+                {notification?.length!==0&&<div className="message">
                     <ul>
                         {notification?.map((item)=>(
-                             <li key={item._id}>
-                                <Image alt="" width={100} height={100} src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/>
+                                <li key={item._id}>
+                                {/* <Image alt="" width={100} height={100} src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/> */}
                                 <div className="msg">
-                             <span>{item?.msg}</span>
-                             <span>{format(item?.createdAt??"")}</span>
-                             </div>
-                           </li>
+                                <span>{item?.msg}</span>
+                                <span>{format(item?.createdAt??"")}</span>
+                                </div>
+                            </li>
                         ))}
                     </ul>
-                 
+                    
 
-                </div>
+                </div>}
                 </div>
                 )}
 

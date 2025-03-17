@@ -10,6 +10,7 @@ const useGetArray = (url:string) => {
                 setloading(true)
               const res =  await axios.get(url,{withCredentials:true})
                 setloading(false)
+                console.log(res)
                 setData(res.data)
             } catch (err) {
 

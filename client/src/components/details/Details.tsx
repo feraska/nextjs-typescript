@@ -98,7 +98,7 @@ const Details:React.FC<{item:card}> = ({item}) => {
             <div className="clicks">
             <div className="buttons">
             <FaPlay className="icon-buttons" onClick={()=>router.push(`/watch/${item?.id}`)}/>
-            <Tooltip text={!user?.list.includes(item.id)?"add":"remove"}>
+            <Tooltip text={!user?.list.includes(item.id)?"add to my list":"remove from my list"}>
             {
             !loadingList?
             !user?.list.includes(item.id)?<IoMdAdd className="icon-buttons" onClick={addHandler}/>

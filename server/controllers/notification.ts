@@ -5,11 +5,7 @@ import { createError } from "../utils/error"
 export const getAllNotification= async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try{
         
-        const message = await Notification.find({
-            users:{
-                $all:[req.user?.id]
-            }
-        }).sort({updatedAt:1})
+        const message = await Notification.find().sort({updatedAt:1})
         // const projectMessages = message.map((msg) => {
         //     return {
         //         fromSelf:msg.sender.toString() === from,
@@ -25,11 +21,10 @@ export const getAllNotification= async(req:RequestWithUser,res:Response,next:Nex
 export const addNotification = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     
     try {
-        const {from,to,msg} = req.body
+        const {msg} = req.body
         const data = await Notification.create({
             msg:msg,
-            users:[from,to],
-            sender:from
+            
         })
         if(data) {
             return res.json({msg:"Message added successfully"})

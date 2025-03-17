@@ -50,7 +50,7 @@ const Search = () => {
         
         <div className="filter">
             
-            <h1>Search</h1>
+            
             <ul>
                 {data?.map((item,i)=>(
                     <CardItem item={item} key={i}/>
