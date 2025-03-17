@@ -24,7 +24,7 @@ const useGlobal = () => {
     const {data:user,get} = useGet(api.findUser)
     const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)
     const {post} = usePost(api.addNotification)
-    const [msg,setMsg] = useState([])
+    const [msg,setMsg] = useState("")
     const [first,setFirst] = useState(0)
     // const [firstSelect,setF] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
