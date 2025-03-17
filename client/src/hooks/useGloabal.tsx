@@ -51,7 +51,7 @@ const useGlobal = () => {
         })
         socket?.on("sendMsg",(msg)=> {
             setMsg(msg)
-           
+            
   
           })
 
