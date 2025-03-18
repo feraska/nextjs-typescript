@@ -18,7 +18,8 @@ const useGet =  (url:string):o => {
         firstName:"",
         lastName:"",
         likes:[],
-        list:[]
+        list:[],
+        unread:0
     }
 )
 
