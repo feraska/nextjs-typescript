@@ -17,8 +17,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logout } from "@/redux/slices/user";
+import { emptyUnread, logout } from "@/redux/slices/user";
 import Loader from "../loader/Loader";
+import usePut from "@/hooks/usePut";
 const Navbar = () => {
     const notification = useAppSelector((state)=>state.notification.notification)
     const user = useAppSelector((state)=>state.user.user)
@@ -33,6 +34,7 @@ const Navbar = () => {
     const [text,setText] = useState(id??"")
     const [showSearch,setShowSearch] = useState(search?.get("q")?true:false)
     const [show,setShow] = useState(false)
+    const {put:unreadEmpty} = usePut(api.emptyUnread)
     const handleChange =  (e:ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
         setTimeout(()=> {
@@ -100,6 +102,12 @@ const Navbar = () => {
        
         
     }
+    const clickNotification = async() => {
+        setShow(!show)
+        dispatch(emptyUnread())
+        await unreadEmpty()
+        
+    }
     return(
         <header className={scrolled?"scrolled":""}>
         <nav>
@@ -137,9 +145,9 @@ const Navbar = () => {
                 
                 {!mobileWidth&&(
                 <div className="notification">
-                <div className="info" onClick={()=>setShow(!show)}> 
+                <div className="info" onClick={clickNotification}> 
                 <IoIosNotificationsOutline className="icon"/>
-                {notification?.length!==0&&<span>{notification?.length}</span>}
+                {user?.unread!==0&&<span>{user?.unread}</span>}
                 </div>
                 {notification?.length!==0&&show&&<div className="message">
                     <ul>

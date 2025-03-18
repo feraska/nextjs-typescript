@@ -13,4 +13,6 @@ router.put(api_1.api.addTolist, verifyToken_1.verifyToken, user_1.addToList);
 router.put(api_1.api.removeFromList, verifyToken_1.verifyToken, user_1.removeFromList);
 router.put(api_1.api.likes, verifyToken_1.verifyToken, user_1.addToLikes);
 router.put(api_1.api.dislike, verifyToken_1.verifyToken, user_1.removeFromLikes);
+router.put(api_1.api.incUnread, verifyToken_1.verifyToken, user_1.unreadInc);
+router.put(api_1.api.emptyUnread, verifyToken_1.verifyToken, user_1.unreadEmpty);
 exports.default = router;

@@ -34,6 +34,10 @@ const userSchema = new mongoose_1.default.Schema({
         type: Array,
         default: [],
     },
+    unread: {
+        type: Number,
+        default: 0
+    }
 }, {
     timestamps: true
 });

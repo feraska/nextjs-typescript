@@ -65,3 +65,29 @@ export const removeFromLikes = async(req:RequestWithUser,res:Response,next:NextF
         return next(createError(500,(err as Error).message))
     }
 }
+
+export const unreadInc = async(req:RequestWithUser,res:Response,next:NextFunction) => {
+    try {
+         await User.findByIdAndUpdate(req.user?.id,{
+             $inc: { unread: 1 } }, // If "score" does not exist, it will be created and set to 1
+  { new: true }
+)
+        
+        return res.status(200).json("unread inc")
+    } catch(err) {
+        return next(createError(500,(err as Error).message))
+    }
+}
+export const unreadEmpty = async(req:RequestWithUser,res:Response,next:NextFunction) => {
+    try {
+         await User.findByIdAndUpdate(req.user?.id,
+            {unread:0},
+             
+  { new: true }
+)
+        
+        return res.status(200).json("unread inc")
+    } catch(err) {
+        return next(createError(500,(err as Error).message))
+    }
+}

@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         type:Array,
         default:[],
     },
+    unread: {
+        type:Number,
+        default:0
+    }
    
 },
 {

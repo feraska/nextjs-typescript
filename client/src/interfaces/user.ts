@@ -4,6 +4,7 @@ export interface User {
     lastName:string,
     _id:string,
     list:Array<number>,
-    likes:Array<number>
+    likes:Array<number>,
+    unread:number 
 }
 export default User

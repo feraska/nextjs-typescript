@@ -17,8 +17,8 @@ const initialState: CounterState = {
     
 }
 
-export const notificationSlice = createSlice({
-  name: 'notification',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     getSocket: (state,action:PayloadAction<Socket>) => {
@@ -42,6 +42,18 @@ export const notificationSlice = createSlice({
     },
     getUser: (state,action:PayloadAction<User>) => {
         state.user = action.payload
+    },
+    incUnread:(state) => {
+        if(!state.user) {
+            return
+        }
+        state.user.unread++
+    },
+    emptyUnread:(state) => {
+        if(!state.user) {
+            return
+        }
+        state.user.unread = 0
     },
     // getLikes: (state,action) => {
     //     if(!state.user) {
@@ -104,7 +116,7 @@ state.user.list = [...state.user.list.filter((value)=>value!==action.payload)]
 })
 
 // Action creators are generated for each case reducer function
-export const { addList,dislike,getSocket,getUser,like,login,logout,removeList} = notificationSlice.actions
+export const { addList,dislike,getSocket,getUser,like,login,logout,removeList,emptyUnread,incUnread} = userSlice.actions
 
-export default notificationSlice.reducer
+export default userSlice.reducer
 

@@ -16,4 +16,6 @@ var api;
     api["dislike"] = "/dislike";
     api["getNotification"] = "/getNotification";
     api["addNotification"] = "/addNotification";
+    api["incUnread"] = "/incUnread";
+    api["emptyUnread"] = "/emptyUnread";
 })(api || (exports.api = api = {}));

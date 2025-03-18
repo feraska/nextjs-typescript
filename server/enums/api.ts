@@ -11,5 +11,7 @@ export enum api{
     likes = "/like",
     dislike = "/dislike",
     getNotification = "/getNotification",
-    addNotification = "/addNotification"
+    addNotification = "/addNotification",
+    incUnread = "/incUnread",
+    emptyUnread = "/emptyUnread"
 }

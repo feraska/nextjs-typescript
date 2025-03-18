@@ -10,6 +10,8 @@ export enum api {
     like = `${mainServer}/user/like`,
     dislike = `${mainServer}/user/dislike`,
     getNotification = `${mainServer}/notification/getNotification`,
-    addNotification = `${mainServer}/notification/addNotification`
+    addNotification = `${mainServer}/notification/addNotification`,
+    incUnread = `${mainServer}/user/incUnread`,
+    emptyUnread = `${mainServer}/user/emptyUnread`,
 
 }

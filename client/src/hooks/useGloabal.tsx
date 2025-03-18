@@ -10,7 +10,8 @@ import { io, Socket } from "socket.io-client"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 // import { setGenre } from "@/redux/slices/genre"
 import { addNotification, getNotification } from "@/redux/slices/notification"
-import { getSocket, getUser, login } from "@/redux/slices/user"
+import { getSocket, getUser, incUnread, login } from "@/redux/slices/user"
+import usePut from "./usePut"
 
 const useGlobal = () => {
     // const genre = useAppSelector((state)=>state.genre.genre)
@@ -20,7 +21,7 @@ const useGlobal = () => {
     const socketIo = useAppSelector((state)=>state.user.socket)
     const dispatch = useAppDispatch()
     //const {state,dispatch} = useContext(AuthContext)
-    // const {data} = useApi("https://api.themoviedb.org/3/genre/movie/list")
+    //const {data} = useApi("https://api.themoviedb.org/3/genre/movie/list")
     const {data:user,get} = useGet(api.findUser)
     const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)
     const {post} = usePost(api.addNotification)
@@ -28,6 +29,7 @@ const useGlobal = () => {
     const [first,setFirst] = useState(0)
     // const [firstSelect,setF] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
+    const {put:unreadInc} = usePut(api.incUnread)
     let socket: Socket | null = null;
     useEffect(()=> {
         
@@ -76,6 +78,8 @@ const useGlobal = () => {
         // dispatch({type:actions.addNotification,payload:{msg,to:state.user?._id}})
         dispatch(addNotification({msg}))
         post({msg})
+        dispatch(incUnread())
+        unreadInc()
         setMsg("")
         }
 

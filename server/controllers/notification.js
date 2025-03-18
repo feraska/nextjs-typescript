@@ -9,7 +9,6 @@ const error_1 = require("../utils/error");
 const getAllNotification = async (req, res, next) => {
     try {
         const message = await notification_1.default.find().sort({ updatedAt: -1 });
-        console.log(message);
         // const projectMessages = message.map((msg) => {
         //     return {
         //         fromSelf:msg.sender.toString() === from,
