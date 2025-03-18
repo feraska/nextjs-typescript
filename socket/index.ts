@@ -41,6 +41,8 @@ io.on("connection",(socket)=>{
     });
   });
   socket.on("sendToAll",(msg)=> {
+    
+    console.log(msg)
     io.emit("sendMsg",(msg))
   })
   //when disconnect

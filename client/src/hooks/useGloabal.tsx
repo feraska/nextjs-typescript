@@ -6,15 +6,15 @@ import useGet from "./useGet"
 import { api } from "../enums/api"
 import useGetArray from "./useGetArray"
 import usePost from "./usePost"
-import { io } from "socket.io-client"
+import { io, Socket } from "socket.io-client"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 // import { setGenre } from "@/redux/slices/genre"
 import { addNotification, getNotification } from "@/redux/slices/notification"
-import { getUser, login } from "@/redux/slices/user"
+import { getSocket, getUser, login } from "@/redux/slices/user"
 
 const useGlobal = () => {
     // const genre = useAppSelector((state)=>state.genre.genre)
-    const notification = useAppSelector((state)=>state.notification.notification)
+    //const notification = useAppSelector((state)=>state.notification.notification)
     const User = useAppSelector((state)=>state.user.user)
     // const sigin = useAppSelector((state)=>state.user.login)
     const socketIo = useAppSelector((state)=>state.user.socket)
@@ -28,6 +28,7 @@ const useGlobal = () => {
     const [first,setFirst] = useState(0)
     // const [firstSelect,setF] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
+    let socket: Socket | null = null;
     useEffect(()=> {
         
       //  return()=>{
@@ -35,21 +36,24 @@ const useGlobal = () => {
         //     setFirstSocket(1)
         //     return
         // }
-        if(!User?._id) {
+        if(!User) {
             
             return
         }
-        if(socketIo?.id) {
+        socket = io("https://nextjs-typescript-1.onrender.com")
+        // if(socketIo?.id) {
             
-            return
-        }
+        //     return
+        // }
         try {
-        const socket = io("https://nextjs-typescript-1.onrender.com")
+        
         socket?.on("connect",()=> {
             console.log("connected")
             //dispatch({type:actions.socket,payload:socket})
+           // dispatch(getSocket(socket))
         })
         socket?.on("sendMsg",(msg)=> {
+            console.log(msg)
             setMsg(msg)
             
   
@@ -62,18 +66,17 @@ const useGlobal = () => {
 
     }
    // }
-    },[User?._id])
+    },[User])
 
     useEffect(()=> {
-        return()=>{
         if(!User?.email) {
             return
         }
-        if(msg) {
+        if(msg!== "") {
         // dispatch({type:actions.addNotification,payload:{msg,to:state.user?._id}})
         dispatch(addNotification({msg}))
         post({msg})
-        }
+        setMsg("")
         }
 
     },[User?.email,msg])
@@ -156,6 +159,7 @@ useEffect(()=> {
                 getAll()
             }
             if(messages) {
+                
                 dispatch(getNotification(messages))
                 }
    // }

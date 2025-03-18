@@ -4,7 +4,6 @@ import RequestWithUser from "../interfaces/requestWithUser"
 import { createError } from "../utils/error"
 export const getAllNotification= async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try{
-        
         const message = await Notification.find().sort({updatedAt:-1})
         // const projectMessages = message.map((msg) => {
         //     return {

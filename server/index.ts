@@ -29,7 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json())
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
 
 
 app.use(api.auth,authRouter)

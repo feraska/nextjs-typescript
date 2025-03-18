@@ -127,9 +127,9 @@ nav {
         align-items: center;
         .notification {
             position: relative;
-            &:hover > .message{
-                display: block;
-            }
+            // &:hover > .message{
+            //     display: block;
+            // }
            .info {
             position: relative;
             color: #fff;
@@ -155,7 +155,7 @@ nav {
            }
            .message {
             position: absolute;
-            display: none;
+            
             background-color: rgba(0,0,0,1);
             top: 30px;
             right: 15px;

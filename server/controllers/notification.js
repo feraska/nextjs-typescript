@@ -8,11 +8,8 @@ const notification_1 = __importDefault(require("../models/notification"));
 const error_1 = require("../utils/error");
 const getAllNotification = async (req, res, next) => {
     try {
-        const message = await notification_1.default.find({
-            users: {
-                $all: [req.user?.id]
-            }
-        }).sort({ updatedAt: 1 });
+        const message = await notification_1.default.find().sort({ updatedAt: -1 });
+        console.log(message);
         // const projectMessages = message.map((msg) => {
         //     return {
         //         fromSelf:msg.sender.toString() === from,
@@ -28,11 +25,9 @@ const getAllNotification = async (req, res, next) => {
 exports.getAllNotification = getAllNotification;
 const addNotification = async (req, res, next) => {
     try {
-        const { from, to, msg } = req.body;
+        const { msg } = req.body;
         const data = await notification_1.default.create({
             msg: msg,
-            users: [from, to],
-            sender: from
         });
         if (data) {
             return res.json({ msg: "Message added successfully" });

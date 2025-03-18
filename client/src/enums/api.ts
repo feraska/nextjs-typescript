@@ -1,4 +1,4 @@
-export enum api {
+export enum api {  
     url = "https://nextjs-typescript.onrender.com",
     mainServer = `${url}/api`,
     loginMainServer = `${mainServer}/auth/login`,

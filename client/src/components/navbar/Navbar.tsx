@@ -32,6 +32,7 @@ const Navbar = () => {
     const id = search?.get("q")
     const [text,setText] = useState(id??"")
     const [showSearch,setShowSearch] = useState(search?.get("q")?true:false)
+    const [show,setShow] = useState(false)
     const handleChange =  (e:ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
         setTimeout(()=> {
@@ -136,11 +137,11 @@ const Navbar = () => {
                 
                 {!mobileWidth&&(
                 <div className="notification">
-                <div className="info"> 
+                <div className="info" onClick={()=>setShow(!show)}> 
                 <IoIosNotificationsOutline className="icon"/>
                 {notification?.length!==0&&<span>{notification?.length}</span>}
                 </div>
-                {notification?.length!==0&&<div className="message">
+                {notification?.length!==0&&show&&<div className="message">
                     <ul>
                         {notification?.map((item)=>(
                                 <li key={item._id}>
