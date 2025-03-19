@@ -37,22 +37,16 @@ const useLoadMore = (url:string,page:number,setPage:React.Dispatch<React.SetStat
                 }
             }
         }
-        // console.log(page)
-        //  const f = async()=> {
-        //          await getData()
-        //  }
         if(first === 0) {
             setFirst(1)
             return
         }
          if(init === 0 && page === 1) {
-         //f()
          getData()
          setInit(1)
          }
          if(init === 1 && page !== 1)
           {
-             //f()
              getData()
          }
      },[page,init,first])

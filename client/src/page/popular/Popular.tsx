@@ -20,7 +20,6 @@ const Popular = () => {
     const id = search?.get("t")
     useScroll(id??"")
     useGlobal()
-    // const {state} = useContext(AuthContext)
     const router = useRouter()
     const login = useAppSelector((state)=>state.user.login)
     if(login === 2) {

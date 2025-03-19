@@ -16,7 +16,6 @@ import { errorMsg } from "@/interfaces/message"
 const  Login = () => {
     useGlobal()
     const router = useRouter()
-    // const {state,dispatch} = useContext(AuthContext)
     const sigIn = useAppSelector((state)=>state.user.login)
     
     const dispatch = useAppDispatch()
@@ -34,14 +33,11 @@ const  Login = () => {
         e.preventDefault()
          try {
              await post(user)
-             console.log(message)
              dispatch(login(1))
-             //dispatch({type:actions.login})
              router.push("/")
              
             
          } catch(err) {
-            //console.log((err as Error).message)
             
             const m = (err as Error)
             const s = JSON.parse(m.message)  

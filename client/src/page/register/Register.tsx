@@ -5,7 +5,6 @@ const BackgroundImage = dynamic(()=> import( "../../components/backgroundImage/B
 import "./register.scss"
 import usePost from "../../hooks/usePost"
 import { api } from "../../enums/api"
-// import { AuthContext } from "../../context/AuthContext"
 import Loading from "../../components/loading/Loading"
 import useGlobal from "../../hooks/useGloabal"
 import Link from "next/link"
@@ -15,7 +14,6 @@ import { errorMsg } from "@/interfaces/message"
 
 const Register = () => {
     useGlobal()
-    // const {state} = useContext(AuthContext)
     const [user,setUser] = useState({
         "email":"",
         "password":"",

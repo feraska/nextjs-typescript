@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser"
 import authRouter from "./routes/auth"
 import userRouter from "./routes/user"
 import notificationRouter from "./routes/notification"
-import bodyParser from "body-parser"
 import { api } from "./enums/api"
-dotenv.config()
+dotenv.config()//dotenv configuration
 const app = express()
+//connect to data base
 const connectToDataBase = async() => {
     try {
         await mongoose.connect(process.env.MONGO_URL!)
@@ -26,12 +26,12 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };
+//middleware
 app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json())
-//app.use(bodyParser.json())
 
-
+//routes
 app.use(api.auth,authRouter)
 app.use(api.user,userRouter)
 app.use(api.notification,notificationRouter)

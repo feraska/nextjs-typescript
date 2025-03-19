@@ -15,19 +15,11 @@ const usePost = (url:string) => {
                 },
              
             })
-            // const d = await fetch(url,{
-            //     method:"POST",
-            //     body:body,
-            //     credentials:"include"
-             
-            // })
-            // const message = await d.json()
             setMessage(message.data)
             setError(false)
             setLoading(false)
         } catch(err) {
             if(err instanceof AxiosError) {
-                //console.log(err.response?.data)
                 setError(true)
                 setLoading(false)
                 throw new Error(JSON.stringify(err.response?.data))

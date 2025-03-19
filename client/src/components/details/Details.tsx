@@ -16,7 +16,6 @@ import { addList, dislike, like, removeList } from "@/redux/slices/user"
 import { errorMsg } from "@/interfaces/message"
 import Loader from "../loader/Loader"
 const Details:React.FC<{item:card}> = ({item}) => {
-    //const {state,dispatch} = useContext(AuthContext)
     const dispatch = useAppDispatch()
     const {put} = usePut(api.addToList)
     const {put:addToLikes} = usePut(api.like)
@@ -34,7 +33,6 @@ const Details:React.FC<{item:card}> = ({item}) => {
         try {
             setLoadingList(true)
             await remove({image:item?.id})
-        // dispatch({type:actions.remove_list,payload:item?.id})
             dispatch(removeList(item?.id))
             setLoadingList(false)
         } catch(err) {
@@ -48,11 +46,9 @@ const Details:React.FC<{item:card}> = ({item}) => {
     const addHandler = async() => {
         try {
             setLoadingList(true)
-        await put({image:item?.id})
-        
-        // dispatch({type:actions.add_list,payload:item?.id})
-        dispatch(addList(item?.id))
-        setLoadingList(false)
+            await put({image:item?.id})
+            dispatch(addList(item?.id))
+            setLoadingList(false)
         
         } catch(err) {
             const m = (err as Error)
@@ -67,11 +63,9 @@ const Details:React.FC<{item:card}> = ({item}) => {
             setLoadingLike(true)
             if(action === actions.like) {
                 await addToLikes({image:item?.id})
-                // dispatch({type:actions.like,payload:item?.id})
                 dispatch(like(item.id))
             } else {
                 await removeFromLikes({image:item?.id})
-                // dispatch({type:actions.dislike,payload:item?.id})
                 dispatch(dislike(item?.id))
             }
             setLoadingLike(false)

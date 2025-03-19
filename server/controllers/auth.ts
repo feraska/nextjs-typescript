@@ -3,6 +3,7 @@ import User from "../models/user"
 import { createError } from "../utils/error"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+//register user
 export const register = async(req:Request,res:Response,next:NextFunction) => {
     try {
         const {email,firstName,lastName,password} = req.body
@@ -21,6 +22,7 @@ export const register = async(req:Request,res:Response,next:NextFunction) => {
    
     
 }
+//login user
 export const login = async(req:Request,res:Response,next:NextFunction) => {
     try {
  
@@ -50,6 +52,7 @@ export const login = async(req:Request,res:Response,next:NextFunction) => {
     }
    
 }
+//logout user
 export const logout = (req:Request,res:Response,next:NextFunction) => {
     try {
     res.clearCookie('access_token',{

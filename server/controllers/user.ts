@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { createError } from "../utils/error";
 import User from "../models/user"
 import RequestWithUser from "../interfaces/requestWithUser"
-
+//get user by id 
 export const getUser = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
         const user = await User.findById(req.user?.id).select("-password")
@@ -12,6 +12,7 @@ export const getUser = async(req:RequestWithUser,res:Response,next:NextFunction)
         return next(createError(500,(err as Error).message))
     }
 }
+//add to my list user
 export const addToList = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
         
@@ -25,6 +26,7 @@ export const addToList = async(req:RequestWithUser,res:Response,next:NextFunctio
         return next(createError(500,(err as Error).message))
     }
 }
+//remove from my list user
 export const removeFromList = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
          await User.findByIdAndUpdate(req.user?.id,{
@@ -38,7 +40,7 @@ export const removeFromList = async(req:RequestWithUser,res:Response,next:NextFu
         return next(createError(500,(err as Error).message))
     }
 }
-
+//like movie by user
 export const addToLikes= async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
         await User.findByIdAndUpdate(req.user?.id,{
@@ -51,7 +53,7 @@ export const addToLikes= async(req:RequestWithUser,res:Response,next:NextFunctio
         return next(createError(500,(err as Error).message))
     }
 }
-
+//disike movie by user
 export const removeFromLikes = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
          await User.findByIdAndUpdate(req.user?.id,{
@@ -65,11 +67,11 @@ export const removeFromLikes = async(req:RequestWithUser,res:Response,next:NextF
         return next(createError(500,(err as Error).message))
     }
 }
-
+//increment 1 unread notification
 export const unreadInc = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
          await User.findByIdAndUpdate(req.user?.id,{
-             $inc: { unread: 1 } }, // If "score" does not exist, it will be created and set to 1
+             $inc: { unread: 1 } }, // If "unread" does not exist, it will be created and set to 1
   { new: true }
 )
         
@@ -78,6 +80,7 @@ export const unreadInc = async(req:RequestWithUser,res:Response,next:NextFunctio
         return next(createError(500,(err as Error).message))
     }
 }
+//update unread notifiaction to be 0
 export const unreadEmpty = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
          await User.findByIdAndUpdate(req.user?.id,

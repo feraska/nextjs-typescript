@@ -3,7 +3,6 @@ import dynamic from "next/dynamic"
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false})
 const Navbar = dynamic(()=>import( "../../components/navbar/Navbar"),{ssr:false})
 import "./search.scss"
-//import useFilter from "../../hooks/useFilter"
 const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:false})
 import Loading from "../../components/loading/Loading"
 import React, {  useState } from "react"
@@ -25,9 +24,7 @@ const Search = () => {
     const [page,setPage] = useState(1)
     useScroll(id??"")
     useGlobal()
-   
-    //const {loading,data,error} = useFilter(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}`)
-   
+      
     const {data,error,loading} = useLoadMore(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}&page=${page}`,page,setPage)
     const router = useRouter()
     

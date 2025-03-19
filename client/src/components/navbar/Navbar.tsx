@@ -4,7 +4,6 @@ import Logo from "../../assets/feras.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
 import {  ChangeEvent,   useEffect, useState } from "react";
-//import { AuthContext, actions } from "../../context/AuthContext";
 import { PiSignOutLight } from "react-icons/pi";
 import useDelete from "../../hooks/useDelete";
 import { api } from "../../enums/api";
@@ -25,7 +24,6 @@ const Navbar = () => {
     const user = useAppSelector((state)=>state.user.user)
     const dispatch = useAppDispatch()
     const [scrolled,setScolled] = useState(false)
-    // const {state,dispatch} = useContext(AuthContext)
     const {deletE,loading} = useDelete(api.logoutMainServer)
     const router = useRouter()
     const pathname = usePathname()
@@ -50,10 +48,9 @@ const Navbar = () => {
     
     const logOut = async() => {
         try {
-        await deletE()
-        // dispatch({type:actions.logout,payload:undefined})
-        dispatch(logout())
-        router.push("/login")
+            await deletE()
+            dispatch(logout())
+            router.push("/login")
         } catch(e) {
 
         }
@@ -77,15 +74,12 @@ const Navbar = () => {
         
         const vNav = (document.getElementsByClassName("v-nav")[0] as HTMLElement) 
        
-        //vNav.style.display = "flex"
         
         if(vNav?.style.display === "") {
             vNav.style.display = "flex"
-         //   setIsClick(true)
         }
          else if(vNav.style.display === "none") {
             vNav.style.display = "flex"
-         //   setIsClick(true)
         }
         else if(vNav.style.display === "flex") {
              vNav.style.display = "none"
@@ -94,11 +88,9 @@ const Navbar = () => {
        
     }
     const clear = () => {
-       // setTimeout(()=> {
             setText("")
             setShowSearch(true)
             router.push("/")
-       // },1000)
        
         
     }
@@ -153,7 +145,6 @@ const Navbar = () => {
                     <ul>
                         {notification?.map((item)=>(
                                 <li key={item._id}>
-                                {/* <Image alt="" width={100} height={100} src="https://res.cloudinary.com/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg"/> */}
                                 <div className="msg">
                                 <span>{item?.msg}</span>
                                 <span>{format(item?.createdAt??"")}</span>
