@@ -39,21 +39,16 @@ const  Login = () => {
     const handleLogin = async(e:FormEvent) => {
         e.preventDefault()
          try {
-             await post(user)
-             dispatch(login(1))
-             router.push("/")
-             
-            
-         } catch(err) {
-            
+            await post(user)
+            dispatch(login(1))
+            //router.push("/") 
+        } 
+        catch(err) {
             const m = (err as Error)
             const s = JSON.parse(m.message)  
             const t:errorMsg = (s  as errorMsg)
             setMessageError(t)
-            
-            
-            
-         }
+        }
          
     }
     //initial page

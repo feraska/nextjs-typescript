@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addNotification, getNotification } from "@/redux/slices/notification"
 import { getUser, incUnread, login } from "@/redux/slices/user"
 import usePut from "./usePut"
+import { usePathname } from "next/navigation"
 
 const useGlobal = () => {
     const User = useAppSelector((state)=>state.user.user)//user redux
@@ -21,9 +22,9 @@ const useGlobal = () => {
     const [firstnot,setFirstNot] = useState(0)
     const {put:unreadInc} = usePut(api.incUnread)//unread message from socket
     let socket: Socket | null = null;//socket
+    const pathname = usePathname()
     //create socket
     useEffect(()=> {
-        
         if(!User) {
             
             return
@@ -45,7 +46,7 @@ const useGlobal = () => {
     catch(err) {
 
     }
-    },[User])
+    },[User?._id])
     //get message from socket
     useEffect(()=> {
         if(!User?.email) {
@@ -60,27 +61,30 @@ const useGlobal = () => {
         }
 
     },[User?.email,msg])
-    //
+    //get user 
     useEffect(()=> {
         const getAll = async()=> {
             try {
+                
                 await get()
                 dispatch(login(1))
+                console.log("get",pathname)
             } 
             catch (err) {
                 dispatch(login(0))
             }
              
          }
+         
          if(first === 0) {
-             setFirst(1)
-             return
+            setFirst(1)
+            return
          }
          
          if(!User?._id) {
-             getAll()
+            getAll()
          }
-    },[User?.email,first])
+    },[User?._id,first])
     useEffect(()=> {
       
     if(user?._id) {

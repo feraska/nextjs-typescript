@@ -7,13 +7,13 @@ import { Socket } from 'socket.io-client'
 export interface CounterState {
   user?: User,
   login:number,
-  socket?:Socket
+  socket:Socket | null 
 }
 
 const initialState: CounterState = {
     user:undefined,
     login:2,
-    socket:undefined
+    socket:null
     
 }
 
@@ -21,16 +21,15 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    getSocket: (state,action:PayloadAction<Socket>) => {
-        
-        if(!state.socket) {
-            return
-        }
+    getSocket: (state,action:PayloadAction<any>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.socket.id = action.payload.id
+      if(!state.socket) {
+        return
+      }
+      state.socket = action.payload   
     },
     login: (state,action:PayloadAction<number>) => {
         state.login = action.payload

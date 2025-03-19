@@ -39,7 +39,8 @@ const Register = () => {
         e.preventDefault()
         try {
         await post(user)
-        } catch(err) {
+        } 
+        catch(err) {
             const m = (err as Error)
             const s = JSON.parse(m.message)  
             const t:errorMsg = (s  as errorMsg)
