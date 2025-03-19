@@ -12,8 +12,9 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const user_1 = __importDefault(require("./routes/user"));
 const notification_1 = __importDefault(require("./routes/notification"));
 const api_1 = require("./enums/api");
-dotenv_1.default.config();
+dotenv_1.default.config(); //dotenv configuration
 const app = (0, express_1.default)();
+//connect to data base
 const connectToDataBase = async () => {
     try {
         await mongoose_1.default.connect(process.env.MONGO_URL);
@@ -30,10 +31,11 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };
+//middleware
 app.use((0, cors_1.default)(corsOptions));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
-//app.use(bodyParser.json())
+//routes
 app.use(api_1.api.auth, auth_1.default);
 app.use(api_1.api.user, user_1.default);
 app.use(api_1.api.notification, notification_1.default);

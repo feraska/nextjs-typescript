@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken"
 export const register = async(req:Request,res:Response,next:NextFunction) => {
     try {
         const {email,firstName,lastName,password} = req.body
-        const salt = await bcrypt.genSalt(16)
+        const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(password,salt)
         await User.create({
             email,
@@ -34,7 +34,6 @@ export const login = async(req:Request,res:Response,next:NextFunction) => {
         return next(createError(400,"user not found"))
         }
     const isCorrectPassword = await bcrypt.compare(password,user.password)
-    
     if(!isCorrectPassword) {
         return next(createError(400,"the password not correct"))
     }

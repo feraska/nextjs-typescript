@@ -8,10 +8,11 @@ const user_1 = __importDefault(require("../models/user"));
 const error_1 = require("../utils/error");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+//register user
 const register = async (req, res, next) => {
     try {
         const { email, firstName, lastName, password } = req.body;
-        const salt = await bcrypt_1.default.genSalt(16);
+        const salt = await bcrypt_1.default.genSalt();
         const hashedPassword = await bcrypt_1.default.hash(password, salt);
         await user_1.default.create({
             email,
@@ -26,6 +27,7 @@ const register = async (req, res, next) => {
     }
 };
 exports.register = register;
+//login user
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -50,6 +52,7 @@ const login = async (req, res, next) => {
     }
 };
 exports.login = login;
+//logout user
 const logout = (req, res, next) => {
     try {
         res.clearCookie('access_token', {

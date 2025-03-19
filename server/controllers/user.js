@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.unreadEmpty = exports.unreadInc = exports.removeFromLikes = exports.addToLikes = exports.removeFromList = exports.addToList = exports.getUser = void 0;
 const error_1 = require("../utils/error");
 const user_1 = __importDefault(require("../models/user"));
+//get user by id 
 const getUser = async (req, res, next) => {
     try {
         const user = await user_1.default.findById(req.user?.id).select("-password");
@@ -16,6 +17,7 @@ const getUser = async (req, res, next) => {
     }
 };
 exports.getUser = getUser;
+//add to my list user
 const addToList = async (req, res, next) => {
     try {
         await user_1.default.findByIdAndUpdate(req.user?.id, {
@@ -30,6 +32,7 @@ const addToList = async (req, res, next) => {
     }
 };
 exports.addToList = addToList;
+//remove from my list user
 const removeFromList = async (req, res, next) => {
     try {
         await user_1.default.findByIdAndUpdate(req.user?.id, {
@@ -44,6 +47,7 @@ const removeFromList = async (req, res, next) => {
     }
 };
 exports.removeFromList = removeFromList;
+//like movie by user
 const addToLikes = async (req, res, next) => {
     try {
         await user_1.default.findByIdAndUpdate(req.user?.id, {
@@ -58,6 +62,7 @@ const addToLikes = async (req, res, next) => {
     }
 };
 exports.addToLikes = addToLikes;
+//disike movie by user
 const removeFromLikes = async (req, res, next) => {
     try {
         await user_1.default.findByIdAndUpdate(req.user?.id, {
@@ -72,11 +77,12 @@ const removeFromLikes = async (req, res, next) => {
     }
 };
 exports.removeFromLikes = removeFromLikes;
+//increment 1 unread notification
 const unreadInc = async (req, res, next) => {
     try {
         await user_1.default.findByIdAndUpdate(req.user?.id, {
             $inc: { unread: 1 }
-        }, // If "score" does not exist, it will be created and set to 1
+        }, // If "unread" does not exist, it will be created and set to 1
         { new: true });
         return res.status(200).json("unread inc");
     }
@@ -85,6 +91,7 @@ const unreadInc = async (req, res, next) => {
     }
 };
 exports.unreadInc = unreadInc;
+//update unread notifiaction to be 0
 const unreadEmpty = async (req, res, next) => {
     try {
         await user_1.default.findByIdAndUpdate(req.user?.id, { unread: 0 }, { new: true });

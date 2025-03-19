@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { login } from "@/redux/slices/user"
 import { errorMsg } from "@/interfaces/message"
 
+
 const  Login = () => {
     useGlobal()//globals
     const router = useRouter()//router
@@ -41,7 +42,7 @@ const  Login = () => {
          try {
             await post(user)
             dispatch(login(1))
-            //router.push("/") 
+            router.push("/") 
         } 
         catch(err) {
             const m = (err as Error)
@@ -51,6 +52,7 @@ const  Login = () => {
         }
          
     }
+
     //initial page
     if(sigIn === 2 || loading) {
         return<Loading/>

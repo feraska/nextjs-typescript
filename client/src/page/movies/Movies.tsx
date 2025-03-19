@@ -6,7 +6,7 @@ const Footer = dynamic(()=> import( "../../components/footer/Footer"),{ssr:false
 import useGlobal from "../../hooks/useGloabal"
 import Loading from "../../components/loading/Loading"
 const SelectGenre = dynamic(()=>import( "../../components/selectGenre/SelectGenre"),{ssr:false})
-const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false}) ;
 const Vheader =  dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import {useRouter,  useSearchParams } from "next/navigation"
 import useScroll from "@/hooks/useScroll"

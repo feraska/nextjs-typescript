@@ -6,7 +6,7 @@ import "./search.scss"
 const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:false})
 import Loading from "../../components/loading/Loading"
 import React, {  useState } from "react"
-const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
 import useGlobal from "@/hooks/useGloabal"

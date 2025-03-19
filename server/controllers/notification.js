@@ -6,15 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNotification = exports.getAllNotification = void 0;
 const notification_1 = __importDefault(require("../models/notification"));
 const error_1 = require("../utils/error");
+//get all notification
 const getAllNotification = async (req, res, next) => {
     try {
         const message = await notification_1.default.find().sort({ updatedAt: -1 });
-        // const projectMessages = message.map((msg) => {
-        //     return {
-        //         fromSelf:msg.sender.toString() === from,
-        //         message:msg.message.text
-        //     }
-        // })
         return res.status(200).json(message);
     }
     catch (err) {
@@ -22,6 +17,7 @@ const getAllNotification = async (req, res, next) => {
     }
 };
 exports.getAllNotification = getAllNotification;
+//add notification
 const addNotification = async (req, res, next) => {
     try {
         const { msg } = req.body;

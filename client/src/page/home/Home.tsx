@@ -6,12 +6,13 @@ const Navbar = dynamic( ()=>import( "../../components/navbar/Navbar"),{ssr:false
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false});
 import useGlobal from "../../hooks/useGloabal";
 import Loading from "../../components/loading/Loading";
-const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
+const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false}) ;
 const Vheader = dynamic( ()=>import( "../../components/vheader/Vheader"),{ssr:false});
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import useScroll from "@/hooks/useScroll";
 import { useAppSelector } from "@/redux/hooks";
+
 
 
 const Home = () => {
