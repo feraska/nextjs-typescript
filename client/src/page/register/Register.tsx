@@ -13,20 +13,28 @@ import { useAppSelector } from "@/redux/hooks"
 import { errorMsg } from "@/interfaces/message"
 
 const Register = () => {
-    useGlobal()
+    useGlobal()//globals
     const [user,setUser] = useState({
         "email":"",
         "password":"",
         "firstName":"",
         "lastName":""
-    })
-    const {post,message,loading,error} = usePost(api.registerMainServer)
-    const router = useRouter()
-    const login = useAppSelector((state)=>state.user.login)
-    const [messageError,setMessageError] = useState<errorMsg>()
+    })//user state 
+    const {post,message,loading,error} = usePost(api.registerMainServer)//register request
+    const router = useRouter()//router
+    const login = useAppSelector((state)=>state.user.login)//lgoin redux
+    const [messageError,setMessageError] = useState<errorMsg>()//error message
+    /**
+     * input change handler
+     * @param e change event input
+     */
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setUser({...user,[e.target.name]:e.target.value})
     }
+    /**
+     * user onclick register button
+     * @param e form event
+     */
     const handleRegister = async(e:FormEvent) => {
         e.preventDefault()
         try {
@@ -39,10 +47,14 @@ const Register = () => {
         }
         
     }
+    /**
+     * initial page
+     */
     if(login === 2 || loading) {
        
         return<Loading/>
     }
+    //login success
     if(login === 1) {
        router.push("/")
        return

@@ -1,9 +1,13 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 const usePost = (url:string) => {
-    const [error,setError] = useState(false)
-    const [loading,setLoading] = useState(false)
-    const [message,setMessage] = useState("")
+    const [error,setError] = useState(false)//error
+    const [loading,setLoading] = useState(false)//loading
+    const [message,setMessage] = useState("")//message
+    /**
+     * post request
+     * @param body  param body
+     */
     const post = async(body:any)=> {
         try {
             setLoading(true)
@@ -18,7 +22,8 @@ const usePost = (url:string) => {
             setMessage(message.data)
             setError(false)
             setLoading(false)
-        } catch(err) {
+        } 
+        catch(err) {
             if(err instanceof AxiosError) {
                 setError(true)
                 setLoading(false)

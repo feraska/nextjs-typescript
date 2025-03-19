@@ -16,15 +16,17 @@ const Cards = dynamic(()=> import("../../components/cards/Cards"),{ssr:false})
 const Playing = dynamic(()=> import("../../components/playing/Playing"),{ssr:false}) 
 
 const Popular = () => {
-    const search = useSearchParams()
-    const id = search?.get("t")
-    useScroll(id??"")
-    useGlobal()
-    const router = useRouter()
-    const login = useAppSelector((state)=>state.user.login)
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
+    useScroll(id??"")//save scroll x,y
+    useGlobal()//globals
+    const router = useRouter()//router
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    //initial page
     if(login === 2) {
         return<Loading/>
     }
+    //if login false (not be user)
     if(login === 0) {
         router.push("/login")
         return

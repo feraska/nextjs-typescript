@@ -3,10 +3,9 @@ import dynamic from "next/dynamic"
 const Footer = dynamic(()=>import( "../../components/footer/Footer"),{ssr:false})
 const Navbar = dynamic(()=>import( "../../components/navbar/Navbar"),{ssr:false})
 import "./languages.scss"
-import useFilter from "../../hooks/useFilter"
 const CardItem = dynamic(()=>import( "../../components/cardItem/CardItem"),{ssr:false})
 import Loading from "../../components/loading/Loading"
-import React, { ChangeEvent, useEffect, useRef, useState } from "react"
+import React, { ChangeEvent, useState } from "react"
 const Movie = dynamic(()=>import("../movie/Movie"),{ssr:false,loading:()=><p>loading...</p>}) ;
 const Vheader = dynamic(()=>import( "../../components/vheader/Vheader"),{ssr:false})
 import { useRouter, useSearchParams } from "next/navigation"
@@ -17,29 +16,36 @@ import useLoadMore from "@/hooks/useLoadMore"
 
 
 const Languages = () => {
-    const search = useSearchParams()
-    const id = search?.get("t")
-    const login = useAppSelector((state)=>state.user.login)
-    const [page,setPage] = useState(1)
-    useScroll(id??"")
-    useGlobal()
-   
-    //const {loading} = useFilter(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}`)
-   
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    const [page,setPage] = useState(1)//page number
+    useScroll(id??"")//save scroll x,y
+    useGlobal()//globals
+    //load more data
     const {data,error,loading} = useLoadMore(`https://api.themoviedb.org/3/discover/movie?with_original_language=${search?.get("q")??"en"}&page=${page}&sort_by=${search?.get("s")}`,page,setPage)
-    const router = useRouter()
+    const router = useRouter()//router
+    /**
+     * filter according language selected
+     * @param e change event
+     */
     const languageChange = (e:ChangeEvent<HTMLSelectElement>)=> {
         router.push(`?q=${e.target.value}&s=${search?.get("s")??""}`)
     }
+    /**
+     * sorting according user choice
+     * @param e change event
+     */
     const sortyChange = (e:ChangeEvent<HTMLSelectElement>)=> {
         router.push(`?q=${search?.get("q")??"en"}&s=${e.target.value}`)
     }
    
-   
+   //if initial page
     if(login === 2) {
        
         return<Loading/>
     }
+    //login false
     if(login === 0) {
         router.push("/login")
         return
@@ -79,6 +85,7 @@ const Languages = () => {
                     <CardItem item={item} key={i}/>
                 ))}
             </ul>
+            {/**data loading more */}
             {loading&&<Loading/>}
         </div>
         </div>

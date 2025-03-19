@@ -2,7 +2,11 @@
 import React from "react"
 import "./playing.scss"
 import Image from "next/image"
-
+/**
+ * 
+ * @param url get url data 
+ * @returns playing component
+ */
 const Playing:React.FC<{url:string}> = ({url}) => {
 
     return(

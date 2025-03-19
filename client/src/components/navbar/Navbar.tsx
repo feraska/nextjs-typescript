@@ -3,7 +3,7 @@ import "./navbar.scss"
 import Logo from "../../assets/feras.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
-import {  ChangeEvent,   useEffect, useState } from "react";
+import {  ChangeEvent,   MouseEventHandler,   useEffect, useRef, useState } from "react";
 import { PiSignOutLight } from "react-icons/pi";
 import useDelete from "../../hooks/useDelete";
 import { api } from "../../enums/api";
@@ -20,19 +20,24 @@ import { emptyUnread, logout } from "@/redux/slices/user";
 import Loader from "../loader/Loader";
 import usePut from "@/hooks/usePut";
 const Navbar = () => {
-    const notification = useAppSelector((state)=>state.notification.notification)
-    const user = useAppSelector((state)=>state.user.user)
-    const dispatch = useAppDispatch()
-    const [scrolled,setScolled] = useState(false)
-    const {deletE,loading} = useDelete(api.logoutMainServer)
-    const router = useRouter()
-    const pathname = usePathname()
-    const search = useSearchParams()
-    const id = search?.get("q")
-    const [text,setText] = useState(id??"")
-    const [showSearch,setShowSearch] = useState(search?.get("q")?true:false)
-    const [show,setShow] = useState(false)
-    const {put:unreadEmpty} = usePut(api.emptyUnread)
+    const notification = useAppSelector((state)=>state.notification.notification)//notification
+    const user = useAppSelector((state)=>state.user.user)//user
+    const dispatch = useAppDispatch()//dispatch redux
+    const [scrolled,setScolled] = useState(false)//scroll x,y
+    const {deletE,loading} = useDelete(api.logoutMainServer)//logout request
+    const router = useRouter()//router
+    const pathname = usePathname()//page pathname
+    const search = useSearchParams()//query string
+    const id = search?.get("q")//query string in search
+    const [text,setText] = useState(id??"")//text in search
+    const [showSearch,setShowSearch] = useState(search?.get("q")?true:false)//show searching text in search
+    const [show,setShow] = useState(false)//show notification list 
+    const {put:unreadEmpty} = usePut(api.emptyUnread)//update unread notification to user
+    const searchRef = useRef<HTMLDivElement>(null);
+    /**
+     * user type text search and check if user located in search page or not
+     * @param e event change
+     */
     const handleChange =  (e:ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
         setTimeout(()=> {
@@ -45,7 +50,9 @@ const Navbar = () => {
         
     }
     
-    
+    /**
+     * user logout 
+     */
     const logOut = async() => {
         try {
             await deletE()
@@ -55,8 +62,13 @@ const Navbar = () => {
 
         }
     }
+
+   
+
     useEffect(()=> {
-        
+        /**
+         * check if scroll y bigger than 0 to change backgroud navbar
+         */
         const scroll = window.onscroll = ()=> {
             
             if(window.scrollY > 0) {
@@ -70,15 +82,30 @@ const Navbar = () => {
             removeEventListener("scroll",scroll)
         }
     },[])
+    /**
+     * handle click outside search
+     */
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+          if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+            setShowSearch(false);
+          }
+        };
+    
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, []);
+    /**
+     * navbar mobile
+     */
     const run = () => {
         
         const vNav = (document.getElementsByClassName("v-nav")[0] as HTMLElement) 
        
         
-        if(vNav?.style.display === "") {
-            vNav.style.display = "flex"
-        }
-         else if(vNav.style.display === "none") {
+        if(vNav?.style.display === "" || "none") {
             vNav.style.display = "flex"
         }
         else if(vNav.style.display === "flex") {
@@ -87,13 +114,20 @@ const Navbar = () => {
        
        
     }
+    /**
+     * clear search
+     */
     const clear = () => {
-            setText("")
-            setShowSearch(true)
-            router.push("/")
+        setText("")
+        setShowSearch(false)
+        router.push("/")
        
         
     }
+ 
+    /**
+     * onclick icon notification
+     */
     const clickNotification = async() => {
         setShow(!show)
         dispatch(emptyUnread())
@@ -125,12 +159,12 @@ const Navbar = () => {
             </div>
 
             <div className="right">
-                <div className="search">
+                <div className="search" ref={searchRef}>
                 {showSearch&&<IoIosClose className="close" onClick={clear} />}
-                <CiSearch className="icon" onClick={()=>setShowSearch(true)} />
+                <CiSearch  className="icon"  onClick={()=>setShowSearch(!showSearch)}/>
                     {
-                        showSearch&&
-                <input autoFocus value={text}  type="text" placeholder="type " onChange={handleChange} onBlur={()=>setShowSearch(false)}/>
+                     showSearch&&  
+                <input autoFocus value={text}  type="text" placeholder="type " onChange={handleChange} />
                     }
                 </div>
                   

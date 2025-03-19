@@ -5,13 +5,14 @@ import {  usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import Image from "next/image"
 const Movie = () => {
-const router = useRouter()
-const path = usePathname()
-const search = useSearchParams()
-const id = search?.get("t")
-const q = search?.get("q")
 
-    const {data:item} = useInfo(`https://api.themoviedb.org/3/movie/${id}`)
+    const router = useRouter()//router
+    const path = usePathname()//page path
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
+    const q = search?.get("q")//query string search
+
+    const {data:item} = useInfo(`https://api.themoviedb.org/3/movie/${id}`)//get info about id
     return(
         <div className="window">
             <div className="data">

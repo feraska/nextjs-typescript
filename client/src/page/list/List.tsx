@@ -1,6 +1,4 @@
 "use client"
-// import { useContext } from "react"
-// import { AuthContext } from "../../context/AuthContext"
 import "./list.scss"
 import dynamic from "next/dynamic"
 const Navbar = dynamic(()=>import("../../components/navbar/Navbar"),{ssr:false}) 
@@ -15,21 +13,22 @@ import useScroll from "@/hooks/useScroll"
 import { useAppSelector } from "@/redux/hooks"
 
 const List = ()=> {
-    //const {state} = useContext(AuthContext)
-    const router = useRouter()
-   const search = useSearchParams()
-    const id = search?.get("t")
-    const user = useAppSelector((state)=>state.user.user)
-    const login = useAppSelector((state)=>state.user.login)
-    useScroll(id??"")
-   useGlobal()
-   if(login === 2) {
-    return<Loading/>
-}
-if(login === 0) {
-    router.push("/login")
+    const router = useRouter()//router
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
+    const user = useAppSelector((state)=>state.user.user)//user redux
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    useScroll(id??"")//save scroll x,y
+    useGlobal()//globals
+    //initial page
+    if(login === 2) {
+        return<Loading/>
+    }
+    //login false
+    if(login === 0) {
+        router.push("/login")
     return
-}
+    }
     return(
         <>
          {id&&<Movie/>}

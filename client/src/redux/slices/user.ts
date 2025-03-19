@@ -55,62 +55,31 @@ export const userSlice = createSlice({
         }
         state.user.unread = 0
     },
-    // getLikes: (state,action) => {
-    //     if(!state.user) {
-    //         return
-    //     }
-    // //    const prev = {...state.user}
-    // //    prev.likes = action.payload
-    //    state.user.likes = [...action.payload]
-    // //    state.user = {...prev}
-    // },
     like: (state,action:PayloadAction<number>) => {
         if(!state.user) {
             return
         }
-    //    const prev = {...state.user}
-    //    prev.likes = action.payload
        state.user.likes = [...state.user.likes,action.payload]
-    //    state.user = {...prev}
     },
     
     dislike: (state,action:PayloadAction<number>) => {
         if(!state.user) {
             return
         }
-    //    const prev = {...state.user}
-    //    prev.likes = action.payload
        state.user.likes = [...state.user.likes.filter((value)=>value!==action.payload)]
-    //    state.user = {...prev}
     },
-    // getList: (state,action) => {
-    //     if(!state.user) {
-    //         return
-    //     }
-    // //    const prev = {...state.user}
-    // //    prev.likes = action.payload
-    //    state.user.list = [...action.payload]
-    // //    state.user = {...prev}
-    // },
-    
-  //},
   addList: (state,action:PayloadAction<number>) => {
     if(!state.user) {
         return
     }
-//    const prev = {...state.user}
-//    prev.likes = action.payload
    state.user.list = [...state.user.list,action.payload]
-//    state.user = {...prev}
 },
 removeList: (state,action:PayloadAction<number>) => {
     if(!state.user) {
         return
     }
-//    const prev = {...state.user}
-//    prev.likes = action.payload
 state.user.list = [...state.user.list.filter((value)=>value!==action.payload)]
-//    state.user = {...prev}
+
 },
   }
 })

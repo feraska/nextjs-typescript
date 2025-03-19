@@ -4,6 +4,12 @@ type Props = {
     children: ReactNode,
     text:string
   }
+/**
+ * 
+ * @param children children component inside the tooltip
+ * @param text tooltip text 
+ * @returns tooltip component
+ */
 const Tooltip:React.FC<Props> = ({children,text}) => {
     return(
         <div className="tooltip">

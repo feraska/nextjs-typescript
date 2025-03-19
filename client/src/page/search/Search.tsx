@@ -16,24 +16,24 @@ import useLoadMore from "@/hooks/useLoadMore"
 
 
 const Search = () => {
-    const search = useSearchParams()
-    const id = search?.get("t")
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
     
 
-    const login = useAppSelector((state)=>state.user.login)
-    const [page,setPage] = useState(1)
-    useScroll(id??"")
-    useGlobal()
-      
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    const [page,setPage] = useState(1)//page number
+    useScroll(id??"")//save scroll x,y
+    useGlobal()//globals
+    //load more data
     const {data,error,loading} = useLoadMore(`https://api.themoviedb.org/3/search/movie?query=${search?.get("q")}&page=${page}`,page,setPage)
-    const router = useRouter()
-    
-   
-   
+
+    const router = useRouter()//router
+    // initial page
     if(login === 2) {
        
         return<Loading/>
     }
+    //login false not be user
     if(login === 0) {
         router.push("/login")
         return

@@ -11,16 +11,17 @@ import { getUser, incUnread, login } from "@/redux/slices/user"
 import usePut from "./usePut"
 
 const useGlobal = () => {
-    const User = useAppSelector((state)=>state.user.user)
-    const dispatch = useAppDispatch()
-    const {data:user,get} = useGet(api.findUser)
-    const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)
-    const {post} = usePost(api.addNotification)
-    const [msg,setMsg] = useState("")
+    const User = useAppSelector((state)=>state.user.user)//user redux
+    const dispatch = useAppDispatch()//dispatch redux
+    const {data:user,get} = useGet(api.findUser)//get user
+    const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)//get notification request
+    const {post} = usePost(api.addNotification)//add notification request
+    const [msg,setMsg] = useState("")//message from socket
     const [first,setFirst] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
-    const {put:unreadInc} = usePut(api.incUnread)
-    let socket: Socket | null = null;
+    const {put:unreadInc} = usePut(api.incUnread)//unread message from socket
+    let socket: Socket | null = null;//socket
+    //create socket
     useEffect(()=> {
         
         if(!User) {
@@ -29,43 +30,45 @@ const useGlobal = () => {
         }
         socket = io("https://nextjs-typescript-1.onrender.com")
         try {
-        
-        socket?.on("connect",()=> {
-            console.log("connected")
-        })
-        socket?.on("sendMsg",(msg)=> {
-            setMsg(msg)
-            
-  
-          })
 
-          socket.on("disconnect",()=> {
+            socket?.on("connect",()=> {
+            console.log("connected")
+            })
+            socket?.on("sendMsg",(msg)=> {
+            setMsg(msg)
+            })
+
+            socket.on("disconnect",()=> {
             console.log("disconnect")
-        })
-    } catch(err) {
+            })
+    } 
+    catch(err) {
 
     }
     },[User])
-
+    //get message from socket
     useEffect(()=> {
         if(!User?.email) {
             return
         }
         if(msg!== "") {
-        dispatch(addNotification({msg}))
-        post({msg})
-        dispatch(incUnread())
-        unreadInc()
-        setMsg("")
+            dispatch(addNotification({msg}))
+            post({msg})
+            dispatch(incUnread())
+            unreadInc()
+            setMsg("")
         }
 
     },[User?.email,msg])
+    //
     useEffect(()=> {
         const getAll = async()=> {
             try {
-             await get()
-            } catch (err) {
-            dispatch(login(0))
+                await get()
+                dispatch(login(1))
+            } 
+            catch (err) {
+                dispatch(login(0))
             }
              
          }

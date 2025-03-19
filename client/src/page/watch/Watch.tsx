@@ -8,16 +8,17 @@ import Loading from "@/components/loading/Loading"
 import { useAppSelector } from "@/redux/hooks"
 import useVideo from "@/hooks/useVideo"
 const Watch = () => {
-    const router = useRouter()
-    const login = useAppSelector((state)=>state.user.login)
-    const params = useParams()
-    const id = params.id
-    const {data} = useVideo(`https://api.themoviedb.org/3/movie/${id}/videos`)
-    useGlobal()
-    
+    const router = useRouter()//router
+    const login = useAppSelector((state)=>state.user.login)//login
+    const params = useParams()//params
+    const id = params.id//get params id
+    const {data} = useVideo(`https://api.themoviedb.org/3/movie/${id}/videos`)//get video about id
+    useGlobal()//globals
+    //initial page
     if(login === 2) {
         return<Loading/>
     }
+    //login false
     if(login === 0) {
         router.push("/login")
         return

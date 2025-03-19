@@ -14,21 +14,28 @@ import { login } from "@/redux/slices/user"
 import { errorMsg } from "@/interfaces/message"
 
 const  Login = () => {
-    useGlobal()
-    const router = useRouter()
-    const sigIn = useAppSelector((state)=>state.user.login)
+    useGlobal()//globals
+    const router = useRouter()//router
+    const sigIn = useAppSelector((state)=>state.user.login)//login
     
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()//dispatch redux
     const [user,setUser] = useState({
         "email":"",
         "password":""
-    })
-    const {post,message,loading,error} = usePost(api.loginMainServer)
-    const [messageError,setMessageError] = useState<errorMsg>()
+    })//user state
+    const {post,message,loading,error} = usePost(api.loginMainServer)//login request
+    const [messageError,setMessageError] = useState<errorMsg>()//error message
+    /**
+     * email,password input event change
+     * @param e change event
+     */
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setUser({...user,[e.target.name]:e.target.value})
     }
-  
+    /**
+     * user on click login button 
+     * @param e formEvent
+     */
     const handleLogin = async(e:FormEvent) => {
         e.preventDefault()
          try {
@@ -49,9 +56,11 @@ const  Login = () => {
          }
          
     }
+    //initial page
     if(sigIn === 2 || loading) {
         return<Loading/>
     }
+    //login success go to home page
     if(sigIn === 1) {
         router.push("/")
         return

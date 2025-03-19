@@ -18,25 +18,27 @@ const Cards = dynamic(()=> import("../../components/cards/Cards"),{ssr:false})
 const Playing = dynamic(()=> import("../../components/playing/Playing"),{ssr:false}) 
 
 const Movies = () => {
-    const {data} = useApi("https://api.themoviedb.org/3/genre/movie/list")
-    const dispatch = useAppDispatch()
+    const {data} = useApi("https://api.themoviedb.org/3/genre/movie/list")//get movies
+    const dispatch = useAppDispatch()//dispatch redux
     useEffect(()=> {
         if(data?.genres) {
             dispatch(setGenre(data.genres))
         }
     },[data?.genres])
-    const [genre,setgenre] = useState("")
-    const search = useSearchParams()
-    const id = search?.get("t")
-    const router = useRouter()
-    useScroll(id??"")
-    useGlobal()
-    const login = useAppSelector((state)=>state.user.login)
+    const [genre,setgenre] = useState("")//genre user choice
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
+    const router = useRouter()//router
+    useScroll(id??"")//save scorll x,y
+    useGlobal()//globals
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    //initial login
     if(login === 2) {
         return<Loading/>
     }
+    //login false
     if(login === 0) {
-        router.push("/")
+        router.push("/login")
         return
     } 
     

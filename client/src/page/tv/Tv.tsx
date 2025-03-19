@@ -18,23 +18,25 @@ import useApi from "@/hooks/useApi"
 import { setGenre } from "@/redux/slices/genre"
 
 const Tv = ()=> {
-    const {data} = useApi("https://api.themoviedb.org/3/genre/tv/list")
-    const dispatch = useAppDispatch()
+    const {data} = useApi("https://api.themoviedb.org/3/genre/tv/list")//get data tv
+    const dispatch = useAppDispatch()//dispatch redux
     useEffect(()=> {
         if(data?.genres) {
             dispatch(setGenre(data.genres))
         }
     },[data?.genres])
-    const [genre,setgenre] = useState("")
-    const search = useSearchParams()
-    const id = search?.get("t")
-    const router = useRouter()
-    const login = useAppSelector((state)=>state.user.login)
-    useScroll(id??"")
-    useGlobal()
+    const [genre,setgenre] = useState("")//genre user choice
+    const search = useSearchParams()//query string
+    const id = search?.get("t")//query string modal
+    const router = useRouter()//router
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    useScroll(id??"")//save scroll x,y
+    useGlobal()//globals
+    //initial page
     if(login === 2) {
         return<Loading/>
     }
+    //login false
     if(login === 0) {
         router.push("/login")
         return

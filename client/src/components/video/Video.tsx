@@ -4,16 +4,19 @@ import "./video.scss"
 
 import { card } from "@/interfaces/card"
 import useVideo from "@/hooks/useVideo"
-
-const Video:React.FC<{item:card,isList?:boolean}> = ({item}) => {
-    const {data} = useVideo(`https://api.themoviedb.org/3/movie/${item.id}/videos`)
+/**
+ * 
+ * @param item:card item details 
+ * @returns video component
+ */
+const Video:React.FC<{item:card}> = ({item}) => {
+    const {data} = useVideo(`https://api.themoviedb.org/3/movie/${item.id}/videos`)//get video by item.id
     
    
     return(
         <div className="video">
             <div className="show" >
-              
-                        <iframe autoCapitalize=""
+            <iframe autoCapitalize=""
             src={`https://www.youtube.com/embed/${data?.results[0]?.key}?autoplay=1&mute=1`}
             
             frameBorder="0" 

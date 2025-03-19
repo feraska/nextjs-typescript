@@ -1,7 +1,11 @@
 import { useEffect,  useState } from "react"
-
+/**
+ * 
+ * @param id if in modal position
+ */
 const useScroll = (id:string) => {
-    const [scrollPosition,setScrollPosition] = useState({ x: 0, y: 0 })
+    const [scrollPosition,setScrollPosition] = useState({ x: 0, y: 0 })//scroll position
+    // set scroll position
     const scroll = () => {
         if(scrollX === 0 && scrollY === 0) {
             return
@@ -13,8 +17,7 @@ const useScroll = (id:string) => {
       
     }
     useEffect(()=> {
-    
-        
+        //scroll to sroll position
         window.scrollTo(scrollPosition.x,scrollPosition.y)
         window.addEventListener("scroll",scroll)
         

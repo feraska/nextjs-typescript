@@ -5,12 +5,21 @@ import { IoIosArrowForward,IoIosArrowBack } from "react-icons/io"
 const CardItem = dynamic(()=> import("../cardItem/CardItem"),{ssr:false}) 
 import "./cards.scss"
 import useApi from "../../hooks/useApi"
-
+/**
+ * 
+ * @param param url it is api get request
+ * @param genre optional param if user located in tv or movies page
+ * @returns cards component
+ */
 const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
-    const {data} = useApi(url)
-    const list = React.createRef<HTMLUListElement>()
-    const [numberSlider,setNumberSlider] = useState(0)
-    
+    const {data} = useApi(url)//get to from api
+    const list = React.createRef<HTMLUListElement>()//cards list slider
+    const [numberSlider,setNumberSlider] = useState(0)//number of slider
+    /**
+     * onclick left or right arrow
+     * @param type left or right slider
+     * @returns void
+     */
     const handleSlider = async(type:string) => {
         if(!list.current) {
             return
@@ -27,6 +36,7 @@ const Cards:React.FC<{url:string,genre?:string}> = ({url,genre}) => {
             setNumberSlider((prev)=>prev+1)
         }
    }
+   //filter the slider according type of genre
    if(genre) {
     return(
     <div className="slider">
