@@ -16,7 +16,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { emptyUnread, logout } from "@/redux/slices/user";
+import { emptyUnread, getHum, logout } from "@/redux/slices/user";
 import Loader from "../loader/Loader";
 import usePut from "@/hooks/usePut";
 const Navbar = () => {
@@ -34,6 +34,13 @@ const Navbar = () => {
     const [show,setShow] = useState(false)//show notification list 
     const {put:unreadEmpty} = usePut(api.emptyUnread)//update unread notification to user
     const searchRef = useRef<HTMLDivElement>(null);
+    /**
+     * navbar mobile
+     */
+    const clickHum = () => {
+        
+        dispatch(getHum())
+    }
     /**
      * user type text search and check if user located in search page or not
      * @param e event change
@@ -97,23 +104,8 @@ const Navbar = () => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
-    /**
-     * navbar mobile
-     */
-    const run = () => {
-        
-        const vNav = (document.getElementsByClassName("v-nav")[0] as HTMLElement) 
-       
-        
-        if(vNav?.style.display === "" || "none") {
-            vNav.style.display = "flex"
-        }
-        else if(vNav.style.display === "flex") {
-             vNav.style.display = "none"
-        }
-       
-       
-    }
+    
+   
     /**
      * clear search
      */
@@ -141,7 +133,7 @@ const Navbar = () => {
             <div className="logo">
                 <Image alt="" width={100} height={100} src={Logo.src}/>
             </div>
-            <RxHamburgerMenu className="h" onClick={run}/>
+            <RxHamburgerMenu className="h" onClick={clickHum}/>
             {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
             
             <h3>{user?.firstName}</h3>
@@ -149,7 +141,7 @@ const Navbar = () => {
             <ul>
             {data.map((value,i)=>(
                 
-                    <Link key={i} href={value.path} className={value.path === pathname?"active":""} replace>
+                    <Link key={i} href={value.path} className={value.path === pathname?"active":""}  >
                     <li key={i}>{value.text}</li>
                     </Link>
              
@@ -169,7 +161,7 @@ const Navbar = () => {
                 </div>
                   
                 
-                {!mobileWidth&&(
+                {
                 <div className="notification">
                 <div className="info" onClick={clickNotification}> 
                 <IoIosNotificationsOutline className="icon"/>
@@ -190,7 +182,7 @@ const Navbar = () => {
 
                 </div>}
                 </div>
-                )}
+                }
 
                 
             </div>

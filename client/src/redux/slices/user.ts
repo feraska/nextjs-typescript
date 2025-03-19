@@ -7,13 +7,15 @@ import { Socket } from 'socket.io-client'
 export interface CounterState {
   user?: User,
   login:number,
-  socket:Socket | null 
+  socket:Socket | null,
+  hum:boolean
 }
 
 const initialState: CounterState = {
     user:undefined,
     login:2,
-    socket:null
+    socket:null,
+    hum:false
     
 }
 
@@ -30,6 +32,9 @@ export const userSlice = createSlice({
         return
       }
       state.socket = action.payload   
+    },
+    getHum:(state) => {
+        state.hum = !state.hum
     },
     login: (state,action:PayloadAction<number>) => {
         state.login = action.payload
@@ -84,7 +89,7 @@ state.user.list = [...state.user.list.filter((value)=>value!==action.payload)]
 })
 
 // Action creators are generated for each case reducer function
-export const { addList,dislike,getSocket,getUser,like,login,logout,removeList,emptyUnread,incUnread} = userSlice.actions
+export const { addList,dislike,getSocket,getUser,like,login,logout,removeList,emptyUnread,incUnread,getHum} = userSlice.actions
 
 export default userSlice.reducer
 

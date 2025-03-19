@@ -32,6 +32,7 @@ const Movies = () => {
     useScroll(id??"")//save scorll x,y
     useGlobal()//globals
     const login = useAppSelector((state)=>state.user.login)//login redux
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     //initial login
     if(login === 2) {
         return<Loading/>
@@ -47,7 +48,7 @@ const Movies = () => {
         <>
          {id&&<Movie/>}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
         <SelectGenre setGenre={setgenre}/>
             <Playing url="/9SSEUrSqhljBMzRe4aBTh17rUaC.jpg"/>
             <Cards url="https://api.themoviedb.org/3/movie/now_playing" genre={genre}/>

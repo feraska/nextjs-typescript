@@ -17,6 +17,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 const Home = () => {
     const login = useAppSelector((state)=>state.user.login)//login redux
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     const router = useRouter()//router
     const search = useSearchParams()//query string
     const id = search?.get("t")//query string modal
@@ -39,7 +40,7 @@ const Home = () => {
      
        {id&&<Movie />}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
       
         <div>
 

@@ -12,6 +12,7 @@ const Watch = () => {
     const login = useAppSelector((state)=>state.user.login)//login
     const params = useParams()//params
     const id = params.id//get params id
+    
     const {data} = useVideo(`https://api.themoviedb.org/3/movie/${id}/videos`)//get video about id
     useGlobal()//globals
     //initial page

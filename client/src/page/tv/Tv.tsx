@@ -20,6 +20,7 @@ import { setGenre } from "@/redux/slices/genre"
 const Tv = ()=> {
     const {data} = useApi("https://api.themoviedb.org/3/genre/tv/list")//get data tv
     const dispatch = useAppDispatch()//dispatch redux
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     useEffect(()=> {
         if(data?.genres) {
             dispatch(setGenre(data.genres))
@@ -46,7 +47,7 @@ const Tv = ()=> {
     
         {id&&<Movie/>}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
         <SelectGenre setGenre={setgenre}/>
         <Playing url="/uCY1j1YqfDWRbbS7hJwd9szX1sJ.jpg"/>
         <Cards url="https://api.themoviedb.org/3/discover/tv" genre={genre}/>

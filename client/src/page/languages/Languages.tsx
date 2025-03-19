@@ -25,6 +25,7 @@ const Languages = () => {
     //load more data
     const {data,error,loading} = useLoadMore(`https://api.themoviedb.org/3/discover/movie?with_original_language=${search?.get("q")??"en"}&page=${page}&sort_by=${search?.get("s")}`,page,setPage)
     const router = useRouter()//router
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     /**
      * filter according language selected
      * @param e change event
@@ -55,7 +56,7 @@ const Languages = () => {
         <>
          {id&&<Movie/>}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
         
         <div className="languages">
             <div className="box">

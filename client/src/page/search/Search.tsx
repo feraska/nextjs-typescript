@@ -22,6 +22,7 @@ const Search = () => {
 
     const login = useAppSelector((state)=>state.user.login)//login redux
     const [page,setPage] = useState(1)//page number
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     useScroll(id??"")//save scroll x,y
     useGlobal()//globals
     //load more data
@@ -43,7 +44,7 @@ const Search = () => {
         <>
          {id&&<Movie/>}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
         
         <div className="filter">
             

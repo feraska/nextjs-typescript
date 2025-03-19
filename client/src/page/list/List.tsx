@@ -18,6 +18,7 @@ const List = ()=> {
     const id = search?.get("t")//query string modal
     const user = useAppSelector((state)=>state.user.user)//user redux
     const login = useAppSelector((state)=>state.user.login)//login redux
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     useScroll(id??"")//save scroll x,y
     useGlobal()//globals
     //initial page
@@ -33,7 +34,7 @@ const List = ()=> {
         <>
          {id&&<Movie/>}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
         <div className="list" >
             <h1>My List</h1>
             <ul>

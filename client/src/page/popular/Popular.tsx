@@ -22,6 +22,7 @@ const Popular = () => {
     useGlobal()//globals
     const router = useRouter()//router
     const login = useAppSelector((state)=>state.user.login)//login redux
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     //initial page
     if(login === 2) {
         return<Loading/>
@@ -35,7 +36,7 @@ const Popular = () => {
         <>
          {id&&<Movie/>}
         <Navbar/>
-        {<Vheader/>}
+        {hum&&<Vheader/>}
             <Playing url= "/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg"/>
             <Cards url="https://api.themoviedb.org/3/movie/popular"/>
         
