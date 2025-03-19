@@ -37,7 +37,7 @@ export const userSlice = createSlice({
     logout: (state) => {
         state.login = 0
         state.user = undefined
-        state.socket = undefined
+        state.socket = null
     },
     getUser: (state,action:PayloadAction<User>) => {
         state.user = action.payload
