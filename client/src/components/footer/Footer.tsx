@@ -9,11 +9,11 @@ const Footer = () => {
             <FaInstagram />
             <FaYoutube />
             </div>
-            <ul>
+            {/* <ul>
                 {data.map((text,i)=>(
                     <li key={i}>{text}</li>
                 ))}
-            </ul>
+            </ul> */}
         </footer>
     )
 }

@@ -62,11 +62,12 @@
     background-color: black;
 }
 header {
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 9999;
     height: max-content;
     width: 100%;
+    background-color: black
 }
 nav {
     padding-left: 20px;

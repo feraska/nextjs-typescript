@@ -33,9 +33,10 @@ const Navbar = () => {
     const [showSearch,setShowSearch] = useState(search?.get("q")?true:false)//show searching text in search
     const [show,setShow] = useState(false)//show notification list 
     const {put:unreadEmpty} = usePut(api.emptyUnread)//update unread notification to user
-    const searchRef = useRef<HTMLDivElement>(null);
+    const searchRef = useRef<HTMLDivElement>(null);//search ref
+    const notificationRef = useRef<HTMLDivElement>(null);//search ref
     /**
-     * navbar mobile
+     * navbar mobile on click
      */
     const clickHum = () => {
         
@@ -96,6 +97,9 @@ const Navbar = () => {
         const handleClickOutside = (event: MouseEvent) => {
           if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
             setShowSearch(false);
+          }
+          if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+            setShow(false);
           }
         };
     
@@ -162,7 +166,7 @@ const Navbar = () => {
                   
                 
                 {
-                <div className="notification">
+                <div className="notification" ref={notificationRef}>
                 <div className="info" onClick={clickNotification}> 
                 <IoIosNotificationsOutline className="icon"/>
                 {user?.unread!==0&&<span>{user?.unread}</span>}
