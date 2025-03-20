@@ -16,7 +16,7 @@ const useGlobal = () => {
     const dispatch = useAppDispatch()//dispatch redux
     const {data:user,get} = useGet(api.findUser)//get user
     const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)//get notification request
-    const {post} = usePost(api.addNotification)//add notification request
+    //const {post} = usePost(api.addNotification)//add notification request
     const [msg,setMsg] = useState("")//message from socket
     const [first,setFirst] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
@@ -54,7 +54,7 @@ const useGlobal = () => {
         }
         if(msg!== "") {
             dispatch(addNotification({msg}))
-            post({msg})
+            //post({msg})
             dispatch(incUnread())
             unreadInc()
             setMsg("")
