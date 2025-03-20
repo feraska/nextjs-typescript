@@ -15,9 +15,11 @@ const useLoadMore = (url:string,page:number,setPage:React.Dispatch<React.SetStat
     const [error,setError] = useState("")//error
     const [loading,setloading] = useState(false)//loading
     const search = useSearchParams()//query string
+    const [init,setInit] = useState(0)//initial new search
     const [first,setFirst] = useState(0)
     useEffect(()=> {
         setPage(1)
+        setInit(0)
     },[search?.get("q"),search?.get("s")])
     useEffect(()=> {
         //get data
@@ -47,8 +49,12 @@ const useLoadMore = (url:string,page:number,setPage:React.Dispatch<React.SetStat
             setFirst(1)
             return
         }
-        getData()
-     },[page,first])
+        if(init === 0 && page === 1) {
+            setInit(1)
+            }
+            getData()
+        
+     },[page,init,first])
      //load more data
      const loadMore = () => {
          setPage((prev)=>prev+1)
