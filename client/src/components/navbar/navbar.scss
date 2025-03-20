@@ -67,7 +67,8 @@ header {
     z-index: 9999;
     height: max-content;
     width: 100%;
-    background-color: black
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 nav {
     padding-left: 20px;
@@ -97,13 +98,13 @@ nav {
         .logo {
            
             img {
-                // width: 100px;
-                // height: 100px;
+                width: 100px;
+                height: 100px;
             }
         }
         ul {
             list-style: none;
-          //  display: flex;
+            //display: flex;
             gap: 20px;
             .active {
                 background-color: red;

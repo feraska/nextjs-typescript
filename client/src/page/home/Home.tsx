@@ -42,13 +42,13 @@ const Home = () => {
         <Navbar/>
         {hum&&<Vheader/>}
       
-        <div>
+        
 
              <Playing url="/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg"/>
             <Cards url="https://api.themoviedb.org/3/discover/movie" /> 
           
           
-        </div>
+        
         <Footer/>
         </>
     )
