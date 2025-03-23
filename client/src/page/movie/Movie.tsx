@@ -14,7 +14,7 @@ const Movie = () => {
 
     const {data:item} = useInfo(`https://api.themoviedb.org/3/movie/${id}`)//get info about id
     return(
-        <div className="window">
+        <div className="window" onClick={()=>router.push(q?`${path}?q=${q}`:path??"/")}>
             <div className="data">
             <AiFillCloseCircle className="close" onClick={()=>router.push(q?`${path}?q=${q}`:path??"/")}/>
         <div className="movie">
