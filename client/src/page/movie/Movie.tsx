@@ -5,6 +5,7 @@ import {  usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import Image from "next/image"
 import { MdFavorite } from "react-icons/md"
+import { card } from "@/interfaces/card"
 const Movie = () => {
 
     const router = useRouter()//router
@@ -13,8 +14,8 @@ const Movie = () => {
     const id = search?.get("t")//query string modal
     const q = search?.get("q")//query string search
 
-    const {data:item} = useInfo(`https://api.themoviedb.org/3/movie/${id}`)//get info about id
-    console.log(item)
+    const {data:item} = useInfo<card>(`https://api.themoviedb.org/3/movie/${id}`)//get info about id
+
     return(
         <div className="window" onClick={()=>router.push(q?`${path}?q=${q}`:path??"/")}>
             <div className="data">

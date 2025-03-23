@@ -2,20 +2,20 @@
 import { useEffect, useState } from "react"
 import useGet from "./useGet"
 import { api } from "../enums/api"
-import useGetArray from "./useGetArray"
-import usePost from "./usePost"
+
 import { io, Socket } from "socket.io-client"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addNotification, getNotification } from "@/redux/slices/notification"
 import { getUser, incUnread, login } from "@/redux/slices/user"
 import usePut from "./usePut"
 import { usePathname } from "next/navigation"
+import User from "@/interfaces/user"
 
 const useGlobal = () => {
     const User = useAppSelector((state)=>state.user.user)//user redux
     const dispatch = useAppDispatch()//dispatch redux
-    const {data:user,get} = useGet(api.findUser)//get user
-    const {data:messages,getData:getMessages,error} = useGetArray(api.getNotification)//get notification request
+    const {data:user,get} = useGet<User>(api.findUser)//get user
+    const {data:messages,get:getMessages,error} = useGet<[]>(api.getNotification)//get notification request
     //const {post} = usePost(api.addNotification)//add notification request
     const [msg,setMsg] = useState("")//message from socket
     const [first,setFirst] = useState(0)

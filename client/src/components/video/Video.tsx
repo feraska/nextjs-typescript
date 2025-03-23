@@ -3,14 +3,15 @@ import Details from "../details/Details"
 import "./video.scss"
 
 import { card } from "@/interfaces/card"
-import useVideo from "@/hooks/useVideo"
+import useInfo from "@/hooks/useInfo"
+import { video } from "@/interfaces/video"
 /**
  * 
  * @param item:card item details 
  * @returns video component
  */
 const Video:React.FC<{item:card}> = ({item}) => {
-    const {data} = useVideo(`https://api.themoviedb.org/3/movie/${item.id}/videos`)//get video by item.id
+    const {data} = useInfo<video>(`https://api.themoviedb.org/3/movie/${item.id}/videos`)//get video by item.id
     
    
     return(

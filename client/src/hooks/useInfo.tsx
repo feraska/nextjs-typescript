@@ -2,11 +2,10 @@
 import {  useEffect, useState } from "react"
 
 import axios, { AxiosError } from "axios"
-import { card } from "@/interfaces/card"
 
 
-const useInfo = (url:string) => {
-    const [data,setData] = useState<card>()//get data
+const useInfo = <T,>(url:string) => {
+    const [data,setData] = useState<T>()//get data
     const [error,setError] = useState("")//error
     const [loading,setloading] = useState(false)//loading
     const [first,setFirst] = useState(0)

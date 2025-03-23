@@ -6,14 +6,15 @@ import { useParams, useRouter } from "next/navigation"
 import useGlobal from "@/hooks/useGloabal"
 import Loading from "@/components/loading/Loading"
 import { useAppSelector } from "@/redux/hooks"
-import useVideo from "@/hooks/useVideo"
+import useInfo from "@/hooks/useInfo"
+import { video } from "@/interfaces/video"
 const Watch = () => {
     const router = useRouter()//router
     const login = useAppSelector((state)=>state.user.login)//login
     const params = useParams()//params
     const id = params.id//get params id
     
-    const {data} = useVideo(`https://api.themoviedb.org/3/movie/${id}/videos`)//get video about id
+    const {data} = useInfo<video>(`https://api.themoviedb.org/3/movie/${id}/videos`)//get video about id
     useGlobal()//globals
     //initial page
     if(login === 2) {

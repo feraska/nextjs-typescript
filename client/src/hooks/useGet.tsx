@@ -3,20 +3,10 @@ import { useState } from "react"
 import User from "../interfaces/user"
 
 
-const useGet =  (url:string) => {
+const useGet = <T,> (url:string) => {
     const [error,setError] = useState(false)//error
     const [loading,setLoading] = useState(false)//loading
-    const [data,setData] = useState<User>(
-        {
-        _id:"",
-        email:"",
-        firstName:"",
-        lastName:"",
-        likes:[],
-        list:[],
-        unread:0
-    }//data user
-)
+    const [data,setData] = useState<T>()
 
     //get data
     const get = async()=> {
