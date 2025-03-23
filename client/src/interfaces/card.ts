@@ -8,7 +8,10 @@ export interface card {
     original_name?:string,
     genres:Array<genere>,
     spoken_languages:Array<lang>,
-    overview:string
+    overview:string,
+    vote_count:string,
+    release_date:string,
+    production_companies:Array<production>
 }
 export interface lang {
     english_name:string
@@ -19,4 +22,10 @@ export interface genre {
 export interface genere {
     id:number,
     name:number
+}
+export interface production {
+    id:number,
+    logo_path:string,
+    name:string,
+    origin_country:string
 }

@@ -45,6 +45,11 @@
         justify-content: center;
         align-items: center;
         gap: 20px;
+        .vote {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
         .genre {
             display: flex;
             gap: 20px;
