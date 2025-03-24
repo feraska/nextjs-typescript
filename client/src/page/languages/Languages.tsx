@@ -67,15 +67,15 @@ const Languages = () => {
                     <select defaultValue={search.get("q")??""} onChange={languageChange}>
                         <option value={"en"}>English</option>
                         <option value={"he"}>Hebrew</option>
-                        <option value={"ar"}>arabic</option>
+                        <option value={"ar"}>Arabic</option>
                     </select>
                 </div>
 
                 <div className="drop">
-                    <label>Sortby</label>
+                    <label>Sort by</label>
                     <select defaultValue={search.get("sort")??""} onChange={sortyChange}>
-                        <option value={"popularity.desc"}>Populary</option>
-                        <option value={"primary_release_date.desc"}>Year Relased</option>
+                        <option value={"popularity.desc"}>Popularity</option>
+                        <option value={"primary_release_date.desc"}>Year Relased New</option>
                         <option value={"original_title.asc"}>A-Z</option>
                         <option value={"original_title.desc"}>Z-A</option>
                     </select>

@@ -1,6 +1,6 @@
 "use client"
 import "./navbar.scss"
-import Logo from "../../assets/feras.png"
+import Logo from "../../assets/logoMovie.png"
 import {data} from "./data"
 import { CiSearch } from "react-icons/ci";
 import {  ChangeEvent,   MouseEventHandler,   useEffect, useRef, useState } from "react";
@@ -19,6 +19,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { emptyUnread, getHum, logout } from "@/redux/slices/user";
 import Loader from "../loader/Loader";
 import usePut from "@/hooks/usePut";
+import avatar from "../../assets/avatar.png"
+import { MdAccountCircle } from "react-icons/md";
 const Navbar = () => {
     const notification = useAppSelector((state)=>state.notification.notification)//notification
     const user = useAppSelector((state)=>state.user.user)//user
@@ -35,6 +37,8 @@ const Navbar = () => {
     const {put:unreadEmpty} = usePut(api.emptyUnread)//update unread notification to user
     const searchRef = useRef<HTMLDivElement>(null);//search ref
     const notificationRef = useRef<HTMLDivElement>(null);//search ref
+    const accountRef = useRef<HTMLDivElement>(null);//search ref
+    const [accountClick,setAccountClick] = useState(false)//account click
     /**
      * navbar mobile on click
      */
@@ -101,6 +105,9 @@ const Navbar = () => {
           if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
             setShow(false);
           }
+          if (accountRef.current && !accountRef.current.contains(event.target as Node)) {
+            setAccountClick(false);
+          }
         };
     
         document.addEventListener("mousedown", handleClickOutside);
@@ -138,9 +145,8 @@ const Navbar = () => {
                 <Image alt="" width={100} height={100} src={Logo.src}/>
             </div>
             <RxHamburgerMenu className="h" onClick={clickHum}/>
-            {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
             
-            <h3>{user?.firstName}</h3>
+            
             
             <ul>
             {data.map((value,i)=>(
@@ -155,6 +161,20 @@ const Navbar = () => {
             </div>
 
             <div className="right">
+            <div className="user" ref={accountRef}>
+            <MdAccountCircle  className="account" onClick={()=>setAccountClick(!accountClick)}/>
+                {accountClick&&
+                <div className="settings">
+            
+                <div className="name">
+                    <h3>{user?.firstName}</h3>
+                    <Image alt="" src={avatar} width={50} height={50}/>
+                    
+                    </div>
+                    {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
+                </div>
+            }
+            </div>
                 <div className="search" ref={searchRef}>
                 {showSearch&&<IoIosClose className="close" onClick={clear} />}
                 <CiSearch  className="icon"  onClick={()=>setShowSearch(!showSearch)}/>
@@ -187,7 +207,7 @@ const Navbar = () => {
                 </div>}
                 </div>
                 }
-
+                
                 
             </div>
         </nav>

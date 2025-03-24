@@ -86,7 +86,6 @@ nav {
     
     align-items: center;
     .left {
-        
         display: flex;
         gap: 25px;
         align-items: center;
@@ -129,9 +128,34 @@ nav {
     .right {
         
         display: flex;
-        
-        justify-content: space-between;
+        gap: 25px;
+        justify-content: center;
         align-items: center;
+        .user{
+            position: relative;
+        .account,.logout {
+            font-size: 26px;
+            cursor: pointer;
+            
+        }
+        .settings {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(0,0,0,1);
+            top: 30px;
+            right: 15px;
+            padding: 5px;
+            z-index: 99999;
+            .name {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    }
         .notification {
             position: relative;
             // &:hover > .message{
@@ -203,7 +227,7 @@ nav {
             display: flex;
             
             gap: 5px;
-            margin-right: 50px;
+            //margin-right: 50px;
             background-color: transparent;
             position: relative;
             width: 80%;
