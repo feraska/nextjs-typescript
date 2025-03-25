@@ -7,14 +7,6 @@ import jwt from "jsonwebtoken"
 export const register = async(req:Request,res:Response,next:NextFunction) => {
     try {
         const {email,firstName,lastName,password} = req.body
-        const salt = await bcrypt.genSalt()
-        const hashedPassword = await bcrypt.hash(password,salt)
-        await User.create({
-            email,
-            firstName,
-            password:hashedPassword,
-            lastName
-        })
         if(email === "") {
             return next(createError(400,"the email must not be empty"))
         }
@@ -31,6 +23,15 @@ export const register = async(req:Request,res:Response,next:NextFunction) => {
         if(user) {
             return next(createError(400,"the email user is exsit"))
         }
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(password,salt)
+        await User.create({
+            email,
+            firstName,
+            password:hashedPassword,
+            lastName
+        })
+        
 
         return res.status(200).json("register successfully")
     } catch (err) {
