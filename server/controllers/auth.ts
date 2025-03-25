@@ -15,6 +15,23 @@ export const register = async(req:Request,res:Response,next:NextFunction) => {
             password:hashedPassword,
             lastName
         })
+        if(email === "") {
+            return next(createError(400,"the email must not be empty"))
+        }
+        if(password === "") {
+            return next(createError(400,"the password must not be empty"))
+        }
+        if(firstName === "") {
+            return next(createError(400,"the first name must not be empty"))
+        }
+        if(lastName === "") {
+            return next(createError(400,"the last name must not be empty"))
+        }
+        const user = await User.findOne({email})
+        if(user) {
+            return next(createError(400,"the email user is exsit"))
+        }
+
         return res.status(200).json("register successfully")
     } catch (err) {
         return next(createError(500,(err as Error).message))

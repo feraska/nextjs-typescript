@@ -89,7 +89,7 @@ export const unreadEmpty = async(req:RequestWithUser,res:Response,next:NextFunct
   { new: true }
 )
         
-        return res.status(200).json("unread inc")
+        return res.status(200).json("unread empty")
     } catch(err) {
         return next(createError(500,(err as Error).message))
     }
