@@ -27,12 +27,15 @@ const SelectGenre:React.FC<{setGenre:(name:string)=>void}> = ({setGenre}) => {
     }
     return(
         <div className="genre">
+            <div className="box">
+            <label>Select Genre</label>
             <select name="" id="" onChange={handleChange} defaultValue={serach.get("g")??""}>
                 <option value={"all"} > All</option>
                 {genre?.map((genre,i)=>(
                     <option key={i} value={genre.id}>{genre.name}</option>
                 ))}
                 </select>
+                </div>
             </div>
     )
 }

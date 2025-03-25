@@ -1,11 +1,15 @@
 .genre {
     position: relative;
     
-    
-    select {
+    .box {
         position: absolute;
         top: 150px;
         left: 40px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    select {
+        
         background-color: black;
         border: 1px solid white;
         color: white;
@@ -24,4 +28,5 @@
         }
 
     }
+}
 }

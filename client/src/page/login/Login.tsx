@@ -12,6 +12,7 @@ import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { login } from "@/redux/slices/user"
 import { errorMsg } from "@/interfaces/message"
+import Loader from "@/components/loader/Loader"
 
 
 const  Login = () => {
@@ -54,7 +55,7 @@ const  Login = () => {
     }
 
     //initial page
-    if(sigIn === 2 || loading) {
+    if(sigIn === 2 ) {
         return<Loading/>
     }
     //login success go to home page
@@ -81,7 +82,7 @@ const  Login = () => {
                     <input type="password" name="password" placeholder="password" onChange={handleChange}/>
                 </div>
                 
-                <button type="submit"  disabled={loading?true:false}>Login</button>
+                {loading?<Loader/>:<button type="submit"  disabled={loading?true:false}>Login</button>}
                 <p>{error&&messageError?.message}</p>
                 
             </form>

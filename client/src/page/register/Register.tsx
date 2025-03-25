@@ -11,6 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAppSelector } from "@/redux/hooks"
 import { errorMsg } from "@/interfaces/message"
+import Loader from "@/components/loader/Loader"
 
 const Register = () => {
     useGlobal()//globals
@@ -51,7 +52,7 @@ const Register = () => {
     /**
      * initial page
      */
-    if(login === 2 || loading) {
+    if(login === 2 ) {
        
         return<Loading/>
     }
@@ -71,22 +72,22 @@ const Register = () => {
         <form onSubmit={handleRegister}>
           <h3>Register</h3>
           <div className="info">
-            
+                <label>*</label>
                 <input type="text" placeholder="first name" name="firstName" onChange={handleChange}/>
             </div>
             <div className="info">
-            
+                <label>*</label>
                 <input type="text" placeholder="last name" name="lastName" onChange={handleChange}/>
             </div>
             <div className="info">
-            
+                <label>*</label>
                 <input type="text" placeholder="email" name="email" onChange={handleChange}/>
             </div>
             <div className="info">
-              
+                <label>*</label>
                 <input type="password" placeholder="password" name="password" onChange={handleChange}/>
             </div>
-            <button type="submit" disabled={loading?true:false}>Register</button>
+            {loading?<Loader/>:<button type="submit" disabled={loading?true:false}>Register</button>}
             <p>{error&&messageError?.message}</p>
             
             <p>{message}</p>
