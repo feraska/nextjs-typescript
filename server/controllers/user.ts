@@ -113,7 +113,11 @@ export const editPassword = async(req:RequestWithUser,res:Response,next:NextFunc
         const user = await User.findById(req.user?.id)
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(currentPassword,salt)
-        if(user?.password !== hashedPassword) {
+        if(!user) {
+            return next(createError(400,"error not be user"))
+        }
+        const isCorrectPassword = await bcrypt.compare(currentPassword,user.password)
+        if(isCorrectPassword) {
             return next(createError(400,"the current password not corrected"))
         }
        
