@@ -109,6 +109,10 @@ export const editPassword = async(req:RequestWithUser,res:Response,next:NextFunc
         if(newPassword !== rePassword) {
             return next(createError(400,"the new password and re-password must be equal"))
         }
+        const user = await User.findById(req.user?.id)
+        if(user?.password !== currentPassword) {
+            return next(createError(400,"the current password not corrected"))
+        }
         await User.findByIdAndUpdate(req.user?.id,
            {password:newPassword},
             
