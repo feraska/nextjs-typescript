@@ -111,11 +111,12 @@ export const editPassword = async(req:RequestWithUser,res:Response,next:NextFunc
             return next(createError(400,"the new password and re-password must be equal"))
         }
         const user = await User.findById(req.user?.id)
-        if(user?.password !== currentPassword) {
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(currentPassword,salt)
+        if(user?.password !== hashedPassword) {
             return next(createError(400,"the current password not corrected"))
         }
-        const salt = await bcrypt.genSalt()
-        const hashedPassword = await bcrypt.hash(newPassword,salt)
+       
         await User.findByIdAndUpdate(req.user?.id,
            {password:hashedPassword},
             
