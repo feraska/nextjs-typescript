@@ -6,21 +6,36 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import usePut from "@/hooks/usePut"
 import Loader from "@/components/loader/Loader"
 import { api } from "@/enums/api"
+import useGlobal from "@/hooks/useGloabal"
+import { useAppSelector } from "@/redux/hooks"
+import Loading from "@/components/loading/Loading"
 const Password = () => {
     const router = useRouter()
+    useGlobal()
+    const login = useAppSelector((state)=>state.user.login)
     const [data,setData ]= useState({
         currentPassword:"",
         newPassword:"",
         rePassword:""
     })
     const {loading,message,put} = usePut(api.editPassword)
-    const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        put(data)
+        await put(data)
     }
     const changeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setData({...data,[e.target.name]:e.target.value})
     }
+    //loading
+    if(login === 2) {
+        return<Loading/>
+    }
+     //if not be user(login false)
+     if(login === 0) {
+        router.push("/login")
+        return
+    }
+
     return (
         <>
         <Navbar/>
