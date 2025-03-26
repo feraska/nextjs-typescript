@@ -10,6 +10,7 @@ import useGlobal from "@/hooks/useGloabal"
 import { useAppSelector } from "@/redux/hooks"
 import Loading from "@/components/loading/Loading"
 import Vheader from "@/components/vheader/Vheader"
+import { errorMsg } from "@/interfaces/message"
 const Password = () => {
     const router = useRouter()
     useGlobal()
@@ -19,11 +20,21 @@ const Password = () => {
         newPassword:"",
         rePassword:""
     })
-    const {loading,message,put} = usePut(api.editPassword)//edit password
+    const {loading,message,put,error} = usePut(api.editPassword)//edit password
+    const [messageError,setMessageError] = useState<errorMsg>()//error message
     const hum = useAppSelector((state)=>state.user.hum)//hum redux
     const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        try {
         await put(data)
+        router.push("/") 
+        }
+        catch(err) {
+            const m = (err as Error)
+            const s = JSON.parse(m.message)  
+            const t:errorMsg = (s  as errorMsg)
+            setMessageError(t)
+        }
     }
     const changeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setData({...data,[e.target.name]:e.target.value})
@@ -55,7 +66,7 @@ const Password = () => {
                         <button type="button" onClick={()=>router.push("/")}>Cancel</button>
                     </div>
                     }
-                    <label>{message}</label>
+                    <p>{error&&messageError?.message}</p>
                 </form>
             </div>
         </div>

@@ -14,6 +14,7 @@ const usePut = (url:string) => {
             const message = await axios.put(url,body,{
                 withCredentials:true
             })
+            
             setMessage(message.data)
             setError(false)
             setLoading(false)
