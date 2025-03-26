@@ -117,7 +117,7 @@ export const editPassword = async(req:RequestWithUser,res:Response,next:NextFunc
             return next(createError(400,"error not be user"))
         }
         const isCorrectPassword = await bcrypt.compare(currentPassword,user.password)
-        if(isCorrectPassword) {
+        if(!isCorrectPassword) {
             return next(createError(400,"the current password not corrected"))
         }
        
