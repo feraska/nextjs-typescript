@@ -9,6 +9,7 @@ import { api } from "@/enums/api"
 import useGlobal from "@/hooks/useGloabal"
 import { useAppSelector } from "@/redux/hooks"
 import Loading from "@/components/loading/Loading"
+import Vheader from "@/components/vheader/Vheader"
 const Password = () => {
     const router = useRouter()
     useGlobal()
@@ -18,7 +19,8 @@ const Password = () => {
         newPassword:"",
         rePassword:""
     })
-    const {loading,message,put} = usePut(api.editPassword)
+    const {loading,message,put} = usePut(api.editPassword)//edit password
+    const hum = useAppSelector((state)=>state.user.hum)//hum redux
     const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         await put(data)
@@ -39,6 +41,7 @@ const Password = () => {
     return (
         <>
         <Navbar/>
+        {hum&&<Vheader/>}
         <div className="password">
             <div className="box">
                 <h1>Change password</h1>
