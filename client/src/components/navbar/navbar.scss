@@ -145,10 +145,14 @@ nav {
             align-items: center;
             gap: 10px;
             background-color: rgba(0,0,0,1);
+            width: max-content;
             top: 30px;
-            right: 15px;
+            // right: 15px;
             padding: 5px;
             z-index: 99999;
+            a:hover {
+                text-decoration: underline;
+            }
             .name {
                 display: flex;
                 gap: 10px;

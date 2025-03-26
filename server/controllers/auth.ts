@@ -7,18 +7,19 @@ import jwt from "jsonwebtoken"
 export const register = async(req:Request,res:Response,next:NextFunction) => {
     try {
         const {email,firstName,lastName,password} = req.body
-        if(email === "") {
-            return next(createError(400,"the email must not be empty"))
-        }
-        if(password === "") {
-            return next(createError(400,"the password must not be empty"))
-        }
         if(firstName === "") {
             return next(createError(400,"the first name must not be empty"))
         }
         if(lastName === "") {
             return next(createError(400,"the last name must not be empty"))
         }
+        if(email === "") {
+            return next(createError(400,"the email must not be empty"))
+        }
+        if(password === "") {
+            return next(createError(400,"the password must not be empty"))
+        }
+        
         const user = await User.findOne({email})
         if(user) {
             return next(createError(400,"the email user is exsit"))
@@ -45,7 +46,12 @@ export const login = async(req:Request,res:Response,next:NextFunction) => {
     try {
  
     const {email,password} = req.body
-    
+    if(email === "") {
+        return next(createError(400,"the email must not to be empty"))
+    }
+    if(password === "") {
+        return next(createError(400,"the password must not to be empty"))
+    }
     const user = await User.findOne({email})
    
     if(!user) {

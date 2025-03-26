@@ -138,7 +138,7 @@ const Navbar = () => {
         
     }
     return(
-        <header className={scrolled?"scrolled":""}>
+        <header className={scrolled || pathname === "/password"?"scrolled":""}>
         <nav>
             <div className="left">
             <div className="logo">
@@ -171,6 +171,7 @@ const Navbar = () => {
                     <Image alt="" src={avatar} width={50} height={50}/>
                     
                     </div>
+                    <Link href={"/password"}>Change Password</Link>
                     {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
                 </div>
             }

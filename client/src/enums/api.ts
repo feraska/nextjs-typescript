@@ -13,5 +13,6 @@ export enum api {
     addNotification = `${mainServer}/notification/addNotification`,
     incUnread = `${mainServer}/user/incUnread`,
     emptyUnread = `${mainServer}/user/emptyUnread`,
+    editPassword = `${mainServer}/user/editPassword`
 
 }

@@ -94,3 +94,29 @@ export const unreadEmpty = async(req:RequestWithUser,res:Response,next:NextFunct
         return next(createError(500,(err as Error).message))
     }
 }
+export const editPassword = async(req:RequestWithUser,res:Response,next:NextFunction) => {
+    try {
+        const {currentPassword,newPassword,rePassword} = req.body
+        if(currentPassword === "") {
+            return next(createError(400,"the current password must not be empty"))
+        }
+        if(newPassword === "") {
+            return next(createError(400,"the current new password must not be empty"))
+        }
+        if(rePassword === "") {
+            return next(createError(400,"the current re-password must not be empty"))
+        }
+        if(newPassword !== rePassword) {
+            return next(createError(400,"the new password and re-password must be equal"))
+        }
+        await User.findByIdAndUpdate(req.user?.id,
+           {password:newPassword},
+            
+ { new: true }
+)
+       
+       return res.status(200).json("edit password successfully")
+   } catch(err) {
+       return next(createError(500,(err as Error).message))
+   }
+}

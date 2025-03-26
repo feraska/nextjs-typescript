@@ -13,5 +13,6 @@ export enum api{
     getNotification = "/getNotification",
     addNotification = "/addNotification",
     incUnread = "/incUnread",
-    emptyUnread = "/emptyUnread"
+    emptyUnread = "/emptyUnread",
+    editPassword = "/editPassword"
 }
