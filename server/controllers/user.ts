@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { createError } from "../utils/error";
 import User from "../models/user"
 import RequestWithUser from "../interfaces/requestWithUser"
+import bcrypt from "bcrypt"
 //get user by id 
 export const getUser = async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try {
@@ -113,8 +114,10 @@ export const editPassword = async(req:RequestWithUser,res:Response,next:NextFunc
         if(user?.password !== currentPassword) {
             return next(createError(400,"the current password not corrected"))
         }
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(newPassword,salt)
         await User.findByIdAndUpdate(req.user?.id,
-           {password:newPassword},
+           {password:hashedPassword},
             
  { new: true }
 )
