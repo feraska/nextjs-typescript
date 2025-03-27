@@ -72,24 +72,33 @@ export const userSlice = createSlice({
         }
        state.user.likes = [...state.user.likes.filter((value)=>value!==action.payload)]
     },
-  addList: (state,action:PayloadAction<number>) => {
-    if(!state.user) {
-        return
+
+    addList: (state,action:PayloadAction<number>) => {
+        if(!state.user) {
+            return
     }
    state.user.list = [...state.user.list,action.payload]
 },
-removeList: (state,action:PayloadAction<number>) => {
-    if(!state.user) {
-        return
-    }
-state.user.list = [...state.user.list.filter((value)=>value!==action.payload)]
+    removeList: (state,action:PayloadAction<number>) => {
+        if(!state.user) {
+            return
+        }
+        state.user.list = [...state.user.list.filter((value)=>value!==action.payload)]
 
 },
+    editUser:(state,action:PayloadAction<User> ) => {
+        if(!state.user) {
+            return
+        }
+        state.user = action.payload
+    },
+   
+
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { addList,dislike,getSocket,getUser,like,login,logout,removeList,emptyUnread,incUnread,getHum} = userSlice.actions
+export const { addList,dislike,getSocket,getUser,like,login,logout,removeList,emptyUnread,incUnread,getHum,editUser} = userSlice.actions
 
 export default userSlice.reducer
 

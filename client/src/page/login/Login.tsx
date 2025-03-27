@@ -86,7 +86,7 @@ const  Login = () => {
                 <p>{error&&messageError?.message}</p>
                 
             </form>
-            
+            <Link href={"/forgotPassword?step=1"}>Forgot Password?</Link>
             <Link href="/register">
                 
                     Sign up Now

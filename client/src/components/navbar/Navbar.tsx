@@ -138,7 +138,7 @@ const Navbar = () => {
         
     }
     return(
-        <header className={scrolled || pathname === "/password"?"scrolled":""}>
+        <header className={scrolled || pathname === "/password" || pathname === "/profile"?"scrolled":""}>
         <nav>
             <div className="left">
             <div className="logo">
@@ -162,16 +162,17 @@ const Navbar = () => {
 
             <div className="right">
             <div className="user" ref={accountRef}>
-            <MdAccountCircle  className="account" onClick={()=>setAccountClick(!accountClick)}/>
+            <Image alt="" width={50} height={50} src={user?.img?.url || avatar}  className="account" onClick={()=>setAccountClick(!accountClick)}/>
                 {accountClick&&
                 <div className="settings">
             
                 <div className="name">
                     <h3>{user?.firstName}</h3>
-                    <Image alt="" src={avatar} width={50} height={50}/>
+                    {/* <Image alt="" src={avatar} width={50} height={50}/> */}
                     
                     </div>
                     <Link href={"/password"}>Change Password</Link>
+                    <Link href={"/profile"}>Edit Profile</Link>
                     {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
                 </div>
             }

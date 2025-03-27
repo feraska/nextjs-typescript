@@ -5,6 +5,11 @@ export interface User {
     _id:string,
     list:Array<number>,
     likes:Array<number>,
-    unread:number 
+    unread:number,
+    img:img 
+}
+interface img {
+    public_id:string,
+    url:string
 }
 export default User
