@@ -6,7 +6,8 @@ export interface User {
     list:Array<number>,
     likes:Array<number>,
     unread:number,
-    img:img 
+    img:img,
+    isAdmin:boolean 
 }
 interface img {
     public_id:string,

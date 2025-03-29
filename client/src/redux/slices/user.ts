@@ -28,9 +28,7 @@ export const userSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      if(!state.socket) {
-        return
-      }
+      
       state.socket = action.payload   
     },
     getHum:(state) => {

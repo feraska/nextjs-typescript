@@ -6,10 +6,11 @@ import { api } from "../enums/api"
 import { io, Socket } from "socket.io-client"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addNotification, getNotification } from "@/redux/slices/notification"
-import { getUser, incUnread, login } from "@/redux/slices/user"
+import { getSocket, getUser, incUnread, login } from "@/redux/slices/user"
 import usePut from "./usePut"
 import { usePathname } from "next/navigation"
 import User from "@/interfaces/user"
+import { socket } from "@/utils/getUser"
 
 const useGlobal = () => {
     const User = useAppSelector((state)=>state.user.user)//user redux
@@ -21,15 +22,14 @@ const useGlobal = () => {
     const [first,setFirst] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
     const {put:unreadInc} = usePut(api.incUnread)//unread message from socket
-    let socket: Socket | null = null;//socket
-    const pathname = usePathname()
     //create socket
     useEffect(()=> {
         if(!User) {
             
             return
         }
-        socket = io("https://nextjs-typescript-1.onrender.com")
+       
+         
         try {
 
             socket?.on("connect",()=> {
@@ -68,7 +68,6 @@ const useGlobal = () => {
                 
                 await get()
                 dispatch(login(1))
-                console.log("get",pathname)
             } 
             catch (err) {
                 dispatch(login(0))

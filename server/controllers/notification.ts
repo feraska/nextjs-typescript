@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express"
 import Notification from "../models/notification"
 import RequestWithUser from "../interfaces/requestWithUser"
 import { createError } from "../utils/error"
+import User from "../models/user"
 //get all notification
 export const getAllNotification= async(req:RequestWithUser,res:Response,next:NextFunction) => {
     try{
@@ -17,7 +18,11 @@ export const addNotification = async(req:RequestWithUser,res:Response,next:NextF
     
     try {
         const {msg} = req.body
-        if(!req.user?.isAdmin) {
+        const user = await User.findById(req.user?.id)
+        if(!user) {
+            return next(createError(400,"not have authorization"))
+        }
+        if(!user.isAdmin) {
             return next(createError(400,"not have authorization"))
         }
         const data = await Notification.create({

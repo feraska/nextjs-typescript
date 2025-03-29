@@ -1,0 +1,48 @@
+.sendMsg {
+    margin-top: 170px;
+    margin-left: 20px;
+    margin-right: 20px;
+    .box {
+        display: flex;
+        flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+        gap: 20px;
+        input {
+            padding: 0.7rem 1rem;
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: #000000b0;
+            color: #fff;
+            &::placeholder {
+                font-size: 16px;
+                color: #fff;
+            }
+            &:focus {
+                border: 1px solid #fff;
+            }
+            
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #e50914;
+            border: none;
+            cursor: pointer;
+            color: white;
+            border-radius: 0.2rem;
+            font-weight: bolder;
+            font-size: 1.05rem;
+            align-self: normal;
+            &:disabled {
+                cursor: not-allowed;
+              }
+              
+            &:hover {
+                background-color: rgba(255, 0, 0, 0.8);
+               
+            }
+            
+        }
+    }
+}

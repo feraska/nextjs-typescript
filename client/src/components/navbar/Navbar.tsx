@@ -173,6 +173,7 @@ const Navbar = () => {
                     </div>
                     <Link href={"/password"}>Change Password</Link>
                     <Link href={"/profile"}>Edit Profile</Link>
+                    {user?.isAdmin&&<Link href={"/sendMsg"}>Send Msg</Link>}
                     {user&&!loading?<PiSignOutLight className="logout" onClick={logOut}/>:<Loader/>}
                 </div>
             }
