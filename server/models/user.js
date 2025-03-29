@@ -38,6 +38,10 @@ const userSchema = new mongoose_1.default.Schema({
         type: Number,
         default: 0
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     img: {
         public_id: {
             type: String,
