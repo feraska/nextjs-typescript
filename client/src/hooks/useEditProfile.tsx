@@ -1,25 +1,31 @@
-import axios, { AxiosError } from "axios";
-import { useState } from "react";
-const usePost = (url:string) => {
+import User from "@/interfaces/user"
+import axios, { AxiosError } from "axios"
+import { useState } from "react"
+
+const useEditProfile = (url:string) => {
     const [error,setError] = useState(false)//error
     const [loading,setLoading] = useState(false)//loading
-    const [message,setMessage] = useState("")//message
+    const [data,setData] = useState("")//message
     /**
      * post request
      * @param body  param body
      */
-    const post = async(body:any)=> {
+    const post = async(file:File|null,user:User)=> {
         try {
             setLoading(true)
-            const message = await axios.post(url,body,{
+            const formData = new FormData();
+            formData.append('file', file??""); // You can append other form data here as well
+            formData.append('firstName',user.firstName)
+            formData.append('lastName',user.lastName)
+            const res = await axios.post(url,formData,{
                 withCredentials:true,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'multipart/form-data', 
                 },
              
             
             })
-            setMessage(message.data)
+            setData(res.data)
             setError(false)
             setLoading(false)
         } 
@@ -35,7 +41,8 @@ const usePost = (url:string) => {
         
     }
     return {
-        post,error,message,loading
+        post,error,data,loading
     }
 }
-export default usePost
+
+export default useEditProfile

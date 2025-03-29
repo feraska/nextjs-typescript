@@ -14,5 +14,9 @@ export enum api{
     addNotification = "/addNotification",
     incUnread = "/incUnread",
     emptyUnread = "/emptyUnread",
-    editPassword = "/editPassword"
+    editPassword = "/editPassword",
+    editProfile = "/editProfile",
+    sendEmail = "/sendEmail",
+    validateCode = "/validateCode",
+    forgotPassword = "/forgotPassword"
 }

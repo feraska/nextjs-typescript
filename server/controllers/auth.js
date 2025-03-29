@@ -12,6 +12,22 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const register = async (req, res, next) => {
     try {
         const { email, firstName, lastName, password } = req.body;
+        if (firstName === "") {
+            return next((0, error_1.createError)(400, "the first name must not be empty"));
+        }
+        if (lastName === "") {
+            return next((0, error_1.createError)(400, "the last name must not be empty"));
+        }
+        if (email === "") {
+            return next((0, error_1.createError)(400, "the email must not be empty"));
+        }
+        if (password === "") {
+            return next((0, error_1.createError)(400, "the password must not be empty"));
+        }
+        const user = await user_1.default.findOne({ email });
+        if (user) {
+            return next((0, error_1.createError)(400, "the email user is exsit"));
+        }
         const salt = await bcrypt_1.default.genSalt();
         const hashedPassword = await bcrypt_1.default.hash(password, salt);
         await user_1.default.create({
@@ -31,6 +47,12 @@ exports.register = register;
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
+        if (email === "") {
+            return next((0, error_1.createError)(400, "the email must not to be empty"));
+        }
+        if (password === "") {
+            return next((0, error_1.createError)(400, "the password must not to be empty"));
+        }
         const user = await user_1.default.findOne({ email });
         if (!user) {
             return next((0, error_1.createError)(400, "user not found"));

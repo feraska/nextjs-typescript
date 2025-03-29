@@ -11,6 +11,7 @@ const ForgotPassword = () => {
     const [email,setEmail] = useState("")//email
     const [encCode,setEncCode] = useState("")//encCode
     const [decCode,setDecCode] = useState("")//decCode
+    const [id,setId] = useState("")//id
     const emailChange = (value:string) => {
       setEmail(value)
     }
@@ -20,14 +21,17 @@ const ForgotPassword = () => {
     const decCodeChange = (value:string) => {
       setDecCode(value)
     }
+    const idChange = (value:string) => {
+      setId(value)
+    }
     if(step === "1") {
-      return <ForgotPassword1 onChangeEmail = {emailChange} onChangeEncCode={encCodeChange}/>
+      return <ForgotPassword1 email = {email} onChangeEmail = {emailChange} onChangeEncCode={encCodeChange}/>
     }
     if(step === "2") {
-      return <ForgotPassword2 onChangeDecCode = {decCodeChange} encCode = {encCode} decCode={decCode}/>
+      return <ForgotPassword2 email={email} onChageId={idChange}  onChangeDecCode = {decCodeChange} encCode = {encCode} decCode={decCode}/>
     }
     if(step === "3") {
-      return <ForgotPassword3 email={email}/>
+      return <ForgotPassword3 id={id}/>
     }
     return <p>not found page</p>
    

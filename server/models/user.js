@@ -37,6 +37,16 @@ const userSchema = new mongoose_1.default.Schema({
     unread: {
         type: Number,
         default: 0
+    },
+    img: {
+        public_id: {
+            type: String,
+            default: null
+        },
+        url: {
+            type: String,
+            default: null
+        }
     }
 }, {
     timestamps: true

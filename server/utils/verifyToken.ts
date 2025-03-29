@@ -6,7 +6,7 @@ import User from "../interfaces/user";
 //vertify token cookies
 export const verifyToken =(req: RequestWithUser, res: Response, next: NextFunction)  => {
   
-  const token = req.cookies.access_token;//cookies check if login
+  const token = req.cookies.access_token || req.body.id;//cookies check if login
  
   if (!token) return next(createError(401, "You are not authenticated!"));
  

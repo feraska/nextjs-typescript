@@ -7,7 +7,14 @@ import authRouter from "./routes/auth"
 import userRouter from "./routes/user"
 import notificationRouter from "./routes/notification"
 import { api } from "./enums/api"
+import cloudinary from "cloudinary"
 dotenv.config()//dotenv configuration
+
+cloudinary.v2.config({
+    api_key:process.env.API_KEY,
+    api_secret:process.env.API_SECRET,
+    cloud_name:process.env.CLOUD_NAME
+})
 const app = express()
 //connect to data base
 const connectToDataBase = async() => {

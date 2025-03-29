@@ -11,8 +11,11 @@ import { CiEdit } from "react-icons/ci"
 import Image from "next/image"
 import avatar from "../../assets/avatar.png"
 import { ChangeEvent, FormEvent, useState } from "react"
-import User from "@/interfaces/user"
 import { editUser } from "@/redux/slices/user"
+import { api } from "@/enums/api"
+
+import useEditProfile from "@/hooks/useEditProfile"
+import Loader from "@/components/loader/Loader"
 const Profile = () => {
     const login = useAppSelector((state)=>state.user.login)//login redux
     const hum = useAppSelector((state)=>state.user.hum)//hum redux
@@ -21,6 +24,8 @@ const Profile = () => {
     
     const dispatch = useAppDispatch()//dispatch redux
     const [img,setImg] = useState("")
+    const [file,setFile] = useState<File>()
+    const {post:upload,data,error,loading} = useEditProfile(api.editProfile)
     useGlobal()
     //if initial page 
     if(login === 2) {
@@ -42,9 +47,12 @@ const Profile = () => {
         }
         
         const file = e.target.files[0]
+        if(!file) {
+            return
+        }
         const url = URL.createObjectURL(file); // Create a temporary URL
         setImg(url)
-        
+        setFile(file)
         
 }
 
@@ -55,19 +63,32 @@ const Profile = () => {
         user = {...user,[e.target.name]:e.target.value}
        // setTempUser({...tempUser,[e.target.name]:e.target.value})
     }
-    const handleSubmit = (e:FormEvent) => {
+    const handleSubmit = async(e:FormEvent) => {
         e.preventDefault()
-        if(!user) {
+        if(!user ) {
             return
         }
+       
         const obj = {
             img: {
                 public_id:"",
                 url:img
             }
         }
+        if(img)
         user = {...user,...obj}
         dispatch(editUser(user))
+        
+        try {
+            await upload(file??null,user)
+            router.push("/")
+            
+            
+        }
+        catch(e) {
+            console.log(e as Error)
+        }
+        
     }
 
     return (
@@ -86,7 +107,7 @@ const Profile = () => {
                     </div>
                 <form onSubmit={handleSubmit}>
                     <div className="image">
-                        <input type="file" id="file" onChange={changeImage}/>
+                        <input type="file" id="file" onChange={changeImage} accept="image/png, image/gif, image/jpeg"/>
                         <label htmlFor="file">
                         <div className="edit">
                         <CiEdit className="icon" />
@@ -103,8 +124,13 @@ const Profile = () => {
                     <label>Last Name</label>
                     <input type="text" onChange={handlerChange} name="lastName" defaultValue={user?.lastName}/>
                     </div>
+                    {loading?<Loader/>:
+                    <>
                     <button type="submit">Save</button>
                     <button type="button" onClick={clickCancel}>Cancel</button>
+                    </>
+                    }
+                    {error&&<p>Errror to edit profile</p>}
                 </form>
             </div>
         </div>

@@ -12,7 +12,13 @@ const auth_1 = __importDefault(require("./routes/auth"));
 const user_1 = __importDefault(require("./routes/user"));
 const notification_1 = __importDefault(require("./routes/notification"));
 const api_1 = require("./enums/api");
+const cloudinary_1 = __importDefault(require("cloudinary"));
 dotenv_1.default.config(); //dotenv configuration
+cloudinary_1.default.v2.config({
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+    cloud_name: process.env.CLOUD_NAME
+});
 const app = (0, express_1.default)();
 //connect to data base
 const connectToDataBase = async () => {

@@ -14,10 +14,11 @@ const nextConfig = {
             {
                 protocol:"https",
                 hostname:'res.cloudinary.com',
-                pathname:'/dpel2vfvq/image/upload/v1710696637/fiverr/oezstpr0zovkzvju7zcg.jpg',
+                
                 port:'',
               //   pathname:'https://api.themoviedb.org/'
-            }
+            },
+
         ]
     },
 };
