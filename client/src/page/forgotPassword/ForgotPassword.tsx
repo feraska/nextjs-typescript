@@ -12,15 +12,31 @@ const ForgotPassword = () => {
     const [encCode,setEncCode] = useState("")//encCode
     const [decCode,setDecCode] = useState("")//decCode
     const [id,setId] = useState("")//id
+    /**
+     * change email value
+     * @param value current email value 
+     */
     const emailChange = (value:string) => {
       setEmail(value)
     }
+    /**
+     * change encrypted code value
+     * @param value current encrypted code value
+     */
     const encCodeChange = (value:string) => {
       setEncCode(value)
     }
+    /**
+     * change decrypted code value
+     * @param value current decrypted code value
+     */
     const decCodeChange = (value:string) => {
       setDecCode(value)
     }
+    /**
+     * change id value
+     * @param value current encrypted id value
+     */
     const idChange = (value:string) => {
       setId(value)
     }

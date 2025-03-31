@@ -14,7 +14,7 @@ cloudinary.v2.config({
     api_key:process.env.API_KEY,
     api_secret:process.env.API_SECRET,
     cloud_name:process.env.CLOUD_NAME
-})
+})//cloudinary config
 const app = express()
 //connect to data base
 const connectToDataBase = async() => {

@@ -5,6 +5,7 @@ import RequestWithUser from "../interfaces/requestWithUser";
 import jwt from "jsonwebtoken";
 import code from "../interfaces/code";
 
+//decrypt the code and store in req.decCode
 export const decCode = async(req: RequestWithUser, res: Response, next: NextFunction)  => {
     try {
         const {encCode} = req.body

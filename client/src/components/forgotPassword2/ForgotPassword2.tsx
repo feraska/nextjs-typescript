@@ -6,20 +6,36 @@ import usePost from "@/hooks/usePost"
 import { api } from "@/enums/api"
 import { errorMsg } from "@/interfaces/message"
 import Loader from "../loader/Loader"
+/**
+ * 
+ * @param email email 
+ * @param onChageId id onchange handler
+ * @param encCode encrypt code 
+ * @param decCode decrypt code
+ */
 const ForgotPassword2:React.FC<{email:string,onChageId:(value:string)=>void,onChangeDecCode:(value:string)=>void,encCode:string,decCode:string}> = ({email,onChageId,onChangeDecCode,encCode,decCode}) => {
-    const router = useRouter()
-    const {error,loading,message,post} = usePost(api.validateCode)
+    const router = useRouter()//router
+    const {error,loading,message,post} = usePost(api.validateCode)//validate code request
     const [messageError,setMessageError] = useState<errorMsg>()//error message
+    /**
+     * if message return successfull
+     */
     useEffect(()=> {
         if(message) {
             onChageId(message)
-            console.log(message)
             router.push("?step=3")
         }
     },[message])
+    /**
+     * if decrypted code get value
+     * @param e event change
+     */
     const changeHandlerDecCode = (e:ChangeEvent<HTMLInputElement>) => {
         onChangeDecCode(e.target.value)
     }
+    /**
+     * if validate code click
+     */
     const clickHandler = async() => {
         try {
             await post({email,encCode,decCode})
@@ -33,6 +49,9 @@ const ForgotPassword2:React.FC<{email:string,onChageId:(value:string)=>void,onCh
                             
                 }
     }
+    /**
+     * if cancel button click
+     */
     const cancelClick = () => {
         router.push("/login")
     }

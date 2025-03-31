@@ -2,13 +2,10 @@
 import { useEffect, useState } from "react"
 import useGet from "./useGet"
 import { api } from "../enums/api"
-
-import { io, Socket } from "socket.io-client"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { addNotification, getNotification } from "@/redux/slices/notification"
-import { getSocket, getUser, incUnread, login } from "@/redux/slices/user"
+import { getUser, incUnread, login } from "@/redux/slices/user"
 import usePut from "./usePut"
-import { usePathname } from "next/navigation"
 import User from "@/interfaces/user"
 import { socket } from "@/utils/getUser"
 
@@ -17,7 +14,6 @@ const useGlobal = () => {
     const dispatch = useAppDispatch()//dispatch redux
     const {data:user,get} = useGet<User>(api.findUser)//get user
     const {data:messages,get:getMessages,error} = useGet<[]>(api.getNotification)//get notification request
-    //const {post} = usePost(api.addNotification)//add notification request
     const [msg,setMsg] = useState("")//message from socket
     const [first,setFirst] = useState(0)
     const [firstnot,setFirstNot] = useState(0)
@@ -29,7 +25,6 @@ const useGlobal = () => {
             return
         }
        
-         
         try {
 
             socket?.on("connect",()=> {
@@ -54,7 +49,6 @@ const useGlobal = () => {
         }
         if(msg!== "") {
             dispatch(addNotification({msg}))
-            //post({msg})
             dispatch(incUnread())
             unreadInc()
             setMsg("")

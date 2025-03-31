@@ -11,10 +11,12 @@ import { useAppSelector } from "@/redux/hooks"
 import Loading from "@/components/loading/Loading"
 import Vheader from "@/components/vheader/Vheader"
 import { errorMsg } from "@/interfaces/message"
+
 const Password = () => {
-    const router = useRouter()
-    useGlobal()
-    const login = useAppSelector((state)=>state.user.login)
+    const router = useRouter()//router
+    useGlobal()//globals
+    const login = useAppSelector((state)=>state.user.login)//login redux
+    //current pasword,new password,re-type password it is type in text
     const [data,setData ]= useState({
         currentPassword:"",
         newPassword:"",
@@ -23,6 +25,10 @@ const Password = () => {
     const {loading,message,put,error} = usePut(api.editPassword)//edit password
     const [messageError,setMessageError] = useState<errorMsg>()//error message
     const hum = useAppSelector((state)=>state.user.hum)//hum redux
+    /**
+     * if save button click
+     * @param e form event
+     */
     const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
@@ -36,6 +42,10 @@ const Password = () => {
             setMessageError(t)
         }
     }
+    /**
+     * input change handler
+     * @param e event change
+     */
     const changeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setData({...data,[e.target.name]:e.target.value})
     }

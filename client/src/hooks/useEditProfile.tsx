@@ -8,7 +8,8 @@ const useEditProfile = (url:string) => {
     const [data,setData] = useState("")//message
     /**
      * post request
-     * @param body  param body
+     * @param file  param file
+     * @param user pararm user
      */
     const post = async(file:File|null,user:User)=> {
         try {

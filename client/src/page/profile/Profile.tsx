@@ -23,10 +23,10 @@ const Profile = () => {
     let user = useAppSelector((state)=>state.user.user)//user
     
     const dispatch = useAppDispatch()//dispatch redux
-    const [img,setImg] = useState("")
-    const [file,setFile] = useState<File>()
-    const {post:upload,data,error,loading} = useEditProfile(api.editProfile)
-    useGlobal()
+    const [img,setImg] = useState("")//img upload url
+    const [file,setFile] = useState<File>()//file upload
+    const {post:upload,data,error,loading} = useEditProfile(api.editProfile)//edit profile request
+    useGlobal()//globals
     //if initial page 
     if(login === 2) {
         
@@ -37,9 +37,17 @@ const Profile = () => {
         router.push("/login")
         return
     }
+    /**
+     * if cancel button click
+     */
     const clickCancel = () => {
         router.push("/")
     }
+    /**
+     * image is upload from input file
+     * @param e change event
+     * 
+     */
     const changeImage = (e:ChangeEvent<HTMLInputElement>) => {
         
         if(!e.target.files) {
@@ -54,8 +62,12 @@ const Profile = () => {
         setImg(url)
         setFile(file)
         
-}
-
+    }
+    /**
+     * input field change
+     * @param e change event
+     * 
+     */
     const handlerChange = (e:ChangeEvent<HTMLInputElement>) => {
         if(!user) {
             return
@@ -63,6 +75,11 @@ const Profile = () => {
         user = {...user,[e.target.name]:e.target.value}
        // setTempUser({...tempUser,[e.target.name]:e.target.value})
     }
+    /**
+     * if save button click
+     * @param e form event
+     * 
+     */
     const handleSubmit = async(e:FormEvent) => {
         e.preventDefault()
         if(!user ) {

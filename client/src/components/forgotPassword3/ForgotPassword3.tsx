@@ -5,17 +5,29 @@ import usePut from "@/hooks/usePut"
 import { api } from "@/enums/api"
 import { errorMsg } from "@/interfaces/message"
 import Loader from "../loader/Loader"
+/**
+ * 
+ * @param id encrypted user id
+ * 
+ */
 const ForgotPassword3:React.FC<{id:string}> = ({id}) => {
     const router = useRouter()
     const [data,setData] = useState({
         newPassword:"",
         rePassword:""
-    })
+    })//new password and re-type password type in text
     const [messageError,setMessageError] = useState<errorMsg>()//error message
-    const {error,loading,message,put} = usePut(api.forgotPassword)
+    const {error,loading,message,put} = usePut(api.forgotPassword)//new password request
+    /**
+     * input field is change
+     * @param e change event
+     */
     const changeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setData({...data,[e.target.name]:e.target.value})
     }
+    /**
+     * if change password button click
+     */
     const clickHandler = async() => {
         try {
             await put({id,newPassword:data.newPassword,rePassword:data.rePassword})
@@ -29,6 +41,9 @@ const ForgotPassword3:React.FC<{id:string}> = ({id}) => {
                                     
                 }
     }
+    /**
+     * if cancel button click
+     */
     const cancelClick = () => {
         router.push("/login")
     }

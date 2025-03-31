@@ -3,7 +3,7 @@ import { createError } from "./error";
 import { NextFunction, Request, Response } from "express";
 import RequestWithUser from "../interfaces/requestWithUser";
 import User from "../interfaces/user";
-//vertify token cookies
+//vertify token cookies and store in req.user
 export const verifyToken =(req: RequestWithUser, res: Response, next: NextFunction)  => {
   
   const token = req.cookies.access_token || req.body.id;//cookies check if login

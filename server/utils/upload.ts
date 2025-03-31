@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from "express";
 const storage = multer.memoryStorage();
 // Set up multer upload
 const upload = multer({ storage: storage });
+//store file in req.files.file
 export const uploadSingle = (req:Request,res:Response,next:NextFunction) => {
     upload.single('file')(req,res,(err:any)=> {
         if(err) {

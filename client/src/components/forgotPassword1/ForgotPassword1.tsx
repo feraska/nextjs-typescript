@@ -6,20 +6,35 @@ import usePost from "@/hooks/usePost"
 import { api } from "@/enums/api"
 import Loader from "../loader/Loader"
 import { errorMsg } from "@/interfaces/message"
+/**
+ * 
+ * @param email email the user type
+ * @param onChangeEmail email text onchange  
+ * @param onChangeEncCode encrypt code onchange
+ */
 const ForgotPassword1:React.FC<{email:string,onChangeEmail:(value:string)=>void,onChangeEncCode:(value:string)=>void}> = ({onChangeEmail,onChangeEncCode,email}) => {
-    const router = useRouter()
-    const {error,loading,message,post} = usePost(api.sendEmail)
+    const router = useRouter()//router
+    const {error,loading,message,post} = usePost(api.sendEmail)//send email request
     const [messageError,setMessageError] = useState<errorMsg>()//error message
+    /**
+     * if email in text is change
+     * @param e event change
+     */
     const changeHandlerEmail = (e:ChangeEvent<HTMLInputElement>) => {
         onChangeEmail(e.target.value)
     }
+    /**
+     * if message return successfull 
+     */
     useEffect(()=> {
         if(message) {
-            console.log(message)
             onChangeEncCode(message)
             router.push("?step=2")
         }
     },[message])
+    /**
+     * button send code click
+     */
     const clickHandler = async() => {
         try {
             await post({email})
@@ -34,6 +49,9 @@ const ForgotPassword1:React.FC<{email:string,onChangeEmail:(value:string)=>void,
                     
         }
     }
+    /**
+     * if cancel button click
+     */
     const cancelClick = () => {
         router.push("/login")
     }

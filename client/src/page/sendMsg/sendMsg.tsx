@@ -20,9 +20,9 @@ const SendMsg = () => {
     const router = useRouter()//router
     const [messageError,setMessageError] = useState<errorMsg>()//error message
     const hum = useAppSelector((state)=>state.user.hum)//hum redux
-    useGlobal()
+    useGlobal()//globals
     //initial page
-    if(sigIn === 2 || !user) {
+    if(sigIn === 2 ) {
         return<Loading/>
     }
     //false
@@ -30,14 +30,25 @@ const SendMsg = () => {
         router.push("/login")
         return
     }
-    
+    //successfull wait to check the user
+    if(sigIn === 1 && !user) {
+        return<Loading/>
+    }
+    //successfull and no admit
     if(sigIn === 1 && !user?.isAdmin) {
         router.push("/")
         return
     }
+    /**
+     * input change handler
+     * @param e change event
+     */
     const handleChange =  (e:ChangeEvent<HTMLInputElement>) => {
         setMsg(e.target.value)
     }
+    /**
+     * if send msg button is click
+     */
     const clickHandler = async() => {
         try {
             socket?.emit("sendToAll",msg)

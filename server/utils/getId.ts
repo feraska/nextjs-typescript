@@ -3,6 +3,7 @@ import RequestWithUser from "../interfaces/requestWithUser";
 import USer from "../models/user"
 import jwt from "jsonwebtoken"
 import { createError } from "./error";
+//get encrypted id user according by email
 export const getId = async(req: RequestWithUser, res: Response, next: NextFunction)  => {
     try {
         const {email} = req.body
