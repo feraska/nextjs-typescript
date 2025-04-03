@@ -14,7 +14,7 @@ import Navbar from "@/components/navbar/Navbar"
 import Vheader from "@/components/vheader/Vheader"
 const SendMsg = () => {
     const [msg,setMsg] = useState("")
-    const {post,loading,error} = usePost(api.addNotification)//add notification request
+    const {post,loading,error,message} = usePost(api.addNotification)//add notification request
     const sigIn = useAppSelector((state)=>state.user.login)//login
     const user = useAppSelector((state)=>state.user.user)//login
     const router = useRouter()//router
@@ -74,6 +74,7 @@ const SendMsg = () => {
             <button onClick={clickHandler}>Send Msg</button>
             }
             <p>{error&&messageError?.message}</p>
+            <p>{message}</p>
             </div>
         </div>
         </>
