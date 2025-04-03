@@ -25,14 +25,11 @@ export const addNotification = async(req:RequestWithUser,res:Response,next:NextF
         if(!user.isAdmin) {
             return next(createError(400,"not have authorization"))
         }
-        const data = await Notification.create({
+         await Notification.create({
             msg:msg,
             
         })
-        if(data) {
-            return next(createError(400,"Message added successfully"))
-        }
-        return res.json("Failed to add message to database")
+        return res.status(200).json("Message added successfully")
     } catch(err) {
         return next(createError(500,(err as Error).message))
     }
