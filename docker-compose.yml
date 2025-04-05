@@ -1,0 +1,16 @@
+
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
+      - NEXT_PUBLIC_API_SOCKET = https://nextjs-typescript-1.onrender.com
+
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
