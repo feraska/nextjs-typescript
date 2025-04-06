@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
-    "axios": "^1.7.2",
+    "axios": "^1.8.4",
     "client": "file:",
-    "next": "14.2.5",
+    "next": "^15.2.4",
     "next-redux-wrapper": "^8.1.0",
     "react": "^18",
     "react-dom": "^18",

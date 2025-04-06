@@ -1,4 +1,5 @@
 // import List from "@/pages/list/List"
+"use client"
 import "@/app/App.scss"
 import dynamic from "next/dynamic"
 const Languages  = dynamic(()=>import("@/page/languages/Languages" ),{

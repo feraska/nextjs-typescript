@@ -1,3 +1,4 @@
+"use client"
 import dynamic from "next/dynamic"
 import "@/app/App.scss"
 const SendMsg = dynamic( ()=>import( "@/page/sendMsg/sendMsg") ,{
