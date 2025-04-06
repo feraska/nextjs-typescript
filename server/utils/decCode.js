@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.decCode = void 0;
 const error_1 = require("./error");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+//decrypt the code and store in req.decCode
 const decCode = async (req, res, next) => {
     try {
         const { encCode } = req.body;

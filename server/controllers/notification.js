@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addNotification = exports.getAllNotification = void 0;
 const notification_1 = __importDefault(require("../models/notification"));
 const error_1 = require("../utils/error");
+const user_1 = __importDefault(require("../models/user"));
 //get all notification
 const getAllNotification = async (req, res, next) => {
     try {
@@ -21,16 +22,17 @@ exports.getAllNotification = getAllNotification;
 const addNotification = async (req, res, next) => {
     try {
         const { msg } = req.body;
-        if (!req.user?.isAdmin) {
+        const user = await user_1.default.findById(req.user?.id);
+        if (!user) {
             return next((0, error_1.createError)(400, "not have authorization"));
         }
-        const data = await notification_1.default.create({
+        if (!user.isAdmin) {
+            return next((0, error_1.createError)(400, "not have authorization"));
+        }
+        await notification_1.default.create({
             msg: msg,
         });
-        if (data) {
-            return next((0, error_1.createError)(400, "Message added successfully"));
-        }
-        return res.json("Failed to add message to database");
+        return res.status(200).json("Message added successfully");
     }
     catch (err) {
         return next((0, error_1.createError)(500, err.message));

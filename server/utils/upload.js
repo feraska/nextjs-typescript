@@ -8,6 +8,7 @@ const multer_1 = __importDefault(require("multer"));
 const storage = multer_1.default.memoryStorage();
 // Set up multer upload
 const upload = (0, multer_1.default)({ storage: storage });
+//store file in req.files.file
 const uploadSingle = (req, res, next) => {
     upload.single('file')(req, res, (err) => {
         if (err) {

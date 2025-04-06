@@ -7,6 +7,7 @@ exports.getId = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const error_1 = require("./error");
+//get encrypted id user according by email
 const getId = async (req, res, next) => {
     try {
         const { email } = req.body;

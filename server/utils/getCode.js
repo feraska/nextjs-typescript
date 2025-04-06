@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCode = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const error_1 = require("./error");
+//get random code of 6 number and store the code number in req.random and encrypted code in req.code
 const getCode = async (req, res, next) => {
     try {
         const random = Math.floor(100000 + Math.random() * 900000).toString();

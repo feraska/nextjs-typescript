@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const error_1 = require("./error");
-//vertify token cookies
+//vertify token cookies and store in req.user
 const verifyToken = (req, res, next) => {
     const token = req.cookies.access_token || req.body.id; //cookies check if login
     if (!token)

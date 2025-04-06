@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateEmail = void 0;
 const error_1 = require("./error");
 const user_1 = __importDefault(require("../models/user"));
+//validate email is exsit
 const validateEmail = async (req, res, next) => {
     try {
         const { email } = req.body;
