@@ -1,16 +1,27 @@
 
 services:
   client:
+    image: client
     build: ./client
+    container_name: client
     ports:
       - "3000:3000"
     depends_on:
       - server
-    environment:
-      - NEXT_PUBLIC_API_URL = http://server:5000
-      - NEXT_PUBLIC_API_SOCKET = https://nextjs-typescript-1.onrender.com
+    # environment:
+    #   - NEXT_PUBLIC_API_URL=http://localhost:5000
+    #   - NEXT_PUBLIC_API_SOCKET=https://nextjs-typescript-1.onrender.com
+    networks:
+      - movie
 
   server:
+    image: server
     build: ./server
+    container_name: server
     ports:
       - "5000:5000"
+    networks:
+      - movie
+networks:
+  movie:
+    name: movie
