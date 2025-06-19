@@ -29,7 +29,7 @@ const connectToDataBase = async() => {
 connectToDataBase()
 const corsOptions = {
     
-    origin: 'api.com', // Specify the allowed origin(s
+    origin: process.env.CLIENT_URL!, // Specify the allowed origin(s
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
